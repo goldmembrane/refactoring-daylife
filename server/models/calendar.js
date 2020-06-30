@@ -23,10 +23,10 @@ module.exports = (sequelize, DataTypes) => {
   calendar.init({
     category: DataTypes.STRING,
     name: DataTypes.STRING,
-    start_date: DataTypes.DATE,
-    start_time: DataTypes.TIME,
-    end_date: DataTypes.DATE,
-    end_time: DataTypes.TIME,
+    start: DataTypes.DATE,
+    //start_time: DataTypes.TIME,
+    end: DataTypes.DATE,
+    //end_time: DataTypes.TIME,
     is_repeat: DataTypes.STRING,
     is_done: DataTypes.BOOLEAN
   }, {

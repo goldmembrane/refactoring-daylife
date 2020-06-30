@@ -14,17 +14,11 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      start_date: {
+      start: {
         type: Sequelize.DATE
       },
-      start_time: {
-        type: Sequelize.TIME
-      },
-      end_date: {
+      end: {
         type: Sequelize.DATE
-      },
-      end_time: {
-        type: Sequelize.TIME
       },
       is_repeat: {
         type: Sequelize.STRING

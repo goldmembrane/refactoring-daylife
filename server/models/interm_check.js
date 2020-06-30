@@ -17,8 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   interm_check.init({
-    alarm_time: DataTypes.TIME,
-    alarm_date: DataTypes.DATE
+    alarm_time: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'interm_check',

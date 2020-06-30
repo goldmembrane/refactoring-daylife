@@ -9,9 +9,6 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       alarm_time: {
-        type: Sequelize.TIME
-      },
-      alarm_date: {
         type: Sequelize.DATE
       },
       createdAt: {
