@@ -27,7 +27,7 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      month: {
+      year: {
         type: Sequelize.INTEGER
       },
       is_done: {
