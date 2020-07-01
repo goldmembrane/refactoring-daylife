@@ -4,11 +4,12 @@ import CalendarDayList from './CalendarDayList';
 const CalendarDay = (props) => {
   const today = new Date();
   const dayList = props.dayList;
-  const dayListItems = dayList.forEach( day => {
-    <CalendarDayList 
-      dayList = {day}/>
-  });
-  
+  const dayListItems = dayList.map( (day, index) => 
+    <CalendarDayList
+      key = {index} 
+      dayList = {day} />
+  );
+
   return (
     <div>
       <span className = 'currentYear'>{today.getFullYear()}</span>

@@ -17,8 +17,6 @@ class Calendar extends React.Component {
     // 오른쪽 빈 공간에 달력의 형태를 렌더링하기
     <div>
       <div className = 'plans'>
-        <Yearly />
-        <Monthly />
       </div>
       <div className = 'main'>
         <CalendarDay 
