@@ -5,8 +5,12 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
   post: (req, res) => {
-    let { name, is_repeat, start, end } = req.body;    //Query Params
+    let name = req.body.name;
+    let start = req.body.start;
+    let end = req.body.end;
+    let is_repeat = req.body.is_repeat
     let interm = req.body.interm;  //interm_check arr
+    
     let category = req.params.category;   //Path Params
     let token = req.cookies.token; //cookie
 
