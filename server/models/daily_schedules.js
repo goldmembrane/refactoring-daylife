@@ -6,11 +6,11 @@ module.exports = (sequelize, DataTypes) => {
     {
         name: DataTypes.STRING,
         start: {
-          type: DataTypes.DATETIME,
+          type: DataTypes.DATE,
           defaultValue: Sequelize.NOW
         },
         end: {
-          type: DataTypes.DATETIME,
+          type: DataTypes.DATE,
           defaultValue: Sequelize.NOW
         },
         is_done: {
