@@ -26,7 +26,7 @@ module.exports = {
       },
       alarm_time: {
         allowNull: true,
-        type: Sequelize.DATETIME
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,

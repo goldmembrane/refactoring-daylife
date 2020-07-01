@@ -29,11 +29,11 @@ module.exports = {
       },
       start: {
         defaultValue: Sequelize.NOW,
-        type: Sequelize.DATETIME
+        type: Sequelize.DATE
       },
       end: {
         defaultValue: Sequelize.NOW,
-        type: Sequelize.DATETIME
+        type: Sequelize.DATE
       },
       is_done: {
         defaultValue: false,
