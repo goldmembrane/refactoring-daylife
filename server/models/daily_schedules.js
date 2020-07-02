@@ -1,36 +1,23 @@
 'use strict';
 
+//const crypto = require('crypto');
+
 module.exports = (sequelize, DataTypes) => {
   const daily_schedules = sequelize.define(
     'daily_schedules',
     {
-        name: DataTypes.STRING,
-        start: {
-          type: DataTypes.DATE,
-          defaultValue: Sequelize.NOW
-        },
-        end: {
-          type: DataTypes.DATE,
-          defaultValue: Sequelize.NOW
-        },
-        is_done: {
-          type: DataTypes.BOOLEAN,
-          defaultValue: false
-        }
+      user_id: DataTypes.INTEGER,
+      name: DataTypes.STRING,
+      start: DataTypes.DATE,
+      end: DataTypes.DATE,
+      is_done: DataTypes.BOOLEAN
     },
-    
+    {}
   );
-  daily_schedules.associate = function(models) {
+  daily_schedules.associate = function (models) {
     // associations can be defined here
     daily_schedules.belongsTo(models.users, {
-      onDelete: 'cascade',
-      foreignKey: {
-        allowNull: false
-      }
-    });
-    models.daily_schedules.hasMany(models.interm_checks, {
-      foreignKey: 'calendar_id',
-      onDelete: 'cascade'
+      foreignKey: 'user_id'
     });
   };
   return daily_schedules;
