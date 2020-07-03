@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import './Weekly.css';
+import Moment from 'react-moment';
 
 const Weekly = (props) => {
   const today = new Date();
@@ -18,14 +19,15 @@ const Weekly = (props) => {
       </DropdownButton>
       <BrowserRouter>
         <button className = 'go-to-Yearly' onClick = {() => props.history.push('/Yearly')}>{today.getFullYear()}</button>
-        <button className = 'go-to-Monthly' onClick = {() => props.history.push('/Monthly')}>{today.getMonth() + 1}</button>
-        <div className = 'day-list'>일</div>
-        <div className = 'day-list'>월</div>
-        <div className = 'day-list'>화</div>
-        <div className = 'day-list'>수</div>
-        <div className = 'day-list'>목</div>
-        <div className = 'day-list'>금</div>
-        <div className = 'day-list'>토</div>
+        <button className = 'go-to-Monthly' onClick = {() => props.history.push('/Monthly')}>
+          <Moment format = 'MMMM'>{today}</Moment></button>
+        <div className = 'day-list' onClick = {() => props.history.push('/')}>일</div>
+        <div className = 'day-list' onClick = {() => props.history.push('/')}>월</div>
+        <div className = 'day-list' onClick = {() => props.history.push('/')}>화</div>
+        <div className = 'day-list' onClick = {() => props.history.push('/')}>수</div>
+        <div className = 'day-list' onClick = {() => props.history.push('/')}>목</div>
+        <div className = 'day-list' onClick = {() => props.history.push('/')}>금</div>
+        <div className = 'day-list' onClick = {() => props.history.push('/')}>토</div>
       </BrowserRouter>
     </div>
   )

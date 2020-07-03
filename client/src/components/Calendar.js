@@ -1,18 +1,39 @@
 import React from 'react';
-import Calendar from 'react-calendar';
+import Monthly from './Monthly';
+import Home from './Home';
+import Weekly from './Weekly';
+import Yearly from './Yearly';
 
 class CalendarView extends React.Component {
-  state = {
-    date : new Date()
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: new Date()
+    }
+    this.onDateChange = this.onDateChange.bind(this);
   }
 
-  onChange = date => this.setState({ date });
+  onDateChange = date => { 
+    this.setState({ date })
+  };
+
+  
 
   render() {
     return (
       <div>
-        <Calendar
-          onChange = {this.onChange}
+        <Monthly
+          onChange = {this.onDateChange}
+          value = {this.state.date}
+        />
+        <Home
+          value = {this.state.date}
+        />
+        <Weekly
+          value = {this.state.date}
+        />
+        <Yearly
+          onChange = {this.onDateChange}
           value = {this.state.date}
         />
       </div>

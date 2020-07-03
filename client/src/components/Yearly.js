@@ -2,8 +2,11 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 const Yearly = (props) => {
+  const today = new Date();
   return (
     <div>
       <DropdownButton id = 'dropdown-basic-button' title = '페이지 이동 : 연도'>
@@ -15,11 +18,12 @@ const Yearly = (props) => {
             onClick = {() => props.history.push('/Monthly')}>월</Dropdown.Item>
       </DropdownButton>
       <BrowserRouter>
-        <div className = 'yearly-schedules'>
-          <input type = 'text' className = 'plan-name'></input>
-          <textarea className = 'plan-context'></textarea>
-          <button type = 'submit'>저장</button>
+        <div>
+          <div className = 'current-year'>{today.getFullYear()}</div>
         </div>
+        <Calendar 
+          onClickMonth = {() => props.onChange(props.value)} 
+          view = 'year'/>
       </BrowserRouter>
     </div>
   )

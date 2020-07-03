@@ -4,7 +4,6 @@
 }
 
 #dropdown-basic-button {
-  margin-top: 100px;
   margin-left: 400px;
   width: 150px;
   height: 50px;
@@ -24,4 +23,38 @@
   background-color: #aaaaaa;
   color: #222222;
   cursor: pointer;
+}
+
+.go-to-Yearly {
+  margin: 20px 0 0 10px;
+  width: 100px;
+  height: 200px;
+  border: none;
+  background-color: #b8eb75;
+  cursor: pointer;
+  display: block;
+  float: left;
+}
+
+.go-to-Monthly {
+  margin: 20px 0 0 10px;
+  width: 100px;
+  height: 200px;
+  border: none;
+  background-color: #b8eb75;;
+  display: block;
+  cursor: pointer;
+  float: left;
+}
+
+
+.daily {
+  width: 150px;
+  height: 500px;
+  text-align: center;
+  border: none;
+  background-color: #faf9a8;
+  margin-left: 20px;
+  float: left;
+  text-align: center;
 }

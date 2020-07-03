@@ -25,3 +25,13 @@
     color: #222222;
     cursor: pointer;
   }
+
+  .current-month {
+    margin: 20px 0 0 10px;
+    width: 100px;
+    height: 200px;
+    border: none;
+    background-color: #b8eb75;
+    line-height: 200px;
+    text-align: center;
+  }
