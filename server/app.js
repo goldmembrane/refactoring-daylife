@@ -4,6 +4,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
 const plansRouter = require('./routes/plans');
+const userRouter = require('./routes/user');
 
 const app = express();
 const port = 3001;
@@ -22,6 +23,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/plans', plansRouter);
+app.use('/user', userRouter);
 
 app.set('port', port);
 app.listen(app.get('port'), () => {
