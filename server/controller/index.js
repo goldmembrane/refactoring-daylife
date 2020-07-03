@@ -1,4 +1,4 @@
 module.exports = {
-    plansController: require('./plan'),
+    plansController: require('./plans'),
     userController: require('./user')
 }
