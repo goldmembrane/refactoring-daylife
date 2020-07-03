@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Monthly, Yearly, Weekly } from './components';
+import { Home, Monthly, Yearly, Weekly } from './pages';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 
