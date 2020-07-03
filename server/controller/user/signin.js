@@ -18,7 +18,7 @@ module.exports = {
               res.status(500).send(err);
             } else {
               res.cookie('token',token);
-              res.json({ id:user.dataValues.id, username:user.dataValues.username }); //12번쨰 줄과 이 부분이 이렇게 해서 데이터에 잘 접근할 수 있는지가 헷갈립니다.
+              res.json({ id:user.dataValues.id }); //12번쨰 줄과 이 부분이 이렇게 해서 데이터에 잘 접근할 수 있는지가 헷갈립니다.
             } 
           })
         } 

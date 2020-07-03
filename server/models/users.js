@@ -1,7 +1,5 @@
 'use strict';
 
-const crypto = require('crypto');
-
 module.exports = (sequelize, DataTypes) => {
   const users = sequelize.define(
     'users',
@@ -10,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       password: DataTypes.STRING,
       email: DataTypes.STRING
     },
-    {}
+    { timestamps: false }
   );
   users.associate = function (models) {
     // associations can be defined here
