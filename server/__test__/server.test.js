@@ -56,12 +56,6 @@ describe('Bare Minimum Requirements', () => {
             return;
           }
           expect(res).to.have.status(200);
-          // expect(res.body).has.all.keys([
-          //   'id',
-          //   'email',
-          //   'password',
-          //   'username',
-          // ]);
           expect(res.body.message).has.equal('success');
           done();
         });
@@ -119,76 +113,73 @@ describe('Bare Minimum Requirements', () => {
     });
   });
 
-  // describe('GET /user/info', () => {
-  //   it('should return user data with request of session.userid', done => {
-  //     const agent = chai.request.agent(app);
-  //     agent
-  //       .post('/user/signin')
-  //       .send({
-  //         email: 'duhyun.kim@codestates.com',
-  //         password: '1234'
-  //       })
-  //       .then(function(res) {
-  //         agent
-  //           .get('/user/info')
-  //           .then(function(res2) {
-  //             // should get status 200, which indicates req.session existence.
-  //             expect(res2).to.have.status(200);
-  //             expect(res2.body).has.all.keys([
-  //               'id',
-  //               'email',
-  //               'password',
-  //               'username',
-  //               'updatedAt',
-  //               'createdAt'
-  //             ]);
-  //             done();
-  //           })
-  //           .catch(err => {
-  //             done(err);
-  //           });
-  //       });
-  //   });
+  describe('GET /user/info', () => {
+    it('should return user data with request of session.userid', done => {
+      const agent = chai.request.agent(app);
+      agent
+        .post('/user/signin')
+        .send({
+          email: 'wonjun@test.com',
+          password: '1234'
+        })
+        .then(function(res) {
+          agent
+            .get('/user/info')
+            .then(function(res2) {
+              // should get status 200, which indicates req.session existence.
+              expect(res2).to.have.status(200);
+              expect(res2.body).has.all.keys([
+                'id',
+                'email',
+                'username'
+              ]);
+              done();
+            })
+            .catch(err => {
+              done(err);
+            });
+        });
+    });
 
-  //   it('should return Unauthorized if request without session.userid', done => {
-  //     const agent = chai.request.agent(app);
-  //     agent
-  //       .post('/user/signin')
-  //       .send({
-  //         email: 'foo@gmail.com',
-  //         password: 'swiss'
-  //       })
-  //       .then(function(res) {
-  //         agent
-  //           .get('/user/info')
-  //           .then(function(res2) {
-  //             // should get status 200, which indicates req.session existence.
-  //             expect(res2).to.have.status(401);
-  //             expect(res2.text).to.equal('need user session');
-  //             done();
-  //           })
-  //           .catch(err => {
-  //             done(err);
-  //           });
-  //       });
-  //   });
-  // });
+    it('should return Unauthorized if request without session.userid', done => {
+      const agent = chai.request.agent(app);
+      agent
+        .post('/user/signin')
+        .send({
+          email: 'foo@gmail.com',
+          password: 'swiss'
+        })
+        .then(function(res) {
+          agent
+            .get('/user/info')
+            .then(function(res2) {
+              // should get status 200, which indicates req.session existence.
+              expect(res2).to.have.status(401);
+              expect(res2.body.message).to.equal('need user session');
+              done();
+            })
+            .catch(err => {
+              done(err);
+            });
+        });
+    });
+  });
 
-  // describe('POST /user/signout', () => {
-  //   it('should redirect {BASE_URL}/ to signout', done => {
-  //     chai
-  //       .request(app)
-  //       .post('/user/signout')
-  //       .set({ host: 'localhost:8080' })
-  //       .end((err, res) => {
-  //         if (err) {
-  //           done(err);
-  //           return;
-  //         }
-  //         expect(res.redirects[0]).to.not.an('undefined');
+  describe('POST /user/signout', () => {
+    it('should redirect {BASE_URL}/ to signout', done => {
+      chai
+        .request(app)
+        .post('/user/signout')
+        .set({ host: 'localhost:8080' })
+        .end((err, res) => {
+          if (err) {
+            done(err);
+            return;
+          }
+          expect(res.redirects[0]).to.not.an('undefined');
 
-  //         done();
-  //       });
-  //   });
-  // });
+          done();
+        });
+    });
+  });
 });

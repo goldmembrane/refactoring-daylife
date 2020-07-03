@@ -4,22 +4,24 @@ require('dotenv').config();
 
 module.exports = {
   get: (req,res) => {
-    let token = req.cookie.token;
+    let token = req.cookies.token;
     let secret = process.env.JWT_SECRET;
-    
-    let decoded = jwt.verify(token, secret);
-    if(decoded){
+       
+    if(token){
+      let decoded = jwt.verify(token, secret);
       users
       .findOne({where: {email:decoded.email}})
       .then(user => {
         if(user === null){
-          res.status(204).send('No Content');
+          res.status(204);
+          res.json({"message": "no content"});
         } else {
-        res.status(200).send({username:user.dataValues.username, email:user.dataValues.email});
+        res.status(200).send({id:user.dataValues.id, username:user.dataValues.username, email:user.dataValues.email});
         }
       })
     } else {
-      res.status(401).send('Unauthorized');
+      res.status(401);
+      res.json({"message": "need user session"});
     }
   }
 }
