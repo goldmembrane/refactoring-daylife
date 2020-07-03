@@ -6,11 +6,15 @@ const cookieParser = require('cookie-parser');
 const plansRouter = require('./routes/plans');
 const userRouter = require('./routes/user');
 
+const morgan = require('morgan');
+
 const app = express();
 const port = 3001;
 
 app.use(cookieParser());
 app.use(bodyParser.json());
+
+app.use(morgan('dev'));
 
 //클라이언트 제작 완료시, 클라이언트의 주소를 origin에 넣고, post, get, put메소드 허용
 app.use(

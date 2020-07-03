@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       end: DataTypes.STRING,
       is_done: DataTypes.BOOLEAN
     },
-    {}
+    { timestamps: false }
   );
   daily_schedules.associate = function (models) {
     // associations can be defined here

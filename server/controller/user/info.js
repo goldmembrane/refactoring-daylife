@@ -1,4 +1,6 @@
-const { users } =  require('../../models');
+// const { users } =  require('../../models');
+const { users } =  require('../../__test__/database/models');
+
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
@@ -10,7 +12,7 @@ module.exports = {
     if(token){
       let decoded = jwt.verify(token, secret);
       users
-      .findOne({where: {email:decoded.email}})
+      .findOne({where: {id:decoded.id}})
       .then(user => {
         if(user === null){
           res.status(204);

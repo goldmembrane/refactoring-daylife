@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       day: DataTypes.INTEGER,
       is_done: DataTypes.BOOLEAN
     },
-    {}
+    { timestamps: false }
   );
   goals.associate = function (models) {
     // associations can be defined here

@@ -1,4 +1,5 @@
-const { users } =  require('../../models');
+const { users } =  require('../../__test__/database/models');
+// const { users } =  require('../../models');
 
 module.exports = {
   post: (req,res) => {
@@ -18,7 +19,7 @@ module.exports = {
       if(!created){
         res.status(409).json({message: 'Already exists user'});
       }
-      const data = await user.get({plain: true});
+      //const data = await user.get({plain: true});
       res.status(200).json({message: 'success'});
     })
     .catch(err => {
