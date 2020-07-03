@@ -9,5 +9,3 @@ router.post('/signout', userController.siginout.post);
 router.get('/info',userController.info.get);
 
 module.exports = router;
-
-
