@@ -8,8 +8,8 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 const app = require('../app');
-//
-const { users, goals, daily_schedules } = require('../models');
+
+const { users, goals, daily_schedules } = require('./database/models');
 const usersFixture = require('./fixtures/users.json');
 //const urlsFixture = require('./fixtures/urls.json');
 
@@ -33,10 +33,10 @@ describe('Test to see if the server is open', () => {
   });
 });
 
-describe('Bare Minimum Requirements', () => {
+describe('Bare Minimum Requirements - user', () => {
   beforeEach(async () => {
     // Setup/TearDown : Check Fixtures folder
-    await users.destroy({ where: {}, truncate: {cascase: true} });
+    await users.destroy({ where: {}, truncate: true });
     await users.create(usersFixture[0]);
   });
 
