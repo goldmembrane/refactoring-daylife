@@ -14,11 +14,11 @@ module.exports = (sequelize, DataTypes) => {
   );
   users.associate = function (models) {
     // associations can be defined here
-    users.hasMany(models.Task, {
+    users.hasMany(models.daily_schedules, {
       foreignKey: 'user_id',
       as: 'daily_schedules'
     });
-    users.hasMany(models.Task, {
+    users.hasMany(models.goals, {
       foreignKey: 'user_id',
       as: 'goals'
     });
