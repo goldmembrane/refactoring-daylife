@@ -6,6 +6,7 @@ require('dotenv').config();
 module.exports = {
   post: (req,res) => {
     const { email,password } = req.body;
+    console.log(email, password);
 
     users
     .findOne({ where:{ email:email }})
@@ -16,6 +17,7 @@ module.exports = {
           let secret = process.env.JWT_SECRET;
           jwt.sign(payload, secret, { expiresIn:'50m' },(err,token) =>{
             if(err){
+	      console.log(err);	    
               res.status(500).send(err);
             } else {
               res.cookie('token',token);
@@ -28,6 +30,7 @@ module.exports = {
       }
     })
     .catch(err => {
+      console.log(err);	    
       res.status(500).send(err);
     })
     
