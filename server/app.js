@@ -18,7 +18,11 @@ app.use(morgan('dev'));
 
 //클라이언트 제작 완료시, 클라이언트의 주소를 origin에 넣고, post, get, put메소드 허용
 app.use(
-    cors()
+    cors({
+      origin: ['http://localhost:3000'],
+      methods: ['GET', 'POST', 'PUT', 'DELETE'],
+      credentials: true
+    })
 );
 
 app.get('/', (req, res) => {

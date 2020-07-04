@@ -1,5 +1,5 @@
-const { goals } = require('../../__test__/database/models');
-// const { goals } = require('../../models');
+// const { goals } = require('../../__test__/database/models');
+const { goals } = require('../../models');
 const jwt = require('jsonwebtoken');
 
 module.exports = {
@@ -125,7 +125,7 @@ module.exports = {
 
       goals.findOne({ where: { id: userId, id: id } }).then(data => {
         if(data){
-          console.log(data);
+          // console.log(data);
           goals.destroy({ where: { id: userId, id: id } }).then(() => {
             res.status(200);
             res.json({ "message": "success" });

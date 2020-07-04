@@ -1,5 +1,5 @@
-const { daily_schedules } = require('../../__test__/database/models');
-// const { daily_schedules } = require('../../models');
+// const { daily_schedules } = require('../../__test__/database/models');
+const { daily_schedules } = require('../../models');
 
 const jwt = require('jsonwebtoken');
 
