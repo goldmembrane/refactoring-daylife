@@ -1,10 +1,13 @@
 #loginForm {
   padding-top: 80px;
+  margin-left: 300px;
+  text-align: center;
+  background-color: #f2f2f2;
 }
 
 #clickBt {
   margin-top: 10px;
-  width: 200px;
+  width: 300px;
   padding: 7px;
   border: none;
   border-radius: 5px;
@@ -17,15 +20,17 @@
 
 #clickBt:hover {
   background-color: #757f9a;
+  color: white;
 }
 
 .inputValue {
-  margin-top: 3px;
   border: none;
-  border-bottom: 1px solid #3a3a3a;
   margin-bottom: 10px;
-  border-radius: 3px;
-  outline: none;
-  padding: 0px 0px 5px 5px;
-  width: 200px;
+  margin-top: 10px;
+  width: 300px;
+}
+
+.label {
+  font-size: larger;
+  font-weight: 500;
 }
