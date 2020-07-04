@@ -1,36 +1,67 @@
-import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import React, {Component} from 'react';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { CalendarMonthly } from '../components';
-import Moment from 'react-moment';
-import '../components/Monthly.css';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
-const Monthly = (props) => {
-  const today = new Date();
-  return (
-    <div>
-      <DropdownButton id = 'dropdown-basic-button' title = '페이지 이동 : 월'>
+class Monthly extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: ''
+    }
+  }
 
-          <Dropdown.Item className = 'dropdown-item' as = 'button'
-            onClick = {() => props.history.push('/')}>3일</Dropdown.Item>
+  goDaily = () => {
+    this.props.history.push('/');
+  }
 
-          <Dropdown.Item className = 'dropdown-item' as = 'button'
-            onClick = {() => props.history.push('/Weekly')}>주</Dropdown.Item>
+  goWeekly = () => {
+    this.props.history.push('/Weekly');
+  }
 
-          <Dropdown.Item className = 'dropdown-item' as = 'button'
-            onClick = {() => props.history.push('/Yearly')}>연도</Dropdown.Item>
+  goYearly = () => {
+    this.props.history.push('/Yearly');
+  }
 
-      </DropdownButton>
-      <BrowserRouter>
-        <button className = 'go-to-Yearly' onClick = {() => props.history.push('/Yearly')}>{today.getFullYear()}</button>
-        <div className = 'current-month'><Moment format = 'MMMM'>{today}</Moment></div>
-        <CalendarMonthly />
-      </BrowserRouter>
-      
-    </div>
-  )
+  handleChange(event) {
+    this.setState({ date: event.target.value });
+  }
 
+  render() {
+    const { date } = this.props;
+    return (
+      <div>
+        <DropdownButton id = 'select-button' title = '페이지 이동'>
+  
+          <Dropdown.Item className = 'option' as = 'button'
+          onClick = {this.goDaily.bind(this)}>일</Dropdown.Item>
+  
+          <Dropdown.Item className = 'option' as = 'button'
+          onClick = {this.goWeekly.bind(this)}>주</Dropdown.Item>
+  
+          <Dropdown.Item className = 'option' as = 'button'
+          onClick = {this.goYearly.bind(this)}>연도</Dropdown.Item>
+  
+        </DropdownButton>
+        <div className = 'user-name'>user</div>
+        <div className = 'edit'>
+          <div className = 'edit-schedules'>일정 편집</div>
+          <div className = 'move-today'>오늘로 이동</div>
+        </div>
+        <div className = 'current-plans'>
+          <div className = 'current-Year-and-plans'
+          onClick = {this.goYearly.bind(this)}>2020</div>
+          <div className = 'current-Month-and-plans'>July</div>
+        </div>
+        <div className = 'calendar-box-Monthly'>
+              <Calendar 
+              onClickDay = {() => this.handleChange, () => this.props.change(this.state.date)} 
+              value = {date}/>
+        </div>
+      </div>
+    )
+  }
 }
 
 export default Monthly;

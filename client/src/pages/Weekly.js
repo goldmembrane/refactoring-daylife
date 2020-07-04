@@ -1,42 +1,59 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
-import Moment from 'react-moment';
-import '../components/Weekly.css';
 
-const Weekly = (props) => {
-  const today = new Date();
+
+const Weekly = ({ history }) => {
+
+  
+  const goDaily = () => {
+    history.push('/');
+  }
+
+  const goMonthly = () => {
+    history.push('/Monthly');
+  }
+
+  const goYearly = () => {
+    history.push('/Yearly');
+  }
   return (
     <div>
-      <DropdownButton id = 'dropdown-basic-button' title = '페이지 이동 : 주'>
+      <DropdownButton id = 'select-button' title = '페이지 이동'>
 
-        <Dropdown.Item className = 'dropdown-item' as = 'button'
-          onClick = {() => props.history.push('/')}>3일</Dropdown.Item>
+        <Dropdown.Item className = 'option' as = 'button'
+        onClick = {goDaily}>일</Dropdown.Item>
 
-        <Dropdown.Item className = 'dropdown-item' as = 'button'
-          onClick = {() => props.history.push('/Monthly')}>월</Dropdown.Item>
+        <Dropdown.Item className = 'option' as = 'button'
+        onClick = {goMonthly}>월</Dropdown.Item>
 
-        <Dropdown.Item className = 'dropdown-item' as = 'button'
-          onClick = {() => props.history.push('/Yearly')}>연도</Dropdown.Item>
+        <Dropdown.Item className = 'option' as = 'button'
+        onClick = {goYearly}>연도</Dropdown.Item>
 
       </DropdownButton>
-      <BrowserRouter>
-
-        <button className = 'go-to-Yearly' onClick = {() => props.history.push('/Yearly')}>{today.getFullYear()}</button>
-        
-        <button className = 'go-to-Monthly' onClick = {() => props.history.push('/Monthly')}>
-          <Moment format = 'MMMM'>{today}</Moment></button>
-
-        <div className = 'day-list' onClick = {() => props.history.push('/')}>일</div>
-        <div className = 'day-list' onClick = {() => props.history.push('/')}>월</div>
-        <div className = 'day-list' onClick = {() => props.history.push('/')}>화</div>
-        <div className = 'day-list' onClick = {() => props.history.push('/')}>수</div>
-        <div className = 'day-list' onClick = {() => props.history.push('/')}>목</div>
-        <div className = 'day-list' onClick = {() => props.history.push('/')}>금</div>
-        <div className = 'day-list' onClick = {() => props.history.push('/')}>토</div>
-
-      </BrowserRouter>
+      <div className = 'user-name'>user</div>
+      <div className = 'weekly-goals'>이번주 목표</div>
+      <div className = 'edit'>
+        <div className = 'edit-schedules'>일정 편집</div>
+        <div className = 'move-today'>오늘로 이동</div>
+      </div>
+      <div className = 'current-plans'>
+        <div className = 'current-Year-and-plans'
+        onClick = {goYearly}>2020</div>
+        <div className = 'current-Month-and-plans'
+        onClick = {goMonthly}>July</div>
+      </div>
+      <button className = 'move-lastweek'>왼쪽 화살표</button>
+      <div className = 'weekly-plans'>
+        <div className = 'daily-plans'>일</div>
+        <div className = 'daily-plans'>월</div>
+        <div className = 'daily-plans'>화</div>
+        <div className = 'daily-plans'>수</div>
+        <div className = 'daily-plans'>목</div>
+        <div className = 'daily-plans'>금</div>
+        <div className = 'daily-plans'>토</div>
+      </div>
+      <button className = 'move-nextweek'>오른쪽 화살표</button>
     </div>
   )
 }
