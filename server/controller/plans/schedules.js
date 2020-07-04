@@ -1,4 +1,5 @@
-const { daily_schedules } = require('../../models');
+const { daily_schedules } = require('../../__test__/database/models');
+// const { daily_schedules } = require('../../models');
 
 const jwt = require('jsonwebtoken');
 
@@ -12,120 +13,126 @@ const getEndWeekDays = require('./getFirstdayOfWeek');
 module.exports = {
   get: (req, res) => {  //get 7일치(무조건)
     let token = req.cookies.token;
-    if(!token){
+    if (!token) {
       res.status(401);
-      res.json({'message':'need user session'});
+      res.json({ 'message': 'need user session' });
       res.end();
     } else {
-      let userId = jwt.verify(token, process.env.JWT_SECRET);
-      // let [year, month, day] = req.body.date.split('-');  //year-month-day
-      // let today = new Date(year + '-' + month + '-' + day);
-
-      
-      // let resData = {
-      //   sun:[], mon:[], tue:[], wed:[], thu:[], fri:[], sat:[]
-      // }
-
-      // //new Date(year + '-' + month + '-' + (day - 1 + i)) <= data <= new Date(year + '-' + month + '-' + (day + i))      
-      // //확인 필요 sequelize에 datetime형식이 어떤 포멧인지 확인하고 그에 맞는 쿼리문 필요
-      // for(let i = 0; i < 7; i++){ 
-      //   await users.findAll({ where: {}})
-      // }
-
-      // res.status(200);
-      // res.json(resData);
-      // res.end();
-
-
-      daily_schedules.findAll({ where: {
-        user_id: userId, 
-        date: {between: getEndWeekDays(new Date(req.body.date))}
-      }}).then(data => {
+      let userId = jwt.verify(token, process.env.JWT_SECRET).id;
+      let date = req.query.date;
+      // let d = getEndWeekDays(new Date(req.body.date));
+      console.log(userId);
+      daily_schedules.findAll({
+        where: {
+          user_id: userId,
+          date: date
+        }
+      }).then(data => {
         res.status(200);
         res.json(data);
         res.end();
-      });
+      }).catch(err => {
+        res.status(501);
+      })
     }
   },
   post: (req, res) => {
     let token = req.cookies.token;
-    if(!token){
+    if (!token) {
       res.status(401);
-      res.json({'message':'need user session'});
+      res.json({ 'message': 'need user session' });
       res.end();
     } else {
-      let userId = jwt.verify(token, process.env.JWT_SECRET);
+      let userId = jwt.verify(token, process.env.JWT_SECRET).id;
       let name = req.body.name;
       let date = req.body.date;
       let start = req.body.start;
       let end = req.body.end;
       let is_done = false;
 
+      console.log(userId+' '+name+' '+date+' '+start+' '+end+' '+is_done);
+      
       daily_schedules.create({
         name: name,
-        date: date,
+        is_done: is_done,
+        user_id: userId,
         start: start,
         end: end,
-        is_done: is_done,
-        user_id: userId
-      }).then(() => {
+        date: date
+      }).then(data => {
         res.status(201);
-        res.json({"message": "success"});
+        res.json({ "message": "success" });
         res.end();
-      });
+      }).catch(err => {
+        res.status(502);
+        res.send(err);
+      })
     }
   },
   put: (req, res) => {
     let token = req.cookies.token;
-    if(!token){
+    if (!token) {
       res.status(401);
-      res.json({'message':'need user session'});
+      res.json({ 'message': 'need user session' });
       res.end();
     } else {
-      let userId = jwt.verify(token, process.env.JWT_SECRET);
-      let id = req.body.id;
+      let userId = jwt.verify(token, process.env.JWT_SECRET).id;
+      let id = req.query.id;
+
       let name = req.body.name;
       let date = req.body.date;
       let start = req.body.start;
       let end = req.body.end;
       let is_done = req.body.is_done;
 
-      daily_schedules.findOne({where: {id: id, user_id: userId}}).then(data => {
-        if(!data) {
+      daily_schedules.findOne({ where: { id: id, user_id: userId } }).then(data => {
+        if (data) {
+          daily_schedules.update({
+            name: name,
+            date: date,
+            start: start,
+            end: end,
+            is_done: is_done
+          }, { where: { id: id } }).then(() => {
+            res.status(201);
+            res.json({ "message": "success" });
+            res.end();
+          });
+        } else {
           res.status(404);
-          res.json({"message":"cannot found"});
+          res.json({ "message": "cannot found" });
           res.end();
         }
-      });
-
-      daily_schedules.update({
-        name: name,
-        date: date,
-        start: start,
-        end: end,
-        is_done: is_done
-      }, {where: {id: id}}).then(() => {
-        res.status(201);
-        res.json({"message": "success"});
-        res.end();
       });
     }
   },
   delete: (req, res) => {
     let token = req.cookies.token;
-    if(!token){
+    if (!token) {
       res.status(401);
-      res.json({'message':'need user session'});
+      res.json({ 'message': 'need user session' });
       res.end();
     } else {
-      let userId = jwt.verify(token, process.env.JWT_SECRET);
-      
-      daily_schedules.destroy({where: {user_id: userId, id: req.body.id}}).then(() => {
-        res.status(200);
-        res.json({"message": "success"});
-        res.end();
+      let userId = jwt.verify(token, process.env.JWT_SECRET).id;
+      let id = req.query.id;
+
+      daily_schedules.findOne({ where: { id: id, user_id: userId } }).then(data => {
+        if (data) {
+          daily_schedules.destroy({ where: { user_id: userId, id: id } }).then(() => {
+            res.status(200);
+            res.json({ "message": "success" });
+            res.end();
+          }).catch(err => {
+            res.status(501);
+          })
+        } else {
+          res.status(404);
+          res.json({ "message": "cannot found" });
+          res.end();
+        }
       })
-      
+
+
     }
   }
 };
