@@ -21,7 +21,7 @@ module.exports = {
       let userId = jwt.verify(token, process.env.JWT_SECRET).id;
       let date = req.query.date;
       // let d = getEndWeekDays(new Date(req.body.date));
-      console.log(userId);
+      // console.log(userId);
       daily_schedules.findAll({
         where: {
           user_id: userId,
@@ -50,7 +50,7 @@ module.exports = {
       let end = req.body.end;
       let is_done = false;
 
-      console.log(userId+' '+name+' '+date+' '+start+' '+end+' '+is_done);
+      // console.log(userId+' '+name+' '+date+' '+start+' '+end+' '+is_done);
       
       daily_schedules.create({
         name: name,

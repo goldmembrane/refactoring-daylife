@@ -1,6 +1,4 @@
 node_modules
 package-lock.json
 .env
-
-app.js
-routes/plans.js
+__test__

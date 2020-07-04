@@ -1,5 +1,5 @@
-const { users } =  require('../../__test__/database/models');
-// const { users } =  require('../../models');
+// const { users } =  require('../../__test__/database/models');
+const { users } =  require('../../models');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
@@ -14,7 +14,7 @@ module.exports = {
         if(user.dataValues.password === password){ 
           let payload = { id: user.id };
           let secret = process.env.JWT_SECRET;
-          jwt.sign(payload, secret, { expiresIn:'5m' },(err,token) =>{
+          jwt.sign(payload, secret, { expiresIn:'50m' },(err,token) =>{
             if(err){
               res.status(500).send(err);
             } else {
