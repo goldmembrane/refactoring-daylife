@@ -1,0 +1,31 @@
+#loginForm {
+  padding-top: 80px;
+}
+
+#clickBt {
+  margin-top: 10px;
+  width: 200px;
+  padding: 7px;
+  border: none;
+  border-radius: 5px;
+  color: #414345;
+  font-weight: bold;
+  background-color: #d7dde8;
+  cursor: pointer;
+  outline: none;
+}
+
+#clickBt:hover {
+  background-color: #757f9a;
+}
+
+.inputValue {
+  margin-top: 3px;
+  border: none;
+  border-bottom: 1px solid #3a3a3a;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  outline: none;
+  padding: 0px 0px 5px 5px;
+  width: 200px;
+}
