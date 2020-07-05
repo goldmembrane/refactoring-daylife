@@ -1,9 +1,10 @@
 import React from 'react';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
+import Moment from 'react-moment';
 
 
-const Weekly = ({ history }) => {
+const Weekly = ({ history, date }) => {
 
   
   const goDaily = () => {
@@ -39,9 +40,9 @@ const Weekly = ({ history }) => {
       </div>
       <div className = 'current-plans'>
         <div className = 'current-Year-and-plans'
-        onClick = {goYearly}>2020</div>
+        onClick = {goYearly}><Moment format = 'YYYY'>{date}</Moment></div>
         <div className = 'current-Month-and-plans'
-        onClick = {goMonthly}>July</div>
+        onClick = {goMonthly}><Moment format = 'MMM'>{date}</Moment></div>
       </div>
       <button className = 'move-lastweek'>왼쪽 화살표</button>
       <div className = 'weekly-plans'>

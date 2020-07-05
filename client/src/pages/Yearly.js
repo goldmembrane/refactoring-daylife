@@ -1,58 +1,86 @@
-import React from 'react';
+import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { setDate } from '../actions';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import Moment from 'react-moment';
 
 
-const Yearly = ({ history }) => {
+class Yearly extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      month: props.date
+    }
+  }
   
-  const goDaily = () => {
-    history.push('/');
+  goDaily = () => {
+    this.props.history.push('/');
   }
 
-  const goWeekly = () => {
-    history.push('/Weekly');
+  goWeekly = () => {
+    this.props.history.push('/Weekly');
   }
 
-  const goMonthly = () => {
-    history.push('/Monthly');
+  goMonthly = () => {
+    this.props.history.push('/Monthly');
   }
 
- 
-  
-  return (
-    <div>
+  handleChangeDate = (event) => {
 
-        <DropdownButton id = 'select-button' title = '페이지 이동'>
+    const select = event;
+    this.setState(() => {
+      return { month: select}
+    });
+
+    this.props.dispatch(setDate(select));
+    this.props.history.push('/Monthly');
+  }
+
+  render() {
+
+    return (
+      <div>
   
-          
-          <Dropdown.Item className = 'option' as = 'button'
-          onClick = {goDaily}>일</Dropdown.Item>
+          <DropdownButton id = 'select-button' title = '페이지 이동'>
+    
+            <Dropdown.Item className = 'option' as = 'button'
+            onClick = {this.goDaily.bind(this)}>일</Dropdown.Item>
+    
+            <Dropdown.Item className = 'option' as = 'button'
+            onClick = {this.goWeekly.bind(this)}>주</Dropdown.Item>
+    
+            <Dropdown.Item className = 'option' as = 'button'
+            onClick = {this.goMonthly.bind(this)}>월</Dropdown.Item>
+    
+          </DropdownButton>
   
-          <Dropdown.Item className = 'option' as = 'button'
-          onClick = {goWeekly}>주</Dropdown.Item>
-  
-          <Dropdown.Item className = 'option' as = 'button'
-          onClick = {goMonthly}>월</Dropdown.Item>
-  
-        </DropdownButton>
-      <div className = 'user-name'>user</div>
-      <div className = 'edit'>
-        <div className = 'edit-schedules'>일정 편집</div>
-        <div className = 'move-today'>오늘로 이동</div>
-      </div>
-      <div className = 'current-plans'>
-        <div className = 'current-Year-and-plans-on-Yearly'>2020</div>
-      </div>
-        <div className = 'calendar-box-Yearly'>
-          <Calendar 
-            view = 'year'
-          />
+        <div className = 'user-name'>user</div>
+        <div className = 'edit'>
+          <div className = 'edit-schedules'>일정 편집</div>
+          <div className = 'move-today'>오늘로 이동</div>
         </div>
-    </div>
-  )
-  
+        <div className = 'current-plans'>
+          <div className = 'current-Year-and-plans-on-Yearly'><Moment format = 'YYYY'>{this.state.month}</Moment></div>
+        </div>
+          <div className = 'calendar-box-Yearly'>
+            <Calendar 
+              view = 'year'
+              onClickMonth = {this.handleChangeDate.bind(this)}
+            />
+          </div>
+      </div>
+    )
+  }
 }
 
-export default Yearly;
+const mapStateToProps = state => {
+  return {
+    date: state.setDateReducer.date
+  }
+};
+
+export default connect(mapStateToProps)(Yearly);
