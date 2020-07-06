@@ -1,6 +1,5 @@
 import React from "react";
 import Title from "./Title";
-import testImg from "./testImg.png";
 import "./Home.css";
 
 export default class Home extends React.Component {
