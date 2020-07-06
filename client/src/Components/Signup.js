@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 import Title from "./Title";
 import "./Signup.css";
-import { withRouter } from "react-router-dom";
 
 class Signup extends React.Component {
   state = {
@@ -48,7 +47,6 @@ class Signup extends React.Component {
   }
 
   render() {
-    // console.log("회원가입 히스토리:", this.props.history);
     return (
       <div>
         <Title />

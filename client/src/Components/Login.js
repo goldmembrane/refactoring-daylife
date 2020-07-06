@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-  withRouter,
-} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 // import axios from "axios";
 import Title from "./Title";
 import "./Login.css";

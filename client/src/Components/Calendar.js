@@ -1,9 +1,6 @@
 import React from "react";
 
 export default class Calendar extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     const isLogin = this.props.isLogin;
     console.log("캘린더의 isLogin:", isLogin);

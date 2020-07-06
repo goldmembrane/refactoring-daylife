@@ -4,7 +4,6 @@ import {
   Switch,
   Route,
   Link,
-  Redirect,
   withRouter,
 } from "react-router-dom";
 import Login from "./Components/Login";
