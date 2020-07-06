@@ -34,9 +34,6 @@ export default class Home extends React.Component {
             달력에서 특정 월을 선택하면 4주 단위로 계획한 세부목표, 마감기한을
             정해두지 않은 이 달의 목표, 이번 해의 목표도 다시 한번 알려줍니다.
           </li>
-          <div>
-            <img src={testImg} alt="testA" />
-          </div>
         </ol>
       </div>
     );
