@@ -9,7 +9,8 @@ class DailyPlan extends Component {
     super(props);
     
     this.state = {
-      date: props.date
+      date: props.date,
+      weekDay: new Date()
     }
   }
 
@@ -19,6 +20,23 @@ class DailyPlan extends Component {
     this.setState({ date: selectDay});
 
     this.props.dispatch(setDate(selectDay));
+  }
+
+  sendPropsToWeekly = (e) => {
+
+    const select = e.target.textContent;
+    const selectToday = new Date(select);
+    
+    const nowMonth = selectToday.getMonth();
+    const nowYear = selectToday.getFullYear();
+    const nowDay = selectToday.getDay();
+    const nowDate = selectToday.getDate();
+
+    const weekStartDay = new Date(nowYear, nowMonth, nowDate - nowDay);
+
+    this.props.dispatch(setDate(weekStartDay));
+
+
   }
 
   setToday = () => {
@@ -45,16 +63,16 @@ class DailyPlan extends Component {
           
         </div>
         <div className = 'day-plans'>
-        <div className = 'yesterday' onClick = {this.changeToday.bind(this)}>
+          <div className = 'yesterday' onClick = {this.changeToday.bind(this)}>
             <Moment format = 'YYYY-MM-DD' >{moment(this.state.date).add(-1, 'day')}</Moment>
-        </div>
-        <div className = 'today'>
+          </div>
+          <div className = 'today' onClick = {(e) => { this.sendPropsToWeekly(e); this.props.goWeek();}} >
             <Moment format = 'YYYY-MM-DD'>{this.state.date}</Moment>
-        </div>
-        <div className = 'tomorrow' onClick = {this.changeToday.bind(this)}>
+          </div>
+          <div className = 'tomorrow' onClick = {this.changeToday.bind(this)}>
             <Moment format = 'YYYY-MM-DD'>{moment(this.state.date).add(1, 'day')}</Moment>
-        </div>
-    </div>
+          </div>
+      </div>
     </div>
     )
   }

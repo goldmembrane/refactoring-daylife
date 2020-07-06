@@ -5,6 +5,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import './Home.css';
 import { DailyPlan } from '../components'
 
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +27,8 @@ class Home extends Component {
     this.props.history.push('/Yearly');
   }
 
+  
+
 
   render() {
 
@@ -33,10 +36,7 @@ class Home extends Component {
       <div>
         
           <DropdownButton id = 'select-button' title = '페이지 이동'>
-  
-            <Dropdown.Item className = 'option' as = 'button'
-            onClick = {this.goWeekly.bind(this)}>주</Dropdown.Item>
-    
+            
             <Dropdown.Item className = 'option' as = 'button'
             onClick = {this.goMonthly.bind(this)}>월</Dropdown.Item>
   
@@ -46,20 +46,11 @@ class Home extends Component {
           </DropdownButton>
   
         <div className = 'user-name'>user</div>
-        {/*<div className = 'current-plans'>
-  
-            <div className = 'current-Year-and-plans' 
-            onClick = {this.goYearly.bind(this)}><Moment format = 'YYYY'>{this.state.date}</Moment></div>
-  
-            <div className = 'current-Month-and-plans'
-            onClick = {this.goMonthly.bind(this)}><Moment format = 'MMM'>{this.state.date}</Moment></div>
-          
-        </div>*/}
-        <DailyPlan 
-        goYear = {this.goYearly.bind(this)}
-        goMonth = {this.goMonthly.bind(this)}/>
-        <div className = 'move-yesterday'>왼쪽</div>
-        <div className = 'move-tomorrow'>오른쪽</div>
+          <DailyPlan 
+          goYear = {this.goYearly.bind(this)}
+          goMonth = {this.goMonthly.bind(this)}
+          goWeek = {this.goWeekly.bind(this)}
+          />
       </div>
     )
   }
