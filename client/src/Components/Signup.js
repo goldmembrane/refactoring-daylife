@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import Title from "./Title";
 import "./Signup.css";
+import { withRouter } from "react-router-dom";
 
 class Signup extends React.Component {
   state = {
@@ -41,17 +42,18 @@ class Signup extends React.Component {
 
     if (confirmPassword) {
       if (!this.doesPasswordMatch()) {
-        return <div>패스워드가 일치하지 않습니다!</div>;
+        return <div>패스워드가 일치하지 않습니다!!</div>;
       }
     }
   }
 
   render() {
+    // console.log("회원가입 히스토리:", this.props.history);
     return (
       <div>
         <Title />
         <form
-          id="signupForm"
+          id="main-signup-form"
           onSubmit={(e) => {
             e.preventDefault();
             const data = JSON.stringify({
@@ -72,50 +74,51 @@ class Signup extends React.Component {
             axios(config)
               .then((response) => {
                 console.log(response.data);
-                this.props.history.replace("./login");
                 alert(`${this.state.username}님 회원가입 하셨습니다.`);
+
+                this.props.history.replace("./login");
               })
               .catch((error) => {
                 alert(`${error} 에러 입니다.`);
               });
           }}
         >
-          <label className="label">회원가입 정보를 입력하세요</label>
+          <label id="main-label">Create Account</label>
           <div>
             <input
-              className="inputValue"
+              className="signup-input-value"
               type="email"
-              placeholder="Email"
+              placeholder="  Email"
               onChange={this.handleInputEmail}
             ></input>
           </div>
           <div>
             <input
-              className="inputValue"
-              placeholder="username"
+              className="signup-input-value"
+              placeholder="  Username"
               onChange={this.handleInputUsername}
             ></input>
           </div>
           <div>
             <input
-              className="inputValue"
+              className="signup-input-value"
               type="password"
-              placeholder="Password"
+              placeholder="  Password"
               onChange={(e) => this.handleOnPasswordInput(e.target.value)}
             ></input>
           </div>
           <div>
             <input
-              className="inputValue"
+              className="signup-input-value"
               onChange={(e) =>
                 this.handleOnConfirmPasswordInput(e.target.value)
               }
               type="password"
-              placeholder="Password check"
+              placeholder="  Password check"
             ></input>
           </div>
-          <small id="feedbackMessage">{this.renderFeedbackMessage()}</small>
-          <button id="clickBt" type="submit">
+          <small id="feedback-message">{this.renderFeedbackMessage()}</small>
+          <button id="click-signup-button" type="submit">
             Sign Up
           </button>
         </form>

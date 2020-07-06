@@ -1,16 +1,17 @@
 import React from "react";
-import "./Calendar.css";
 
 export default class Calendar extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
-    return (
-      <div id="calrendar">
-        <h1>이곳은 캘린더 페이지 </h1>
-        <div>날짜 등등 일ㄴㅁ임ㄴㅇㅁㄴㅇ</div>
-        <span>ㅇㅁㄴㅇㅁㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ</span>
-        <h2>이야아이이야</h2>
-        <span>21</span>
-      </div>
+    const isLogin = this.props.isLogin;
+    console.log("캘린더의 isLogin:", isLogin);
+    console.log("캘린더의 디스 프롭:", this.props);
+    return isLogin ? (
+      <h1 id="calrendar">이곳에 병현님 대표 캘린더를 랜더해준다</h1>
+    ) : (
+      <h1>Not Found</h1>
     );
   }
 }

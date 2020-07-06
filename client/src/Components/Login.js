@@ -1,82 +1,83 @@
 import React from "react";
-import axios from "axios";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+  withRouter,
+} from "react-router-dom";
+// import axios from "axios";
 import Title from "./Title";
 import "./Login.css";
 
 class Login extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    email: "",
+    password: "",
+  };
 
-    this.state = {
-      email: "",
-      password: "",
-    };
-    this.handleInputValue = this.handleInputValue.bind(this);
-  }
   handleInputValue = (key) => (e) => {
     this.setState({ [key]: e.target.value });
   };
 
   render() {
+    const { history } = this.props;
     return (
       <div>
         <Title />
         <form
-          id="loginForm"
+          id="login-form"
           onSubmit={(e) => {
             e.preventDefault();
-
-            const data = JSON.stringify(this.state);
-
-            let config = {
-              method: "post",
-              url: "http://15.164.232.40:3001/user/signin",
+            fetch("http://15.164.232.40:3001/user/signin", {
+              method: "POST",
+              body: JSON.stringify(this.state),
+              credentials: "include",
               headers: {
-                "Content-Type": "application/json",
+                "Content-type": "application/json; charset=UTF-8",
               },
-              data: data,
-            };
-
-            axios(config)
-              .then((response) => {
-                console.log(response.data);
-                this.props.onSubmit(data);
-                alert("로그인 성공");
-                this.props.history("/calendar");
+            })
+              .then((res) => {
+                if (res.status === 200) {
+                  console.log("200코드 받음 잘됨");
+                  return res.json();
+                }
               })
-              .catch((error) => {
-                console.log("data에 담긴 정보: ", data);
-                console.log(`${error}에러 회원가입 다시해라`);
+              .then((data) => {
+                if (data) {
+                  this.props.handleLogin();
+                  history.push("./calendar");
+                } else {
+                  alert(`회원가입을 진행하시거나 로그인을 다시 시도해 주세요.`);
+                }
               });
           }}
         >
-          <label className="label">로그인 정보를 입력하세요</label>
+          <label id="main-label">Sign in</label>
           <div>
             <input
-              className="inputValue"
+              className="login-input-value"
               type="email"
-              placeholder="Email"
+              placeholder="  Email"
               onChange={this.handleInputValue("email")}
             ></input>
           </div>
           <div>
             <input
-              className="inputValue"
+              className="login-input-value"
               type="password"
-              placeholder="Password"
+              placeholder="  Password"
               onChange={this.handleInputValue("password")}
             ></input>
           </div>
-          <button id="clickBt" type="submit">
-            Login
+          <button id="click-login-button" type="submit">
+            SIGN IN
           </button>
-          {/* <button onClick={() => this.props.history.replace("/signup")}>
-          회원가입
-        </button> */}
         </form>
       </div>
     );
   }
 }
 
-export default Login;
+export default withRouter(Login);

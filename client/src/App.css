@@ -2,7 +2,7 @@ html {
   background-color: #f2f2f2;
 }
 
-.listBts {
+#main-buttons {
   font-family: serif;
   display: flex;
   float: left;
@@ -13,7 +13,7 @@ html {
   background-color: white;
 }
 
-.listBt {
+.router-button {
   border: none;
   border-radius: 5px;
   color: #94716b;
@@ -25,7 +25,7 @@ html {
   margin-top: 50px;
 }
 
-.listBt:hover {
+.router-button:hover {
   color: #eb5757;
   border: none;
   outline: none;
@@ -33,10 +33,10 @@ html {
 }
 
 #wisesayingBt {
-  margin-bottom: 700px;
+  padding-bottom: 650px;
 }
 
-#list {
+#list-title {
   margin-top: 300px;
   font-size: 25px;
   color: #3b4371;

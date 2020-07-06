@@ -1,4 +1,4 @@
-#title {
+#main {
   font-family: "Courier";
   font-family: fantasy;
   text-align: center;
@@ -8,12 +8,12 @@
   color: #414345;
 }
 
-#daylife {
-  font-size: 150px;
+#main-title {
+  font-size: 125px;
   margin-bottom: 18px;
 }
 
-#sentence {
+#sub-title {
   font-style: oblique;
   font-size: 20px;
   font-family: serif;
