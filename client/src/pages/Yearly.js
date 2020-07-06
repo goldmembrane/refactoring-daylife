@@ -40,6 +40,14 @@ class Yearly extends Component {
     this.props.history.push('/Monthly');
   }
 
+  setToday = () => {
+
+    const today = new Date();
+    this.setState({ date: today });
+
+    this.props.dispatch(setDate(today));
+  }
+
   render() {
 
     return (
@@ -61,10 +69,12 @@ class Yearly extends Component {
         <div className = 'user-name'>user</div>
         <div className = 'edit'>
           <div className = 'edit-schedules'>일정 편집</div>
-          <div className = 'move-today'>오늘로 이동</div>
+          <div className = 'move-today' onClick = {this.setToday.bind(this)}>오늘로 이동</div>
         </div>
         <div className = 'current-plans'>
-          <div className = 'current-Year-and-plans-on-Yearly'><Moment format = 'YYYY'>{this.state.month}</Moment></div>
+          <div className = 'current-Year-and-plans-on-Yearly'>
+            <Moment format = 'YYYY'>{this.state.month}</Moment>
+          </div>
         </div>
           <div className = 'calendar-box-Yearly'>
             <Calendar 

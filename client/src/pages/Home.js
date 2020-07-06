@@ -3,18 +3,16 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import { connect } from 'react-redux';
 import Dropdown from 'react-bootstrap/Dropdown';
 import './Home.css';
-import Moment from 'react-moment';
-import moment from 'moment';
+import { DailyPlan } from '../components'
 
 class Home extends Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
       date: props.date
     }
   }
-  
 
   goWeekly = () => {
     this.props.history.push('/Weekly');
@@ -27,7 +25,8 @@ class Home extends Component {
   goYearly = () => {
     this.props.history.push('/Yearly');
   }
-  
+
+
   render() {
 
     return (
@@ -47,25 +46,19 @@ class Home extends Component {
           </DropdownButton>
   
         <div className = 'user-name'>user</div>
-        <div className = 'edit'>
-          <div className = 'edit-schedules'>일정 편집</div>
-          <div className = 'move-today'>오늘로 이동</div>
-        </div>
-        <div className = 'current-plans'>
+        {/*<div className = 'current-plans'>
   
             <div className = 'current-Year-and-plans' 
             onClick = {this.goYearly.bind(this)}><Moment format = 'YYYY'>{this.state.date}</Moment></div>
   
             <div className = 'current-Month-and-plans'
             onClick = {this.goMonthly.bind(this)}><Moment format = 'MMM'>{this.state.date}</Moment></div>
-            
-        </div>
+          
+        </div>*/}
+        <DailyPlan 
+        goYear = {this.goYearly.bind(this)}
+        goMonth = {this.goMonthly.bind(this)}/>
         <div className = 'move-yesterday'>왼쪽</div>
-        <div className = 'day-plans'>
-          <div className = 'yesterday'><Moment format = 'DD'>{moment(this.state.date).add(-1, 'day')}</Moment></div>
-          <div className = 'today'><Moment format = 'DD'>{this.state.date}</Moment></div>
-          <div className = 'tomorrow'><Moment format = 'DD'>{moment(this.state.date).add(1, 'day')}</Moment></div>
-        </div>
         <div className = 'move-tomorrow'>오른쪽</div>
       </div>
     )

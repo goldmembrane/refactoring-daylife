@@ -7,12 +7,13 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import Moment from 'react-moment';
 
+
 class Monthly extends Component {
   constructor(props){
     super(props);
 
     this.state = {
-      day: props.date
+      date: props.date
     }
   }
 
@@ -31,12 +32,19 @@ class Monthly extends Component {
   handleChangeDate = (event) => {
     const select = event;
     this.setState({
-      day: select
+      date: select
     });
     
     this.props.dispatch(setDate(select));
     this.props.history.push('/');
   };
+
+  setToday = () => {
+    const today = new Date();
+    this.setState({ date: today });
+
+    this.props.dispatch(setDate(today));
+  }
 
   render() {
     return (
@@ -56,16 +64,17 @@ class Monthly extends Component {
         <div className = 'user-name'>user</div>
         <div className = 'edit'>
           <div className = 'edit-schedules'>일정 편집</div>
-          <div className = 'move-today'>오늘로 이동</div>
+          <div className = 'move-today' onClick = {this.setToday.bind(this)}>오늘로 이동</div>
         </div>
         <div className = 'current-plans'>
           <div className = 'current-Year-and-plans'
-          onClick = {this.goYearly.bind(this)}><Moment format = 'YYYY'>{this.state.day}</Moment></div>
-          <div className = 'current-Month-and-plans'><Moment format = 'MMM'>{this.state.day}</Moment></div>
+          onClick = {this.goYearly.bind(this)}><Moment format = 'YYYY'>{this.state.date}</Moment></div>
+          <div className = 'current-Month-and-plans'><Moment format = 'MMM'>{this.state.date}</Moment></div>
         </div>
         <div className = 'calendar-box-Monthly'>
               <Calendar 
                 onClickDay = {this.handleChangeDate.bind(this)}
+                value = {this.state.date}
               />
         </div>
       </div>

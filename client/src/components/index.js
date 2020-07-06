@@ -1,2 +1,1 @@
-export {default as CalendarMonthly} from './CalendarMonthly';
-export {default as CalendarYearly} from './CalendarYearly';
+export {default as DailyPlan} from './DailyPlan';
