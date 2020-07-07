@@ -29,6 +29,11 @@ class Monthly extends Component {
   goYearly = () => {
     this.props.history.push('/Yearly');
   };
+  
+  handleChange = event => {
+    const select = event.activeStartDate
+    this.setState({ date: select});
+  }
 
   handleChangeDate = (event) => {
     const select = event;
@@ -75,7 +80,7 @@ class Monthly extends Component {
         <div className = 'calendar-box-Monthly'>
               <Calendar 
                 onClickDay = {this.handleChangeDate.bind(this)}
-                value = {this.state.date}
+                onActiveStartDateChange = {this.handleChange}
               />
         </div>
       </div>

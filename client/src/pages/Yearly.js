@@ -19,7 +19,7 @@ class Yearly extends Component {
   }
   
   goDaily = () => {
-    this.props.history.push('/');
+    this.props.history.push('/calendar');
   }
 
   goWeekly = () => {
@@ -30,12 +30,15 @@ class Yearly extends Component {
     this.props.history.push('/Monthly');
   }
 
+  handleChange = event => {
+    const select = event.activeStartDate;
+    this.setState({ month: select});
+  }
+
   handleChangeDate = (event) => {
 
     const select = event;
-    this.setState(() => {
-      return { month: select}
-    });
+    this.setState({ month: select});
 
     this.props.dispatch(setDate(select));
     this.props.history.push('/Monthly');
@@ -81,6 +84,7 @@ class Yearly extends Component {
             <Calendar 
               view = 'year'
               onClickMonth = {this.handleChangeDate.bind(this)}
+              onActiveStartDateChange = {this.handleChange}
             />
           </div>
       </div>
