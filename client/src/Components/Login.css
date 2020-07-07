@@ -6,7 +6,7 @@
   left: 50%;
   margin-top: -100px;
   width: 400px;
-  height: 280px;
+  height: 310px;
   box-shadow: 5px 5px 5px #414345;
   border-radius: 10px;
 }
@@ -15,7 +15,7 @@
   border: none;
   margin-bottom: 10px;
   margin-top: 15px;
-  width: 250px;
+  width: 240px;
   background-color: #e9e4f0;
 }
 
@@ -29,7 +29,7 @@
   background-color: #93291e;
   cursor: pointer;
   outline: none;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 #click-login-button:hover {
@@ -41,4 +41,12 @@
   padding-top: 20px;
   font-weight: 900;
   font-size: 35px;
+}
+
+#google-login-button{
+  position:absolute; 
+  top:50%; left:50%;
+  margin-top:100px; margin-left:-60px; 
+  width:200px; height:200px; 
+
 }

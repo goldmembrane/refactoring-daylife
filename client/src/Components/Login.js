@@ -64,9 +64,11 @@ class Login extends React.Component {
               onChange={this.handleInputValue("password")}
             ></input>
           </div>
+
           <button id="click-login-button" type="submit">
             SIGN IN
           </button>
+          <div id="google-login-button" class="g-signin2" data-onsuccess="onSignIn"></div>
         </form>
       </div>
     );
