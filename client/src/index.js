@@ -1,15 +1,19 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter, Route } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.css"
+import React from 'react';
+import ReactDom from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
-ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-  document.getElementById("root")
+import Root from './Root';
+import reducers from './reducers';
+
+const store = createStore(
+  reducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
+)
+
+ReactDom.render(
+  <Provider store = {store}>
+    <Root />
+  </Provider>,
+  document.getElementById('root')
 );
-
-serviceWorker.unregister();

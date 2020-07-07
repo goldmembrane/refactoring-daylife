@@ -1,4 +1,5 @@
 import React from "react";
+import { Home , Monthly, Yearly, Weekly } from './pages';
 import {
   BrowserRouter as Router,
   Switch,
@@ -75,6 +76,9 @@ class App extends React.Component {
             />
             <Route path="/signup" component={Signup} />
             <Route path="/wisesaying" component={WiseSaying} />
+            <Route path = '/Yearly' component = {Yearly} />
+            <Route path = '/Monthly' component = {Monthly} />
+            <Route path = '/Weekly' component = {Weekly} />
           </Switch>
         </Router>
       </div>
