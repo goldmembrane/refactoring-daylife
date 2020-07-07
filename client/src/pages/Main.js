@@ -3,10 +3,12 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import { connect } from 'react-redux';
 import Dropdown from 'react-bootstrap/Dropdown';
 import './Home.css';
-import { DailyPlan } from '../components'
+import { DailyPlan } from '../Components';
+import { withRouter } from "react-router-dom";
 
 
-class Home extends Component {
+
+class Main extends Component {
   constructor(props) {
     super(props);
     
@@ -59,4 +61,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(withRouter(Main));

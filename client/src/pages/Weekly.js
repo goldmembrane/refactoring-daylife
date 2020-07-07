@@ -5,10 +5,11 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Moment from 'react-moment';
 import moment from 'moment';
-import ShowYearPlan from '../components/ShowYearPlan';
-import ShowMonthPlan from '../components/ShowMonthPlan';
-import ShowWeeklyPlan from '../components/ShowWeeklyPlan';
-import CreatePlan from '../components/CreatePlan';
+import ShowYearPlan from '../Components/ShowYearPlan';
+import ShowMonthPlan from '../Components/ShowMonthPlan';
+import ShowWeeklyPlan from '../Components/ShowWeeklyPlan';
+import CreatePlan from '../Components/CreatePlan';
+import { withRouter } from "react-router-dom";
 
 
 class Weekly extends Component {
@@ -30,7 +31,7 @@ class Weekly extends Component {
   }
 
   goDaily = () => {
-    this.props.history.push('/');
+    this.props.history.push('/calendar');
   }
 
   goMonthly = () => {
@@ -50,7 +51,7 @@ class Weekly extends Component {
     this.setState({ date: selectDay });
 
     this.props.dispatch(setDate(selectDay));
-    this.props.history.push('/');
+    this.props.history.push('/calendar');
   }
 
   setToday = () => {
@@ -137,4 +138,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Weekly);
+export default connect(mapStateToProps)(withRouter(Weekly));
