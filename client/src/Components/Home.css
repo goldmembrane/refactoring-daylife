@@ -1,0 +1,22 @@
+#main-home-page {
+  background-color: #f2f2f2;
+}
+
+#main-text {
+  margin-top: 100px;
+  text-align: center;
+}
+
+.content {
+  margin-bottom: 13px;
+  font-size: 18px;
+  font-family: serif;
+}
+
+ol {
+  padding-inline-start: 0;
+}
+
+li {
+  list-style-type: none;
+}

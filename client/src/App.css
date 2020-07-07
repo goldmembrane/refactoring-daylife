@@ -1,0 +1,44 @@
+html {
+  background-color: #f2f2f2;
+}
+
+#main-buttons {
+  font-family: serif;
+  display: flex;
+  float: left;
+  flex-direction: column;
+  width: 300px;
+  padding: 17px 10px 0;
+  align-items: center;
+  background-color: white;
+}
+
+.router-button {
+  border: none;
+  border-radius: 5px;
+  color: #94716b;
+  font-weight: bold;
+  background-color: white;
+  cursor: pointer;
+  outline: none;
+  font-size: 20px;
+  margin-top: 50px;
+}
+
+.router-button:hover {
+  color: #eb5757;
+  border: none;
+  outline: none;
+  font-size: 22px;
+}
+
+#wisesayingBt {
+  padding-bottom: 650px;
+}
+
+#list-title {
+  margin-top: 300px;
+  font-size: 25px;
+  color: #3b4371;
+  font-weight: 700;
+}
