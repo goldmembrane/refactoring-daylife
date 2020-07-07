@@ -44,7 +44,6 @@ class App extends React.Component {
 
   render() {
     const { isLogin } = this.state;
-    console.log("App.js에서 isLogin값은? ::", isLogin);
     return (
       <div>
         <Router>
@@ -58,15 +57,9 @@ class App extends React.Component {
                 {isLogin ? "Logout" : "Login"}
               </button>
             </Link>
-            <Link to="/signup">
+            <Link to="/signup" id="signup-link">
               <button className="router-button">Sign Up</button>
             </Link>
-            <Link to="/wisesaying" id="wisesayingBt">
-              <button className="router-button">For My Time</button>
-            </Link>
-            {/* <Link to="/calendar">
-              <button className="router-button">캘린더</button>
-            </Link> */}
           </div>
           <Switch>
             <Route
