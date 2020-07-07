@@ -5,6 +5,10 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Moment from 'react-moment';
 import moment from 'moment';
+import ShowYearPlan from '../components/ShowYearPlan';
+import ShowMonthPlan from '../components/ShowMonthPlan';
+import ShowWeeklyPlan from '../components/ShowWeeklyPlan';
+import CreatePlan from '../components/CreatePlan';
 
 
 class Weekly extends Component {
@@ -12,8 +16,17 @@ class Weekly extends Component {
     super(props);
 
     this.state = { 
-      date: props.date
+      date: props.date,
+      isModalOpen: false
     }
+  }
+
+  openModal = () => {
+    this.setState({ isModalOpen: true });
+  }
+
+  closeModal = () => {
+    this.setState({ isModalOpen: false });
   }
 
   goDaily = () => {
@@ -49,8 +62,6 @@ class Weekly extends Component {
 
   }
 
-  
-
   render() {
 
     return (
@@ -65,21 +76,30 @@ class Weekly extends Component {
   
         </DropdownButton>
         <div className = 'user-name'>user</div>
-        <div className = 'weekly-goals'>이번주 목표</div>
+        <div className = 'weekly-goals'>
+          <ShowWeeklyPlan />
+        </div>
         <div className = 'edit'>
-          <div className = 'edit-schedules'>일정 편집</div>
+
+          <div className = 'edit-schedules' onClick = {this.openModal.bind(this)}>일정 편집</div>
+          <CreatePlan isOpen = {this.state.isModalOpen} 
+                      close = {this.closeModal.bind(this)} 
+          />
+
           <div className = 'move-today' onClick = {this.setToday.bind(this)}>오늘로 이동</div>
         </div>
         <div className = 'current-plans'>
 
           <div className = 'current-Year-and-plans'
           onClick = {this.goYearly.bind(this)}>
-            <Moment format = 'YYYY'>{this.state.date}</Moment>
+            <p><Moment format = 'YYYY'>{this.state.date}</Moment></p>
+            <ShowYearPlan />
           </div>
 
           <div className = 'current-Month-and-plans'
           onClick = {this.goMonthly.bind(this)}>
-            <Moment format = 'MMM'>{this.state.date}</Moment>
+            <p><Moment format = 'MMM'>{this.state.date}</Moment></p>
+            <ShowMonthPlan />
           </div>
 
         </div>

@@ -1,2 +1,2 @@
 export {default as DailyPlan} from './DailyPlan';
-export {dafault as UpdatePlan} from './UpdatePlan';
+export {default as CreatePlan} from './CreatePlan';
