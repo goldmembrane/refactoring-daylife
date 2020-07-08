@@ -37,7 +37,7 @@ class DailyPlan extends Component {
   }
 
   backThreeDays = () => {
-    const currentDate = props.date;
+    const currentDate = this.props.date;
     const backThreeDate = moment(currentDate).add(-3, 'day');
     this.setState({ date: backThreeDate });
 
@@ -45,7 +45,7 @@ class DailyPlan extends Component {
   }
 
   forwordThreeDays = () => {
-    const currentDate = props.date;
+    const currentDate = this.props.date;
     const forwordThreeDate = moment(currentDate).add(3, 'day');
     this.setState({ date: forwordThreeDate });
 
