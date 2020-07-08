@@ -6,6 +6,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import Moment from 'react-moment';
+import { withRouter } from "react-router-dom";
 
 
 class Yearly extends Component {
@@ -93,4 +94,4 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps)(Yearly);
+export default connect(mapStateToProps)(withRouter(Yearly));

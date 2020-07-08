@@ -6,6 +6,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import Moment from 'react-moment';
+import { withRouter } from "react-router-dom";
 
 
 class Monthly extends Component {
@@ -18,7 +19,7 @@ class Monthly extends Component {
   }
 
   goDaily = () => {
-    this.props.history.push('/');
+    this.props.history.push('/calendar');
   };
 
   goWeekly = () => {
@@ -36,7 +37,7 @@ class Monthly extends Component {
     });
     
     this.props.dispatch(setDate(select));
-    this.props.history.push('/');
+    this.props.history.push('/calendar');
   };
 
   setToday = () => {
@@ -88,4 +89,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Monthly);
+export default connect(mapStateToProps)(withRouter(Monthly));
