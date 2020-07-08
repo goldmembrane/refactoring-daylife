@@ -1,6 +1,7 @@
 // YOUR CODE HERE:
 
-let dateArr = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+let dateArr = ['s', 'm', 't', 'w', 't', 'f', 's']
+// let dateArr = ['일', '월', '화', '수', '목', '금', '토']
 let today = new Date();
 let now = today;
 let year = now.getFullYear().toString();

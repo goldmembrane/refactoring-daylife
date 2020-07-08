@@ -28,7 +28,10 @@ Date.prototype.getWeek = function (dowOffset) {
 
 //code start
 
-let dateArr = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+// let dateArr = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+// let dateArr = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+let dateArr = ['일', '월', '화', '수', '목', '금', '토']
+
 let today = new Date();
 let now = today;
 let year = now.getFullYear().toString();
@@ -51,11 +54,6 @@ const app = {
       //fetch goals, schedules
       //버튼 이벤트 -> 일정 추가  (팝업)
       app.addCreateHandelers();
-      //버튼 이벤트 -> 일정 수정  (팝업)
-      //버튼 이벤트 -> 일정 체크 
-      //버튼 이벤트 -> 일정 삭제
-      app.addDeleteGoalHandelers();  
-      // app.addDeleteScheduleHandelers();
       //버튼 이벤트 -> 로그아웃
       app.addLogoutHandelers();
     } else {  //로그인이 안된 경우
@@ -88,6 +86,7 @@ const app = {
     if(logoutBtn){
       logoutBtn.addEventListener('click', e => {
         localStorage.setItem('isLogin', 0);
+        alert('로그아웃되었습니다.');
         app.renderLoginPage();
       })
     }
@@ -103,46 +102,13 @@ const app = {
   },
   addCreateHandelers: () => { //일정생성 핸들러 => 클릭시 팝업
     let makeBtn = document.getElementById('makeup');
-    console.log(makeBtn);
+    // console.log(makeBtn);
     if(makeBtn){
       makeBtn.addEventListener('click', e => {
         window.open('./makePlan.html', 'make plan', "width=500, height=400, left=200, top=50");
       });
     }
   },
-  addDeleteGoalHandelers: () => { //목표삭제 핸들러  ////class이름으로 접근하여 여러 요소에 접근, 개개인마다 이벤트 리스너 달아줌
-    window.addEventListener("load", function(e) {
-      let deleteBtn = document.getElementsByClassName('goal_delete');
-      console.log(deleteBtn, deleteBtn.length);
-      for(let i = 0; i < deleteBtn.length; i++){
-        console.log(deleteBtn[i]);
-      }
-    });
-    
-    // let deleteBtn = document.getElementsByClassName('goal_delete');
-    
-    // console.log(deleteBtn)
-    // console.log(deleteBtn.length)
-    // for(let i = 0; i < deleteBtn.length; i++){
-    //   console.log(deleteBtn[i])
-
-    //   deleteBtn[i].addEventListener('click', e => {
-    //     console.log('==')
-    //     console.log(e)
-    //     console.log(this.id);
-    //   })
-    // }
-  },
-  // addDeleteScheduleHandelers: () => { //일정삭제 핸들러
-  //   let deleteBtn = document.getElementsByClassName('schedule_delete');
-  //   if(deleteBtn){
-  //     deleteBtn.addEventListener('click', e => {
-  //       console.log('==');
-  //       console.log(e.value);
-  //       console.log(e);
-  //     })
-  //   }
-  // },
   fetchLogin: data => {
     console.log(data);
     fetch('http://15.164.232.40:3001/user/signin', {
@@ -189,6 +155,78 @@ const app = {
       .then(callback);
     }
   },
+  fetchGoalsDel: (id) => { //get from goals
+    window
+    .fetch(`http://15.164.232.40:3001/plans/goals/delete?id=${id}`,{
+      method: 'DELETE',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+    .then(resp => { 
+      if(resp.status !== 200){
+        alert('잘못된 접근입니다');
+      } else {
+        alert('성공적으로 삭제되었습니다.');
+        app.renderDayPage();
+      }
+    });
+  },
+  fetchSchedulesCheck: (id, is_done) => { //get from schedules, 체크박스용
+    window
+    .fetch(`http://15.164.232.40:3001/plans/schedules/put?id=${id}`,{
+      method: 'PUT',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      },
+      body: JSON.stringify({is_done: !is_done})
+    })
+    .then(resp => { 
+      if(resp.status !== 201){
+        alert('잘못된 접근입니다');
+      } else {
+        app.renderDayPage();
+      }
+    });
+  },
+  fetchGoalsCheck: (id, is_done) => { //get from goals, 체크박스용
+    window
+    .fetch(`http://15.164.232.40:3001/plans/goals/put?id=${id}`,{
+      method: 'PUT',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      },
+      body: JSON.stringify({is_done: !is_done})
+    })
+    .then(resp => { 
+      if(resp.status !== 201){
+        alert('잘못된 접근입니다');
+      } else {
+        app.renderDayPage();
+      }
+    });
+  },
+  fetchSchedulesDel: (id) => { //get from schedules
+    window
+    .fetch(`http://15.164.232.40:3001/plans/schedules/delete?id=${id}`,{
+      method: 'DELETE',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+    .then(resp => { 
+      if(resp.status !== 200){
+        alert('잘못된 접근입니다');
+      } else {
+        alert('성공적으로 삭제되었습니다.');
+        app.renderDayPage();
+      }
+    });
+  },
   fetchSchedulesGet: (date, callback) => {  //get from schedules
     window
       .fetch(`http://15.164.232.40:3001/plans/schedules/get?date=${date}`)
@@ -206,29 +244,35 @@ const app = {
     goals.className = 'goal';
     if(goal.is_done){ //목표 달성한 경우
       goals.innerHTML = `
-<li class="lists_title"> 
+<li class="lists_title" id=${goal.id}> 
 <span>
   <del> ${goal.name} </del>
-  </span>
-  <span>
+</span>
+<span>
   <input type="checkbox" checked>
 </span>
 <span>
-  <img src="./trash.png" alt="Delete" class="goal_delete" id=${goal.id} width="17" height="17">
+  <img src="./edit.png" alt="edit" class="goal_delete" width="17" height="17">
+</span>
+<span>
+  <img src="./trash.png" alt="Delete" class="goal_delete" width="17" height="17">
 </span>
 </li>
 `//해당 버튼 클릭시 -> 버튼의 id값 === 글의 id값 -> onclick사용 ..?
     } else {  //목표 아직 달성 안한 경우
       goals.innerHTML = `
-<li class="lists_title"> 
+<li class="lists_title" id=${goal.id}> 
 <span>
   ${goal.name}
-  </span>
-  <span>
+</span>
+<span>
   <input type="checkbox">
 </span>
 <span>
-  <img src="./trash.png" alt="Delete" class="goal_delete" id=${goal.id} width="17" height="17">
+  <img src="./edit.png" alt="edit" class="goal_delete" width="17" height="17">
+</span>
+<span>
+  <img src="./trash.png" alt="Delete" class="goal_delete" width="17" height="17">
 </span>
 </li>
 `
@@ -238,20 +282,21 @@ const app = {
   plansTmpl: (plan) => {  //일정 템플릿
     let plans = document.createElement('p');
     plans.className = 'plan';
-    console.log(plan.is_done);
+    // console.log(plan.id);
     if(plan.is_done){
       plans.innerHTML = `
     <li>
-<span class="lists_title"> 
+<span class="lists_title" id=${plan.id}> 
   <del> ${plan.name} </del>
 </span>
 <span>
-  <input type="checkbox"  checked>
+  <input type="checkbox" checked>
 </span>
 <span>
-  <button type="submit" class="schedule_delete">
-    <img src="./trash.png" alt="Delete" width="17" height="17">
-  </button>
+  <img src="./edit.png" alt="edit" class="goal_delete" width="17" height="17">
+</span>
+<span>
+  <img src="./trash.png" alt="Delete" class="goal_delete" width="17" height="17">
 </span>
 <ul>
   <li> start time: ${plan.start} </li>
@@ -262,16 +307,17 @@ const app = {
     } else {
       plans.innerHTML = `
     <li>
-<span class="lists_title"> 
+<span class="lists_title" id=${plan.id}> 
   ${plan.name}
 </span>
 <span>
   <input type="checkbox">
 </span>
 <span>
-  <button type="submit" class="schedule_delete">
-    <img src="./trash.png" alt="Delete" width="17" height="17">
-  </button>
+  <img src="./edit.png" alt="edit" class="goal_delete" width="17" height="17">
+</span>
+<span>
+  <img src="./trash.png" alt="Delete" class="goal_delete" width="17" height="17">
 </span>
 <ul>
   <li> start time: ${plan.start} </li>
@@ -282,30 +328,106 @@ const app = {
     }
     return plans;
   },
+  clearDayPage: () => { //일정페이지 재 로딩시 화면 초기화
+    document.getElementById('annually_goals').innerHTML = '';
+    document.getElementById('month_goals').innerHTML = '';
+    document.getElementById('weekly_goals').innerHTML = '';
+    document.getElementById('schedules').innerHTML = '';
+  },
   renderDayPage: () => { //일정 페이지 렌더링
     //화면전환 로그인 => 일정
     document.getElementById('login_area').style.display = 'none';
     document.getElementById('info_area').style.display = 'block';
+    //재로딩시 기존 화면 지움
+    app.clearDayPage();
 
     app.fetchGoalsGet({category: 'annually', year: year, day: null}, (data) => {
       // console.log(data);
       for (let i = 0; i < data.length; i++) {
-        document.getElementById('annually_goals').appendChild(app.goalsTmpl(data[i]));
+        let tmpNode = app.goalsTmpl(data[i]);
+        document.getElementById('annually_goals').appendChild(tmpNode);
+        let gId = tmpNode.childNodes[1].id;
+
+        tmpNode.childNodes[1].childNodes[3].childNodes[1].addEventListener('click', e => {  //체크박스
+          console.log("체크박스" + gId);
+          //delete와 비슷하게 id받고, is_done받고 fetch실행
+          console.log(data[i].is_done)
+          app.fetchGoalsCheck(gId, data[i].is_done);
+        });
+        tmpNode.childNodes[1].childNodes[5].addEventListener('click', e => {  //수정
+          console.log("내용 수정" + gId);
+          window.open('./editPopup.html', 'signup', "width=500, height=400, left=200, top=50"); //수정창 팝업
+          //data[i]접근이 가능한지 확인 
+        });
+        tmpNode.childNodes[1].childNodes[7].addEventListener('click', e => {  //수정
+          console.log("내용 삭제" + gId);
+          app.fetchGoalsDel(gId);
+        });
       }
     });
     app.fetchGoalsGet({category: 'monthly', year: year, day: month}, (data) => {
       for (let i = 0; i < data.length; i++) {
-        document.getElementById('month_goals').appendChild(app.goalsTmpl(data[i]));
+        let tmpNode = app.goalsTmpl(data[i]);
+        document.getElementById('month_goals').appendChild(tmpNode);
+        let gId = tmpNode.childNodes[1].id;
+        // console.log(gId);
+        tmpNode.childNodes[1].childNodes[3].childNodes[1].addEventListener('click', e => {  //체크박스
+          console.log("체크박스" + gId);
+          app.fetchGoalsCheck(gId, data[i].is_done);
+        });
+        tmpNode.childNodes[1].childNodes[5].addEventListener('click', e => {  //수정
+          console.log("내용 수정" + gId);
+          window.open('./editPopup.html', 'signup', "width=500, height=400, left=200, top=50"); //수정창 팝업
+
+        });
+        tmpNode.childNodes[1].childNodes[7].addEventListener('click', e => {  //수정
+          console.log("내용 삭제" + gId);
+          app.fetchGoalsDel(gId);
+        });
       }
     });
     app.fetchGoalsGet({category: 'weekly', year: year, day: week}, (data) => {
       for (let i = 0; i < data.length; i++) {
-        document.getElementById('weekly_goals').appendChild(app.goalsTmpl(data[i]));
+        let tmpNode = app.goalsTmpl(data[i]);
+        document.getElementById('weekly_goals').appendChild(tmpNode);
+        let gId = tmpNode.childNodes[1].id;
+        // console.log(gId);
+        tmpNode.childNodes[1].childNodes[3].childNodes[1].addEventListener('click', e => {  //체크박스
+          console.log("체크박스" + gId);
+          app.fetchGoalsCheck(gId, data[i].is_done);
+        });
+        tmpNode.childNodes[1].childNodes[5].addEventListener('click', e => {  //수정
+          console.log("내용 수정" + gId);
+          window.open('./editPopup.html', 'signup', "width=500, height=400, left=200, top=50"); //수정창 팝업
+
+        });
+        tmpNode.childNodes[1].childNodes[7].addEventListener('click', e => {  //수정
+          console.log("내용 삭제" + gId);
+          app.fetchGoalsDel(gId);
+        });
       }
     });
     app.fetchSchedulesGet(date, (data) => {
       for (let i = 0; i < data.length; i++) {
-        document.getElementById('schedules').appendChild(app.plansTmpl(data[i]));
+        // document.getElementById('schedules').appendChild(app.plansTmpl(data[i]));
+        let tmpNode = app.plansTmpl(data[i]);
+        document.getElementById('schedules').appendChild(tmpNode);
+        // console.log()
+        let gId = tmpNode.childNodes[1].childNodes[1].id;
+        //console.log(gId);
+        tmpNode.childNodes[1].childNodes[3].childNodes[1].addEventListener('click', e => {  //체크박스
+          console.log("체크박스" + gId);
+          app.fetchSchedulesCheck(gId, data[i].is_done);
+        });
+        tmpNode.childNodes[1].childNodes[5].addEventListener('click', e => {  //수정
+          console.log("내용 수정" + gId);
+          window.open('./editPopup.html', 'signup', "width=500, height=400, left=200, top=50"); //수정창 팝업
+
+        });
+        tmpNode.childNodes[1].childNodes[7].addEventListener('click', e => {  //수정
+          console.log("내용 삭제" + gId);
+          app.fetchSchedulesDel(gId);
+        });
       }
     });
 
