@@ -6,6 +6,7 @@ import moment from 'moment';
 import CreatePlan from './CreatePlan';
 import ShowYearPlan from './ShowYearPlan';
 import ShowMonthPlan from './ShowMonthPlan';
+import Popup from 'reactjs-popup';
 
 class DailyPlan extends Component {
   constructor(props) {
@@ -13,19 +14,11 @@ class DailyPlan extends Component {
     
     this.state = {
       date: props.date,
-      weekDay: new Date(),
-      isModalOpen: false
+      weekDay: new Date()
     }
   }
   
-
-  openModal = () => {
-    this.setState({ isModalOpen: true });
-  }
-
-  closeModal = () => {
-    this.setState({ isModalOpen: false });
-  }
+  
 
 
   changeToday = e => {
@@ -37,7 +30,7 @@ class DailyPlan extends Component {
   }
 
   backThreeDays = () => {
-    const currentDate = props.date;
+    const currentDate = this.props.date;
     const backThreeDate = moment(currentDate).add(-3, 'day');
     this.setState({ date: backThreeDate });
 
@@ -45,7 +38,7 @@ class DailyPlan extends Component {
   }
 
   forwordThreeDays = () => {
-    const currentDate = props.date;
+    const currentDate = this.props.date;
     const forwordThreeDate = moment(currentDate).add(3, 'day');
     this.setState({ date: forwordThreeDate });
 
@@ -85,10 +78,15 @@ class DailyPlan extends Component {
       <div>
         <div className = 'edit'>
 
-          <div className = 'edit-schedules' onClick = {this.openModal.bind(this)}>일정 편집</div>
-          <CreatePlan isOpen = {this.state.isModalOpen} 
-                      close = {this.closeModal.bind(this)} 
-          />
+          <Popup trigger = {<button className = 'show-popup'>일정 생성</button>} 
+                 position = 'right center'
+                 modal = {true}
+                 contentStyle = {{ maxWidth: '600px', width: '90%', height: '40%'}}>
+            {close => ( <div>
+                          <div className = 'close' onClick = {close}>X</div>
+                            <CreatePlan close = {close} />
+                        </div>) }
+          </Popup>
 
           <div className = 'move-today' onClick = {this.setToday.bind(this)}>오늘로 이동</div>
 

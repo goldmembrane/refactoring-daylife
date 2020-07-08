@@ -10,6 +10,7 @@ import ShowMonthPlan from '../Components/ShowMonthPlan';
 import ShowWeeklyPlan from '../Components/ShowWeeklyPlan';
 import CreatePlan from '../Components/CreatePlan';
 import { withRouter } from "react-router-dom";
+import Popup from 'reactjs-popup';
 
 
 class Weekly extends Component {
@@ -43,7 +44,7 @@ class Weekly extends Component {
   }
 
   backOneWeek = () => {
-    const currentDate = props.date;
+    const currentDate = this.props.date;
     const backOneWeek = moment(currentDate).add(-7, 'day');
 
     this.setState({ date: backOneWeek });
@@ -51,7 +52,7 @@ class Weekly extends Component {
   }
 
   forwordOneWeek = () => {
-    const currentDate = props.date;
+    const currentDate = this.props.date;
     const forwordOneWeek = moment(currentDate).add(7, 'day');
 
     this.setState({ date: forwordOneWeek });
@@ -101,11 +102,15 @@ class Weekly extends Component {
 
         <div className = 'edit'>
 
-          <div className = 'edit-schedules' onClick = {this.openModal.bind(this)}>일정 편집</div>
-
-          <CreatePlan isOpen = {this.state.isModalOpen} 
-                      close = {this.closeModal.bind(this)} 
-          />
+        <Popup trigger = {<button className = 'show-popup'>일정 생성</button>} 
+                 position = 'right center'
+                 modal = {true}
+                 contentStyle = {{ maxWidth: '600px', width: '90%', height: '40%'}}>
+            {close => ( <div>
+                          <div className = 'close' onClick = {close}>X</div>
+                            <CreatePlan close = {close} />
+                        </div>) }
+          </Popup>
 
           <div className = 'move-today' onClick = {this.setToday.bind(this)}>오늘로 이동</div>
 
@@ -152,6 +157,7 @@ class Weekly extends Component {
         </div>
 
         <button className = 'move-next-week' onClick = {this.forwordOneWeek.bind(this)}>오른쪽</button>
+        
       </div>
     )
   }

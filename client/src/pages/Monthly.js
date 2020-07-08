@@ -7,6 +7,8 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import Moment from 'react-moment';
 import { withRouter } from "react-router-dom";
+import Popup from 'reactjs-popup';
+import CreatePlan from '../Components/CreatePlan';
 
 
 class Monthly extends Component {
@@ -55,6 +57,7 @@ class Monthly extends Component {
   render() {
     return (
       <div>
+
         <DropdownButton id = 'select-button' title = '페이지 이동'>
   
           <Dropdown.Item className = 'option' as = 'button'
@@ -67,21 +70,42 @@ class Monthly extends Component {
           onClick = {this.goYearly.bind(this)}>연도</Dropdown.Item>
   
         </DropdownButton>
+
         <div className = 'user-name'>user</div>
+
         <div className = 'edit'>
-          <div className = 'edit-schedules'>일정 편집</div>
+
+         <Popup trigger = {<button className = 'show-popup'>일정 생성</button>} 
+                 position = 'right center'
+                 modal = {true}
+                 contentStyle = {{ maxWidth: '600px', width: '90%', height: '40%'}}>
+            {close => ( <div>
+                          <div className = 'close' onClick = {close}>X</div>
+                            <CreatePlan close = {close} />
+                        </div>) }
+          </Popup>
+
           <div className = 'move-today' onClick = {this.setToday.bind(this)}>오늘로 이동</div>
+
         </div>
+
         <div className = 'current-plans'>
+
           <div className = 'current-Year-and-plans'
           onClick = {this.goYearly.bind(this)}><Moment format = 'YYYY'>{this.state.date}</Moment></div>
+
           <div className = 'current-Month-and-plans'><Moment format = 'MMM'>{this.state.date}</Moment></div>
+
         </div>
+
         <div className = 'calendar-box-Monthly'>
-              <Calendar 
-                onClickDay = {this.handleChangeDate.bind(this)}
-                onActiveStartDateChange = {this.handleChange}
-              />
+
+          <Calendar 
+            onClickDay = {this.handleChangeDate.bind(this)}
+            onActiveStartDateChange = {this.handleChange}
+            defaultValue = {this.state.date}
+          />
+
         </div>
       </div>
     )
