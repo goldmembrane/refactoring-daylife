@@ -43,7 +43,7 @@ class Weekly extends Component {
   }
 
   backOneWeek = () => {
-    const currentDate = props.date;
+    const currentDate = this.props.date;
     const backOneWeek = moment(currentDate).add(-7, 'day');
 
     this.setState({ date: backOneWeek });
@@ -51,7 +51,7 @@ class Weekly extends Component {
   }
 
   forwordOneWeek = () => {
-    const currentDate = props.date;
+    const currentDate = this.props.date;
     const forwordOneWeek = moment(currentDate).add(7, 'day');
 
     this.setState({ date: forwordOneWeek });
