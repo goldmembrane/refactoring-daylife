@@ -9,6 +9,10 @@ import Moment from 'react-moment';
 import { withRouter } from "react-router-dom";
 import Popup from 'reactjs-popup';
 import CreatePlan from '../Components/CreatePlan';
+import * as getGoalsActions from '../modules/GetGoals';
+import { bindActionCreators } from 'redux';
+import ShowYearPlan from '../Components/ShowYearPlan';
+
 
 
 class Yearly extends Component {
@@ -18,6 +22,12 @@ class Yearly extends Component {
     this.state = {
       month: props.date
     }
+  }
+
+  componentDidMount() {
+    const { GetGoalsActions } = this.props;
+
+    GetGoalsActions.getGoals();
   }
   
   goDaily = () => {
@@ -55,6 +65,8 @@ class Yearly extends Component {
   }
 
   render() {
+
+    const { data } = this.props;
 
     return (
       <div>
@@ -96,6 +108,11 @@ class Yearly extends Component {
 
             <Moment format = 'YYYY'>{this.state.month}</Moment>
 
+            <div className = 'current-year-plans'>
+              {data ? (data.map((val, i) => <ShowYearPlan key = {i} {...val}/>)
+              ): null }
+            </div>
+
           </div>
 
         </div>
@@ -114,10 +131,13 @@ class Yearly extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    date: state.setDateReducer.date
-  }
-};
 
-export default connect(mapStateToProps)(withRouter(Yearly));
+export default connect(
+  state => ({
+    date: state.setDateReducer.date,
+    data: state.getGoals.data
+  }),
+  dispatch => ({
+    GetGoalsActions: bindActionCreators(getGoalsActions, dispatch)
+  })
+)(withRouter(Yearly));

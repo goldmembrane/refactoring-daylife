@@ -1,26 +1,17 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { setYearPlan } from '../actions';
-// import * as postGoalsActions from '../modules/PostGoals';
-// import { bindActionCreators } from 'redux';
+import React from 'react';
 
 
-class CreateYearPlan extends Component {
+const CreateYearPlan = ({ close, select, onCreate }) => {
 
-  sendYearPlans = () => {
-    this.props.dispatch(setYearPlan(this.props.plan));
-  }
 
-  render() {
-    return (
-      this.props.select === 'yearly' ? (
-        <div>
-          <button className = 'save' onClick = {() => {this.sendYearPlans(); this.props.close()}}>저장</button>
-        </div>
-      ) : null
-    )
-  }
+  return (
+    select === 'yearly' ? (
+      <div>
+        <button className = 'save' onClick = {() => {onCreate(); close()}}>저장</button>
+      </div>
+    ) : null
+  )
 }
 
 
-export default connect()(CreateYearPlan);
+export default CreateYearPlan;

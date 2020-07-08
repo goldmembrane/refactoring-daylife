@@ -17,13 +17,13 @@ handleChangeFromSelect = event => {
   this.setState({ value: event.currentTarget.value })
 }
 
-
 handleChangePlans = event => {
   this.setState({ plan: event.target.value });
 };
 
-render() {
 
+render() {
+  const { plan } = this.state;
   return (
     <React.Fragment>
       <div className = 'modal-box'>
@@ -35,7 +35,7 @@ render() {
             <label className = 'plan-name'>일정 이름</label>
             <input type = 'text' 
                   className = 'write-plan-name'
-                  value = {this.state.plan}
+                  value = {plan}
                   onChange = {this.handleChangePlans}></input>
           </div>
           <div className = 'plan-choose-box'>
@@ -49,7 +49,7 @@ render() {
               <CreatePlanDetail 
                 select = {this.state.value}
                 close = {this.props.close}
-                plan = {this.state.plan}
+                plan = {plan}
               />
             </div>
           </div>
@@ -59,13 +59,6 @@ render() {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    year: state.setPlansReducer.year,
-    month: state.setPlansReducer.month,
-    week: state.setPlansReducer.week,
-    day: state.setPlansReducer.day
-  }
-}
+const mapStateToProps = () => ({});
 
 export default connect(mapStateToProps)(CreatePlan);

@@ -10,8 +10,6 @@ class ShowYearPlan extends Component {
       </div>
     )
   }
-
-
 }
 
 const mapStateToProps = state => {

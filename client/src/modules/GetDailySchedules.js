@@ -16,7 +16,7 @@ const initialState = {
   data: []
 };
 
-export const getSchedule = () => dispatch => {
+export const getSchedules = () => dispatch => {
   dispatch({ type: GET_SCHEDULES_PENDING });
 
   return getScheduleAPI()

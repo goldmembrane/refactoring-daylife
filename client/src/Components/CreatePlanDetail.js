@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setStartTime, setEndTime } from '../actions';
 import TimePicker from 'react-time-picker';
 import CreateYearPlan from './CreateYearPlan';
 import CreateMonthPlan from './CreateMonthPlan';
 import CreateWeekPlan from './CreateWeekPlan';
-import { setDayPlan } from '../actions';
+import * as postSchedulesActions from '../modules/PostDailySchedules';
+import * as postGoalsActions from '../modules/PostGoals';
+import { bindActionCreators } from 'redux';
 
 class CreatePlanDetail extends Component {
   constructor(props) {
@@ -18,12 +19,7 @@ class CreatePlanDetail extends Component {
     }
     this.handleChangeStartTime = this.handleChangeStartTime.bind(this);
     this.handleChangeEndTime = this.handleChangeEndTime.bind(this);
-    this.saveChangeTime = this.saveChangeTime.bind(this);
     this.handleChangeFromSelect = this.handleChangeFromSelect.bind(this);
-  }
-
-  sendDayPlans = () => {
-    this.props.dispatch(setDayPlan(this.props.plan));
   }
 
   handleChangeFromSelect = event => {
@@ -45,12 +41,26 @@ class CreatePlanDetail extends Component {
 
   };
 
-  saveChangeTime = () => {
-    this.props.dispatch(setStartTime(this.state.startTime));
-    this.props.dispatch(setEndTime(this.state.endTime));
+  handleGoalCreate = () => {
+
+    const { plan, PostGoalsActions } = this.props;
+
+    PostGoalsActions.postGoals({ name: plan });
+
+  }
+
+  handleSchedulesCreate = () => {
+
+    const { start, end } = this.state;
+
+    const { plan, PostSchedulesActions } = this.props;
+
+    PostSchedulesActions.postSchedules({ name: plan , start: start, end: end });
   }
 
   render() {
+    const { close } = this.props;
+    const { handleGoalCreate, handleSchedulesCreate } = this;
 
     return (
       this.props.select === 'goals' ? (
@@ -66,19 +76,19 @@ class CreatePlanDetail extends Component {
             </select>
           </div>
           <CreateYearPlan 
-            plan = {this.props.plan}
-            close = {this.props.close}
+            close = {close}
             select = {this.state.value}
+            onCreate = {handleGoalCreate}
           />
           <CreateMonthPlan
-            plan = {this.props.plan}
-            close = {this.props.close}
+            close = {close}
             select = {this.state.value}
+            onCreate = {handleGoalCreate}
           />
           <CreateWeekPlan
-            plan = {this.props.plan}
-            close = {this.props.close}
+            close = {close}
             select = {this.state.value}
+            onCreate = {handleGoalCreate}
           />
         </div>
       ) : 
@@ -100,18 +110,21 @@ class CreatePlanDetail extends Component {
               onChange = {this.handleChangeEndTime}
             />
           </div>
-          <button className = 'save' onClick = {() => {this.saveChangeTime(); this.sendDayPlans(); this.props.close()}}>저장</button>
+          <button className = 'save' onClick = {() => {handleSchedulesCreate(); close()}}>저장</button>
         </div>
       )
     )
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    start: state.setScheduleTimeReducer.start,
-    end: state.setScheduleTimeReducer.end
-  }
-}
 
-export default connect(mapStateToProps)(CreatePlanDetail);
+export default connect(
+  state => ({
+    scheduleData: state.postSchedules.data,
+    goalData: state.postGoals.data
+  }),
+  dispatch => ({
+    PostSchedulesActions: bindActionCreators(postSchedulesActions, dispatch),
+    PostGoalsActions: bindActionCreators(postGoalsActions, dispatch)
+  })
+)(CreatePlanDetail);

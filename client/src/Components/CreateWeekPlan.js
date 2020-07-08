@@ -1,28 +1,16 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { setWeekPlan } from '../actions';
+import React from 'react';
 
-class CreateWeekPlan extends Component {
+const CreateWeekPlan = ({ close, select, onCreate }) => {
 
-  sendWeekPlans = () => {
-    this.props.dispatch(setWeekPlan(this.props.plan));
-  }
 
-  render() {
-    return (
-      this.props.select === 'weekly' ? (
-        <div>
-          <button className = 'save' onClick = {() =>{this.sendWeekPlans(); this.props.close() }}>저장</button>
-        </div>
-      ): null
-    )
-  }
+  return (
+    select === 'weekly' ? (
+      <div>
+        <button className = 'save' onClick = {() =>{onCreate(); close()}}>저장</button>
+      </div>
+    ): null
+  )
 }
 
-const mapStateToProps = state => {
-  return {
-    week: state.setPlansReducer.week
-  }
-}
 
-export default connect(mapStateToProps)(CreateWeekPlan);
+export default CreateWeekPlan;

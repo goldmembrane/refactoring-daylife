@@ -9,7 +9,11 @@ const POST_GOAL_FAILURE = 'POST_GOAL_FAILURE';
 axios.defaults.withCredentials = true;
 
 function postGoalAPI(data) {
-  return axios.post('http://localhost:3001/plans/goals/post', data);
+  return axios({
+    method: 'post',
+    url: 'http://15.164.232.40:3001/plans/goals/post',
+    data: data
+  });
 }
 
 const initialState = {
