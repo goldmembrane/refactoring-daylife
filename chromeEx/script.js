@@ -1,22 +1,19 @@
 Date.prototype.getWeek = function (dowOffset) {
-  /*getWeek() was developed by Nick Baicoianu at MeanFreePath: http://www.meanfreepath.com */
 
-  dowOffset = typeof (dowOffset) == 'int' ? dowOffset : 0; //default dowOffset to zero
+  dowOffset = typeof (dowOffset) == 'int' ? dowOffset : 0;
   var newYear = new Date(this.getFullYear(), 0, 1);
-  var day = newYear.getDay() - dowOffset; //the day of week the year begins on
+  var day = newYear.getDay() - dowOffset; 
   day = (day >= 0 ? day : day + 7);
   var daynum = Math.floor((this.getTime() - newYear.getTime() -
     (this.getTimezoneOffset() - newYear.getTimezoneOffset()) * 60000) / 86400000) + 1;
   var weeknum;
-  //if the year starts before the middle of a week
+ 
   if (day < 4) {
     weeknum = Math.floor((daynum + day - 1) / 7) + 1;
     if (weeknum > 52) {
       nYear = new Date(this.getFullYear() + 1, 0, 1);
       nday = nYear.getDay() - dowOffset;
       nday = nday >= 0 ? nday : nday + 7;
-      /*if the next year starts before the middle of
-        the week, it is week #1 of that year*/
       weeknum = nday < 4 ? 1 : 53;
     }
   }
@@ -32,19 +29,20 @@ Date.prototype.getWeek = function (dowOffset) {
 // let dateArr = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 let dateArr = ['일', '월', '화', '수', '목', '금', '토']
 
+function pad(n, width) {
+  n = n + '';
+  return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
+}
+
+////*******변경사항 -> 1일 -> 01일 */
 let today = new Date();
 let now = today;
 let year = now.getFullYear().toString();
 let month = (now.getMonth() + 1).toString();
 let week = now.getWeek().toString();
-let date = year + '-' + month + '-' + now.getDate();
+let date = year + '-' + pad(month,2) + '-' + pad(now.getDate(),2);
 
-const app = {
-  // loginUrl: 'http://15.164.232.40:3001/user',
-  // goalsUrl: 'http://15.164.232.40:3001/plans/goals',
-  // schedulesUrl: 'http://15.164.232.40:3001/plans/schedules',
-  
-  
+const app = {  
   init: () => {
     chrome.browserAction.setBadgeText({ text: today.getDate().toString() + ' ' + dateArr[today.getDay()] });
     //console.log(localStorage.getItem('isLogin'));
@@ -96,7 +94,7 @@ const app = {
     let signupBtn = document.getElementById('signup');
     if(signupBtn){
       signupBtn.addEventListener('click', e => {
-        window.open('./userPopup.html', 'signup', "width=500, height=400, left=200, top=50");
+        window.open('./html/userPopup.html', 'signup', "width=500, height=400, left=200, top=50");
       });
     }
   },
@@ -105,7 +103,7 @@ const app = {
     // console.log(makeBtn);
     if(makeBtn){
       makeBtn.addEventListener('click', e => {
-        window.open('./makePlan.html', 'make plan', "width=500, height=400, left=200, top=50");
+        window.open('./html/makePlan.html', 'make plan', "width=500, height=400, left=200, top=50");
       });
     }
   },
@@ -191,15 +189,21 @@ const app = {
       }
     });
   },
-  fetchGoalsCheck: (id, is_done) => { //get from goals, 체크박스용
+  fetchGoalsCheck: (data) => { //get from goals, 체크박스용
     window
-    .fetch(`http://15.164.232.40:3001/plans/goals/put?id=${id}`,{
+    .fetch(`http://15.164.232.40:3001/plans/goals/put?id=${data.id}`,{
       method: 'PUT',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       },
-      body: JSON.stringify({is_done: !is_done})
+      body: JSON.stringify({
+        category: data.category,
+        name: data.name,
+        year: data.year,
+        day: data.day,
+        is_done: !data.is_done
+      })
     })
     .then(resp => { 
       if(resp.status !== 201){
@@ -335,11 +339,11 @@ const app = {
     document.getElementById('schedules').innerHTML = '';
   },
   renderDayPage: () => { //일정 페이지 렌더링
+    //재로딩시 기존 화면 지움
+    app.clearDayPage();
     //화면전환 로그인 => 일정
     document.getElementById('login_area').style.display = 'none';
     document.getElementById('info_area').style.display = 'block';
-    //재로딩시 기존 화면 지움
-    app.clearDayPage();
 
     app.fetchGoalsGet({category: 'annually', year: year, day: null}, (data) => {
       // console.log(data);
@@ -352,11 +356,11 @@ const app = {
           console.log("체크박스" + gId);
           //delete와 비슷하게 id받고, is_done받고 fetch실행
           console.log(data[i].is_done)
-          app.fetchGoalsCheck(gId, data[i].is_done);
+          app.fetchGoalsCheck(data[i]);
         });
         tmpNode.childNodes[1].childNodes[5].addEventListener('click', e => {  //수정
           console.log("내용 수정" + gId);
-          window.open('./editPopup.html', 'signup', "width=500, height=400, left=200, top=50"); //수정창 팝업
+          window.open('./html/editPopup.html', 'signup', "width=500, height=400, left=200, top=50"); //수정창 팝업
           //data[i]접근이 가능한지 확인 
         });
         tmpNode.childNodes[1].childNodes[7].addEventListener('click', e => {  //수정
@@ -373,11 +377,12 @@ const app = {
         // console.log(gId);
         tmpNode.childNodes[1].childNodes[3].childNodes[1].addEventListener('click', e => {  //체크박스
           console.log("체크박스" + gId);
-          app.fetchGoalsCheck(gId, data[i].is_done);
+          // app.fetchGoalsCheck(gId, data[i].is_done);
+          app.fetchGoalsCheck(data[i]);
         });
         tmpNode.childNodes[1].childNodes[5].addEventListener('click', e => {  //수정
           console.log("내용 수정" + gId);
-          window.open('./editPopup.html', 'signup', "width=500, height=400, left=200, top=50"); //수정창 팝업
+          window.open('./html/editPopup.html', 'signup', "width=500, height=400, left=200, top=50"); //수정창 팝업
 
         });
         tmpNode.childNodes[1].childNodes[7].addEventListener('click', e => {  //수정
@@ -394,11 +399,12 @@ const app = {
         // console.log(gId);
         tmpNode.childNodes[1].childNodes[3].childNodes[1].addEventListener('click', e => {  //체크박스
           console.log("체크박스" + gId);
-          app.fetchGoalsCheck(gId, data[i].is_done);
+          // app.fetchGoalsCheck(gId, data[i].is_done);
+          app.fetchGoalsCheck(data[i]);
         });
         tmpNode.childNodes[1].childNodes[5].addEventListener('click', e => {  //수정
           console.log("내용 수정" + gId);
-          window.open('./editPopup.html', 'signup', "width=500, height=400, left=200, top=50"); //수정창 팝업
+          window.open('./html/editPopup.html', 'signup', "width=500, height=400, left=200, top=50"); //수정창 팝업
 
         });
         tmpNode.childNodes[1].childNodes[7].addEventListener('click', e => {  //수정
@@ -421,7 +427,7 @@ const app = {
         });
         tmpNode.childNodes[1].childNodes[5].addEventListener('click', e => {  //수정
           console.log("내용 수정" + gId);
-          window.open('./editPopup.html', 'signup', "width=500, height=400, left=200, top=50"); //수정창 팝업
+          window.open('./html/editPopup.html', 'signup', "width=500, height=400, left=200, top=50"); //수정창 팝업
 
         });
         tmpNode.childNodes[1].childNodes[7].addEventListener('click', e => {  //수정
