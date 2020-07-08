@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { connect } from 'react-redux';
 import Dropdown from 'react-bootstrap/Dropdown';
-import './Home.css';
+import './Main.css';
 import { DailyPlan } from '../Components';
 import { withRouter } from "react-router-dom";
 

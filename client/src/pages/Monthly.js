@@ -35,7 +35,7 @@ class Monthly extends Component {
     this.setState({ date: select});
   }
 
-  handleChangeDate = (event) => {
+  handleChangeDate = event => {
     const select = event;
     this.setState({
       date: select

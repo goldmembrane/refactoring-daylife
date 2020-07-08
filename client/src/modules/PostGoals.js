@@ -18,7 +18,7 @@ const initialState = {
   data: null
 }
 
-export const PostGoals = data => dispatch => {
+export const postGoals = data => dispatch => {
   dispatch({ type: POST_GOAL_PENDING });
 
   return postGoalAPI(data)
