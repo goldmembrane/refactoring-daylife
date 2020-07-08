@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setYearPlan } from '../actions';
-import * as postGoalsActions from '../modules/PostGoals';
-import { bindActionCreators } from 'redux';
+// import * as postGoalsActions from '../modules/PostGoals';
+// import { bindActionCreators } from 'redux';
 
 
 class CreateYearPlan extends Component {
@@ -23,11 +23,4 @@ class CreateYearPlan extends Component {
 }
 
 
-export default connect(
-  state => ({
-    data: state.postGoals.data
-  }),
-  dispatch => ({
-    postGoalsActions: bindActionCreators(postGoalsActions, dispatch)
-  })
-)(CreateYearPlan);
+export default connect()(CreateYearPlan);
