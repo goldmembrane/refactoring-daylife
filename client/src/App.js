@@ -16,6 +16,7 @@ import "./App.css";
 import Monthly from "./pages/Monthly";
 import { Yearly } from "./pages";
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -63,6 +64,7 @@ class App extends React.Component {
             <Link to="/signup" id="signup-link">
               <button className="router-button">Sign Up</button>
             </Link>
+
             <Link to = '/Weekly' />
           </div>
           <Route exact path="/" component={Home} />
