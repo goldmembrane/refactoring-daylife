@@ -9,9 +9,13 @@ import {
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
 import Home from "./Components/Home";
-import Calendar from "./Components/Calendar";
 import WiseSaying from "./Components/WiseSaying";
+import Main from "./pages/Main";
+import Weekly from './pages/Weekly';
 import "./App.css";
+import Monthly from "./pages/Monthly";
+import { Yearly } from "./pages";
+
 
 class App extends React.Component {
   constructor(props) {
@@ -60,19 +64,27 @@ class App extends React.Component {
             <Link to="/signup" id="signup-link">
               <button className="router-button">Sign Up</button>
             </Link>
+
+            <Link to = '/Weekly' />
           </div>
+          <Route exact path="/" component={Home} />
           <Switch>
             <Route
-              path="/calendar"
-              render={() => <Calendar isLogin={isLogin} />}
-            />
-            <Route exact path="/" component={Home} />
-            <Route
               path="/login"
-              render={() => (
-                <Login isLogin={isLogin} handleLogin={this.handleLogin} />
-              )}
+              render={() => (<Login isLogin={isLogin} handleLogin={this.handleLogin} />)} />
+            <Route
+              path="/calendar"
+              render={() => <Main isLogin = {isLogin}/>}
             />
+            <Route
+              path = '/Weekly' 
+              component = {Weekly}/>
+            <Route
+              path = '/Monthly'
+              component = {Monthly}/>
+            <Route
+              path = '/Yearly'
+              component = {Yearly}/>
             <Route path="/signup" component={Signup} />
             <Route path="/wisesaying" component={WiseSaying} />
           </Switch>
