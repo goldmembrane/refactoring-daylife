@@ -1,0 +1,144 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.user-name {
+  margin: 20px 0 20px 20px;
+  width: 130px;
+  height: 30px;
+  border: none;
+  background-color: #fc5036;
+  text-align: center;
+  line-height: 30px;
+}
+
+.edit {
+  margin-left: 20px;
+  width: 80px;
+  height: 400px;
+  float: left;
+}
+
+.edit-schedules {
+  width: 80px;
+  height: 175px;
+  border: none;
+  text-align: center;
+  line-height: 150px;
+  background-color: antiquewhite;
+}
+
+.move-today {
+  margin-top: 50px;
+  width: 80px;
+  height: 175px;
+  border: none;
+  text-align: center;
+  line-height: 150px;
+  background-color: antiquewhite;
+}
+
+.current-plans {
+  width: 100px;
+  height: 400px;
+  margin-left: 20px;
+  float: left;
+}
+
+.current-Year-and-plans {
+  width: 100px;
+  height: 175px;
+  border: none;
+  text-align: center;
+  background-color: aquamarine;
+}
+
+.current-Month-and-plans {
+  margin-top: 50px;
+  width: 100px;
+  height: 175px;
+  border: none;
+  text-align: center;
+  background-color: aquamarine;
+}
+
+.day-plans {
+  width: 500px;
+  height: 400px;
+  display: inline-block;
+  margin-left: 30px;
+}
+
+.yesterday {
+  width: 150px;
+  height: 400px;
+  border: none;
+  text-align: center;
+  background-color: #84c9f1;
+  margin-right: 25px;
+  display: inline-block;
+}
+
+.today {
+  width: 150px;
+  height: 400px;
+  border: none;
+  text-align: center;
+  background-color: #84c9f1;
+  margin-right: 25px;
+  display: inline-block;
+}
+
+.tomorrow {
+  width: 150px;
+  height: 400px;
+  border: none;
+  text-align: center;
+  background-color: #84c9f1;
+  display: inline-block;
+}
+
+#select-button {
+  margin-left: 600px;
+  margin-top: 30px;
+  width: 150px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  background-color: #5555ff;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+.option {
+  display: block;
+  width: 100px;
+  height: 50px;
+  border: none;
+  background-color: #aaaaaa;
+  color: #222222;
+  cursor: pointer;
+}
+.option:first-child {
+  margin-top: 5px;
+}
+
+.move-yesterday {
+  width: 40px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  margin-left: 15px;
+  display: inline-block;
+}
+.move-tomorrow {
+  width: 50px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  margin-left: 15px;
+  display: inline-block;
+}
+
+

@@ -1,10 +1,9 @@
-import React from "react";
+import React, {Component} from "react";
 import { withRouter } from "react-router-dom";
-// import axios from "axios";
 import Title from "./Title";
 import "./Login.css";
 
-class Login extends React.Component {
+class Login extends Component {
   state = {
     email: "",
     password: "",
