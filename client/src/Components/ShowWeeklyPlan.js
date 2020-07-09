@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
 class ShowWeeklyPlan extends Component {
   
   render() {
+    const { name } = this.props;
     return(
       <div className = 'week-plan-box'>
-        <div className = 'week-plan'>{this.props.week}</div>
+        <div className = 'week-plan'>{name}</div>
       </div>
     )
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    week: state.setPlansReducer.week
-  }
-}
-
-export default connect(mapStateToProps)(ShowWeeklyPlan);
+export default ShowWeeklyPlan;

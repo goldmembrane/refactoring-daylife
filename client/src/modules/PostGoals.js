@@ -12,7 +12,8 @@ function postGoalAPI(data) {
   return axios({
     method: 'post',
     url: 'http://15.164.232.40:3001/plans/goals/post',
-    data: data
+    headers: {'content-type': 'application/json'},
+    data: JSON.stringify(data)
   });
 }
 

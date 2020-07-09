@@ -1,17 +1,44 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Calendar from 'react-calendar';
+import { connect } from 'react-redux';
+import * as setThisDateActions from '../modules/setThisDate';
+import { bindActionCreators } from 'redux';
+import './CreateYearPlan.css';
 
 
-const CreateYearPlan = ({ close, select, onCreate }) => {
+class CreateYearPlan extends Component {
 
+  handleSelectYear = event => {
+    const select = event;
 
-  return (
-    select === 'yearly' ? (
-      <div>
-        <button className = 'save' onClick = {() => {onCreate(); close()}}>저장</button>
-      </div>
-    ) : null
-  )
+    const { SetThisDateActions } = this.props;
+
+    SetThisDateActions.changeDate(select);
+  }
+
+  render() {
+    const { select, onCreate, close } = this.props;
+    const { handleSelectYear } = this;
+    return (
+      select === 'annually' ? (
+        <div>
+          <button className = 'save' onClick = {() => {onCreate(); close()}}>저장</button>
+          <Calendar view = 'decade' onClickYear = {handleSelectYear}/>
+        </div>
+      ) : null
+    )
+  }
 }
 
+const mapStateToProps = state => ({
+  date: state.setThisDate.date
+});
 
-export default CreateYearPlan;
+const mapDispatchToProps = dispatch => ({
+  SetThisDateActions: bindActionCreators(setThisDateActions, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreateYearPlan);

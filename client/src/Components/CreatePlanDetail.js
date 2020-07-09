@@ -6,7 +6,9 @@ import CreateMonthPlan from './CreateMonthPlan';
 import CreateWeekPlan from './CreateWeekPlan';
 import * as postSchedulesActions from '../modules/PostDailySchedules';
 import * as postGoalsActions from '../modules/PostGoals';
+import * as setThisDateActions from '../modules/setThisDate';
 import { bindActionCreators } from 'redux';
+import moment from 'moment';
 
 class CreatePlanDetail extends Component {
   constructor(props) {
@@ -15,7 +17,7 @@ class CreatePlanDetail extends Component {
     this.state = {
       startTime: '00:00',
       endTime: '23:00',
-      value: 'yearly'
+      value: 'annually'
     }
     this.handleChangeStartTime = this.handleChangeStartTime.bind(this);
     this.handleChangeEndTime = this.handleChangeEndTime.bind(this);
@@ -29,38 +31,69 @@ class CreatePlanDetail extends Component {
 
   handleChangeStartTime = event => {
 
-    const selectTime = event;
+    const selectTime = event.target;
     this.setState({ startTime: selectTime });
 
   };
 
   handleChangeEndTime = event => {
 
-    const selectTime = event;
+    const selectTime = event.target;
     this.setState({ endTime: selectTime });
 
   };
 
-  handleGoalCreate = () => {
+  handleYearGoalCreate = () => {
 
-    const { plan, PostGoalsActions } = this.props;
+    const { plan, PostGoalsActions, date } = this.props;
+    const { value } = this.state;
 
-    PostGoalsActions.postGoals({ name: plan });
+    const year = moment(date).format('YYYY');
+
+    PostGoalsActions.postGoals({ name: plan, year: year, category: value });
 
   }
+
+  handleMonthGoalCreate = () => {
+
+    const { plan, PostGoalsActions, date } = this.props;
+    const { value } = this.state;
+
+    const year = moment(date).format('YYYY');
+    const day = moment(date).format('MM');
+
+    PostGoalsActions.postGoals({ name: plan, year: year, day: day,  category: value });
+
+  }
+
+  handleWeekGoalCreate = () => {
+
+    const { plan, PostGoalsActions, date } = this.props;
+    const { value } = this.state;
+
+    const year = moment(date).format('YYYY');
+    const day = moment(date).format('ww');
+
+    PostGoalsActions.postGoals({ name: plan, year: year, day: day,  category: value });
+  }
+
 
   handleSchedulesCreate = () => {
 
     const { start, end } = this.state;
-
+    const today = new Date();
     const { plan, PostSchedulesActions } = this.props;
 
-    PostSchedulesActions.postSchedules({ name: plan , start: start, end: end });
+    const startTime = moment(start).format('HH:mm');
+    const endTime = moment(end).format('HH:mm');
+    const formatDate = moment(today).format('YYYY-MM-DD');
+
+    PostSchedulesActions.postSchedules({ name: plan , start: startTime, end: endTime, date: formatDate });
   }
 
   render() {
     const { close } = this.props;
-    const { handleGoalCreate, handleSchedulesCreate } = this;
+    const { handleYearGoalCreate, handleMonthGoalCreate, handleWeekGoalCreate, handleSchedulesCreate } = this;
 
     return (
       this.props.select === 'goals' ? (
@@ -70,7 +103,7 @@ class CreatePlanDetail extends Component {
             <select className = 'goals-category' 
                     defaultValue = {this.state.value}
                     onChange = {this.handleChangeFromSelect}>
-              <option className = 'yearly-plan' value = 'yearly'>Yearly</option>
+              <option className = 'yearly-plan' value = 'annually'>Yearly</option>
               <option className = 'monthly-plan' value = 'monthly'>Monthly</option>
               <option className = 'weekly-plan' value = 'weekly'>Weekly</option>
             </select>
@@ -78,17 +111,17 @@ class CreatePlanDetail extends Component {
           <CreateYearPlan 
             close = {close}
             select = {this.state.value}
-            onCreate = {handleGoalCreate}
+            onCreate = {handleYearGoalCreate}
           />
           <CreateMonthPlan
             close = {close}
             select = {this.state.value}
-            onCreate = {handleGoalCreate}
+            onCreate = {handleMonthGoalCreate}
           />
           <CreateWeekPlan
             close = {close}
             select = {this.state.value}
-            onCreate = {handleGoalCreate}
+            onCreate = {handleWeekGoalCreate}
           />
         </div>
       ) : 
@@ -117,14 +150,20 @@ class CreatePlanDetail extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  scheduleData: state.postSchedules.data,
+  goalData: state.postGoals.data,
+  date: state.setThisDate.date
+});
+
+const mapDispatchToProps = dispatch => ({
+  PostSchedulesActions: bindActionCreators(postSchedulesActions, dispatch),
+  PostGoalsActions: bindActionCreators(postGoalsActions, dispatch),
+  SetThisDateActions: bindActionCreators(setThisDateActions, dispatch)
+});
+
 
 export default connect(
-  state => ({
-    scheduleData: state.postSchedules.data,
-    goalData: state.postGoals.data
-  }),
-  dispatch => ({
-    PostSchedulesActions: bindActionCreators(postSchedulesActions, dispatch),
-    PostGoalsActions: bindActionCreators(postGoalsActions, dispatch)
-  })
+  mapStateToProps,
+  mapDispatchToProps
 )(CreatePlanDetail);

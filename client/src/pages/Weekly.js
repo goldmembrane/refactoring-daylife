@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setDate } from '../actions';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Moment from 'react-moment';
@@ -11,6 +10,11 @@ import ShowWeeklyPlan from '../Components/ShowWeeklyPlan';
 import CreatePlan from '../Components/CreatePlan';
 import { withRouter } from "react-router-dom";
 import Popup from 'reactjs-popup';
+import * as setThisDateActions from '../modules/setThisDate';
+import * as getYearGoalsActions from '../modules/GetYearGoals';
+import * as getMonthGoalsActions from '../modules/GetMonthGoals';
+import * as getWeeklyGoalsActions from '../modules/GetWeeklyPlans';
+import { bindActionCreators } from 'redux';
 
 
 class Weekly extends Component {
@@ -21,6 +25,14 @@ class Weekly extends Component {
       date: props.date,
       isModalOpen: false
     }
+  }
+
+  componentDidMount() {
+    const { GetYearGoalsActions, GetMonthGoalsActions, GetWeeklyGoalsActions } = this.props;
+
+    GetYearGoalsActions.getYearGoals();
+    GetMonthGoalsActions.getMonthGoals();
+    GetWeeklyGoalsActions.getWeeklyGoals();
   }
 
   openModal = () => {
@@ -45,43 +57,53 @@ class Weekly extends Component {
 
   backOneWeek = () => {
     const currentDate = this.props.date;
+    const { SetThisDateActions } = this.props;
     const backOneWeek = moment(currentDate).add(-7, 'day');
 
     this.setState({ date: backOneWeek });
-    this.props.dispatch(setDate(backOneWeek));
+    SetThisDateActions.changeDate(backOneWeek);
   }
 
   forwordOneWeek = () => {
     const currentDate = this.props.date;
+    const { SetThisDateActions } = this.props;
     const forwordOneWeek = moment(currentDate).add(7, 'day');
 
     this.setState({ date: forwordOneWeek });
-    this.props.dispatch(setDate(forwordOneWeek));
+    SetThisDateActions.changeDate(forwordOneWeek);
   }
 
   handleChangeDate = e => {
     const select = e.target.textContent;
     const selectDay = new Date(select);
-
-  
+    const { SetThisDateActions } = this.props;
 
     this.setState({ date: selectDay });
 
-    this.props.dispatch(setDate(selectDay));
+    SetThisDateActions.changeDate(selectDay);
     this.props.history.push('/calendar');
   }
 
   setToday = () => {
 
+    const { SetThisDateActions } = this.props;
     const today = new Date();
-    this.setState({ date: today });
 
-    this.props.dispatch(setDate(today));
+    const nowMonth = today.getMonth();
+    const nowYear = today.getFullYear();
+    const nowDay = today.getDay();
+    const nowDate = today.getDate();
+
+    const weekStartFromToDay = new Date(nowYear, nowMonth, nowDate - nowDay);
+
+    this.setState({ date: weekStartFromToDay });
+
+    SetThisDateActions.changeDate(weekStartFromToDay);
 
   }
 
   render() {
-
+    const { yearGoalData, monthGoalData, weeklyGoalData } = this.props;
     return (
       <div>
         <DropdownButton id = 'select-button' title = '페이지 이동'>
@@ -97,7 +119,13 @@ class Weekly extends Component {
         <div className = 'user-name'>user</div>
 
         <div className = 'weekly-goals'>
-          <ShowWeeklyPlan />
+
+          <p><Moment format = 'ww'>{this.state.date}</Moment></p>
+
+          {weeklyGoalData ? (
+            weeklyGoalData.map((data, i) => <ShowWeeklyPlan key = {i} {...data} />)
+          ): <h1>no content</h1>}
+
         </div>
 
         <div className = 'edit'>
@@ -119,13 +147,23 @@ class Weekly extends Component {
         <div className = 'current-plans'>
 
           <div className = 'current-Year-and-plans' onClick = {this.goYearly.bind(this)}>
+
             <p><Moment format = 'YYYY'>{this.state.date}</Moment></p>
-            <ShowYearPlan />
+
+            {yearGoalData ? (
+              yearGoalData.map((data, i) => <ShowYearPlan key = {i} {...data} />)
+            ): <h1>no content</h1>}
+
           </div>
 
           <div className = 'current-Month-and-plans' onClick = {this.goMonthly.bind(this)}>
+
             <p><Moment format = 'MMM'>{this.state.date}</Moment></p>
-            <ShowMonthPlan />
+
+            {monthGoalData ? (
+              monthGoalData.map((data, i) => <ShowMonthPlan key = {i} {...data} />)
+            ): <h1>no content</h1>}
+
           </div>
 
         </div>
@@ -163,10 +201,21 @@ class Weekly extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    date: state.setDateReducer.date
-  }
-}
+const mapStateToProps = state => ({
+  date: state.setThisDate.date,
+  yearGoalData: state.getYearGoals.year,
+  monthGoalData: state.getMonthGoals.month,
+  weeklyGoalData: state.getWeeklyGoals.week
+});
 
-export default connect(mapStateToProps)(withRouter(Weekly));
+const mapDispatchToProps = dispatch => ({
+  SetThisDateActions: bindActionCreators(setThisDateActions, dispatch),
+  GetYearGoalsActions: bindActionCreators(getYearGoalsActions, dispatch),
+  GetMonthGoalsActions: bindActionCreators(getMonthGoalsActions, dispatch),
+  GetWeeklyGoalsActions: bindActionCreators(getWeeklyGoalsActions, dispatch)
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Weekly));
