@@ -9,7 +9,12 @@ const POST_SCHEDULES_FAILURE = 'POST_SCHEDULES_FAILURE';
 axios.defaults.withCredentials = true;
 
 function PostSchedulesAPI(data) {
-  return axios.post('http://localhost:3001/plans/schedules/post', data);
+  return axios({
+    method: 'post',
+    url: 'http://15.164.232.40:3001/plans/goals/post',
+    headers: {'content-type': 'application/json'},
+    data: JSON.stringify(data)
+  });
 }
 
 const initialState = {
@@ -18,7 +23,7 @@ const initialState = {
   data: null
 }
 
-export const PostSchedules = data => dispatch => {
+export const postSchedules = data => dispatch => {
   dispatch({ type: POST_SCHEDULES_PENDING });
 
   return PostSchedulesAPI(data)

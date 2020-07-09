@@ -1,28 +1,41 @@
 import React, { Component } from 'react';
+import Calendar from 'react-calendar';
 import { connect } from 'react-redux';
-import { setWeekPlan } from '../actions';
+import * as setThisDateActions from '../modules/setThisDate';
+import { bindActionCreators } from 'redux';
 
 class CreateWeekPlan extends Component {
 
-  sendWeekPlans = () => {
-    this.props.dispatch(setWeekPlan(this.props.plan));
+  handleChangeWeek = event => {
+    const select = event;
+    const { SetThisDateActions } = this.props;
+
+    SetThisDateActions.changeDate(select);
   }
 
   render() {
+    const { select, onCreate, close } = this.props;
+    const { handleChangeWeek } = this;
     return (
-      this.props.select === 'weekly' ? (
+      select === 'weekly' ? (
         <div>
-          <button className = 'save' onClick = {() =>{this.sendWeekPlans(); this.props.close() }}>저장</button>
+          <button className = 'save' onClick = {() =>{onCreate(); close()}}>저장</button>
+          <Calendar onClickDay = {handleChangeWeek} />
         </div>
       ): null
     )
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    week: state.setPlansReducer.week
-  }
-}
+const mapStateToProps = state => ({
+  date: state.setThisDate.date
+});
 
-export default connect(mapStateToProps)(CreateWeekPlan);
+const mapDispatchToProps = dispatch => ({
+  SetThisDateActions: bindActionCreators(setThisDateActions, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreateWeekPlan);

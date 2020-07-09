@@ -1,17 +1,24 @@
 import { handleActions } from 'redux-actions';
+
 import axios from 'axios';
 
-const GET_SCHEDULES_PENDING = 'GET_SCHEDULES_PENDING';
-const GET_SCHEDULES_SUCCESS = 'GET_SCHEDULES_SUCCESS';
-const GET_SCHEDULES_FAILURE = 'GET_SCHEDULES_FAILURE';
+const GET_WEEK_GOAL_PENDING = 'GET_WEEK_GOAL_PENDING';
+const GET_WEEK_GOAL_SUCCESS = 'GET_WEEK_GOAL_SUCCESS';
+const GET_WEEK_GOAL_FAILURE = 'GET_WEEK_GOAL_FAILURE';
 
 axios.defaults.withCredentials = true;
 
-function getScheduleAPI() {
 
+
+function getWeeklyGoalAPI() {
   return axios({
     method: 'get',
-    url: 'http://15.164.232.40:3001/plans/schedules/get',
+    url: 'http://15.164.232.40:3001/plans/goals/get',
+    params: {
+      category: 'monthly',
+      year: '2020',
+      day: '7'
+    },
     responseType: 'json'
   });
 }
@@ -22,18 +29,19 @@ const initialState = {
   data: []
 };
 
-export const getSchedules = () => dispatch => {
-  dispatch({ type: GET_SCHEDULES_PENDING });
 
-  return getScheduleAPI()
+export const getWeeklyGoals = () => dispatch => {
+  dispatch({ type: GET_WEEK_GOAL_PENDING });
+
+  return getWeeklyGoalAPI()
     .then(result => {
       dispatch({
-        type: GET_SCHEDULES_SUCCESS,
+        type: GET_WEEK_GOAL_SUCCESS,
         payload: result.data
       });
     }).catch(error => {
       dispatch({
-        type: GET_SCHEDULES_FAILURE,
+        type: GET_WEEK_GOAL_FAILURE,
         payload: error
       });
     });
@@ -41,21 +49,21 @@ export const getSchedules = () => dispatch => {
 
 export default handleActions(
   {
-    [GET_SCHEDULES_PENDING]: (state, action) => {
+    [GET_WEEK_GOAL_PENDING]: (state, action) => {
       return {
         ...state,
         pending: true,
         error: false
       };
     },
-    [GET_SCHEDULES_SUCCESS]: (state, action) => {
+    [GET_WEEK_GOAL_SUCCESS]: (state, action) => {
       return {
         ...state,
         pending: false,
-        data: action.payload
+        week: action.payload
       };
     },
-    [GET_SCHEDULES_FAILURE]: (state, action) => {
+    [GET_WEEK_GOAL_FAILURE]: (state, action) => {
       return {
         ...state,
         pending: false,

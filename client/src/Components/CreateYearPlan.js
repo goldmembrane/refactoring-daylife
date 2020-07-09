@@ -1,33 +1,44 @@
 import React, { Component } from 'react';
+import Calendar from 'react-calendar';
 import { connect } from 'react-redux';
-import { setYearPlan } from '../actions';
-import * as postGoalsActions from '../modules/PostGoals';
+import * as setThisDateActions from '../modules/setThisDate';
 import { bindActionCreators } from 'redux';
+import './CreateYearPlan.css';
 
 
 class CreateYearPlan extends Component {
 
-  sendYearPlans = () => {
-    this.props.dispatch(setYearPlan(this.props.plan));
+  handleSelectYear = event => {
+    const select = event;
+
+    const { SetThisDateActions } = this.props;
+
+    SetThisDateActions.changeDate(select);
   }
 
   render() {
+    const { select, onCreate, close } = this.props;
+    const { handleSelectYear } = this;
     return (
-      this.props.select === 'yearly' ? (
+      select === 'annually' ? (
         <div>
-          <button className = 'save' onClick = {() => {this.sendYearPlans(); this.props.close()}}>저장</button>
+          <button className = 'save' onClick = {() => {onCreate(); close()}}>저장</button>
+          <Calendar view = 'decade' onClickYear = {handleSelectYear}/>
         </div>
       ) : null
     )
   }
 }
 
+const mapStateToProps = state => ({
+  date: state.setThisDate.date
+});
+
+const mapDispatchToProps = dispatch => ({
+  SetThisDateActions: bindActionCreators(setThisDateActions, dispatch)
+});
 
 export default connect(
-  state => ({
-    data: state.postGoals.data
-  }),
-  dispatch => ({
-    postGoalsActions: bindActionCreators(postGoalsActions, dispatch)
-  })
+  mapStateToProps,
+  mapDispatchToProps
 )(CreateYearPlan);
