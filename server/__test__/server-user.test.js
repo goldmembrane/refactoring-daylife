@@ -7,10 +7,11 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-const app = require('../../../../dayLife/server/app');
+
+const app = require('../app');
 
 const { users, goals, daily_schedules } = require('./database/models');
-const usersFixture = require('../../../../dayLife/server/__test__/fixtures/users.json');
+const usersFixture = require('./fixtures/users.json');
 //const urlsFixture = require('./fixtures/urls.json');
 
 describe('Test to see if the server is open', () => {
