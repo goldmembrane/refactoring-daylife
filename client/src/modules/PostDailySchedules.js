@@ -9,7 +9,11 @@ const POST_SCHEDULES_FAILURE = 'POST_SCHEDULES_FAILURE';
 axios.defaults.withCredentials = true;
 
 function PostSchedulesAPI(data) {
-  return axios.post('http://15.164.232.40:3001/plans/schedules/post', data);
+  return axios({
+    method: 'post',
+    url: 'http://15.164.232.40:3001/plans/goals/post',
+    data: data
+  });
 }
 
 const initialState = {

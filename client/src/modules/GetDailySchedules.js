@@ -7,7 +7,11 @@ const GET_SCHEDULES_SUCCESS = 'GET_SCHEDULES_SUCCESS';
 const GET_SCHEDULES_FAILURE = 'GET_SCHEDULES_FAILURE';
 
 function getScheduleAPI() {
-  return axios.get('http://localhost:3001/schedules/get');
+  return axios({
+    method: 'get',
+    url: 'http://15.164.232.40:3001/plans/schedules/get',
+    responseType: 'json'
+  });
 }
 
 const initialState = {
