@@ -61,8 +61,9 @@ class Main extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    date: state.setDateReducer.date,
-  };
-};
+
+    date: state.setThisDate.date
+  }
+}
 
 export default connect(mapStateToProps)(withRouter(Main));

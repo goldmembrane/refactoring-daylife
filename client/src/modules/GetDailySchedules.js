@@ -1,13 +1,21 @@
-import { handleActions } from "redux-actions";
 
-import axios from "axios";
+import { handleActions } from 'redux-actions';
+import axios from 'axios';
 
 const GET_SCHEDULES_PENDING = "GET_SCHEDULES_PENDING";
 const GET_SCHEDULES_SUCCESS = "GET_SCHEDULES_SUCCESS";
 const GET_SCHEDULES_FAILURE = "GET_SCHEDULES_FAILURE";
 
+axios.defaults.withCredentials = true;
+
 function getScheduleAPI() {
-  return axios.get("http://localhost:3001/schedules/get");
+
+
+  return axios({
+    method: 'get',
+    url: 'http://15.164.232.40:3001/plans/schedules/get',
+    responseType: 'json'
+  });
 }
 
 const initialState = {
@@ -16,7 +24,8 @@ const initialState = {
   data: [],
 };
 
-export const getSchedule = () => (dispatch) => {
+
+export const getSchedules = () => dispatch => {
   dispatch({ type: GET_SCHEDULES_PENDING });
 
   return getScheduleAPI()

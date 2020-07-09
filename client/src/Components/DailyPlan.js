@@ -1,12 +1,18 @@
-import React, { Component } from "react";
-import Moment from "react-moment";
-import { connect } from "react-redux";
-import { setDate } from "../actions";
-import moment from "moment";
-import CreatePlan from "./CreatePlan";
-import ShowYearPlan from "./ShowYearPlan";
-import ShowMonthPlan from "./ShowMonthPlan";
-import Popup from "reactjs-popup";
+
+import React, { Component } from 'react';
+import Moment from 'react-moment';
+import { connect } from 'react-redux';
+import moment from 'moment';
+import CreatePlan from './CreatePlan';
+import ShowYearPlan from './ShowYearPlan';
+import ShowMonthPlan from './ShowMonthPlan';
+import ShowDailyPlan from './ShowDailyPlan';
+import Popup from 'reactjs-popup';
+import * as setThisDateActions from '../modules/setThisDate';
+import * as getYearGoalsActions from '../modules/GetYearGoals';
+import * as getMonthGoalsActions from '../modules/GetMonthGoals';
+import * as getDailySchedulesActions from '../modules/GetDailySchedules';
+import { bindActionCreators } from 'redux';
 
 class DailyPlan extends Component {
   constructor(props) {
@@ -18,32 +24,51 @@ class DailyPlan extends Component {
     };
   }
 
+  
+  
+  componentDidMount() {
+    const { GetYearGoalsActions, GetMonthGoalsActions, GetDailySchedulesActions } = this.props;
+
+    GetYearGoalsActions.getYearGoals();
+    GetMonthGoalsActions.getMonthGoals();
+    GetDailySchedulesActions.getSchedules();
+  }
+
   changeToday = (e) => {
     const select = e.target.textContent;
+    const { SetThisDateActions } = this.props;
     const selectDay = new Date(select);
     this.setState({ date: selectDay });
 
-    this.props.dispatch(setDate(selectDay));
-  };
+
+    SetThisDateActions.changeDate(selectDay);
+  }
 
   backThreeDays = () => {
+    const { SetThisDateActions } = this.props;
     const currentDate = this.props.date;
     const backThreeDate = moment(currentDate).add(-3, "day");
     this.setState({ date: backThreeDate });
 
-    this.props.dispatch(setDate(backThreeDate));
-  };
+
+    SetThisDateActions.changeDate(backThreeDate);
+  }
 
   forwordThreeDays = () => {
+    const { SetThisDateActions } = this.props;
     const currentDate = this.props.date;
     const forwordThreeDate = moment(currentDate).add(3, "day");
     this.setState({ date: forwordThreeDate });
 
-    this.props.dispatch(setDate(forwordThreeDate));
-  };
+
+    SetThisDateActions.changeDate(forwordThreeDate);
+  }
+
+  sendPropsToWeekly = e => {
 
   sendPropsToWeekly = (e) => {
     const select = e.target.textContent;
+    const { SetThisDateActions } = this.props;
     const selectToday = new Date(select);
 
     const nowMonth = selectToday.getMonth();
@@ -53,18 +78,27 @@ class DailyPlan extends Component {
 
     const weekStartDay = new Date(nowYear, nowMonth, nowDate - nowDay);
 
-    this.props.dispatch(setDate(weekStartDay));
-  };
+
+    SetThisDateActions.changeDate(weekStartDay);
+
+
+  }
+
+  
 
   setToday = () => {
+
+    const { SetThisDateActions } = this.props;
     const today = new Date();
     this.setState({ date: today });
 
-    this.props.dispatch(setDate(today));
-  };
+    SetThisDateActions.changeDate(today);
+  }
 
   render() {
-    return (
+    const { yearGoalData, monthGoalData, scheduleData } = this.props;
+    return(
+
       <div>
         <div>
           <Popup
@@ -82,60 +116,68 @@ class DailyPlan extends Component {
               </div>
             )}
           </Popup>
-          <span className="move-today" onClick={this.setToday.bind(this)}>
-            오늘로 이동
-          </span>
-          <div></div>
 
-          <div className="edit">
-            {/* <div
-            className="move-back-three-days"
-            onClick={this.backThreeDays.bind(this)}
-          >
-            왼쪽
+
+          <div className = 'move-today' onClick = {this.setToday.bind(this)}>오늘로 이동</div>
+
+        </div>
+        <div className = 'current-plans'>
+  
+            <div className = 'current-Year-and-plans' onClick = {this.props.goYear}>
+
+              <p><Moment format = 'YYYY'>{this.state.date}</Moment></p>
+
+              {yearGoalData ? (
+              yearGoalData.map((data, i) => <ShowYearPlan key = {i} {...data} />)
+            ): <h1>no content</h1>}
+
+            </div>
+  
+            <div className = 'current-Month-and-plans' onClick = {this.props.goMonth}>
+
+              <p><Moment format = 'MMM'>{this.state.date}</Moment></p>
+
+              {monthGoalData ? (
+              monthGoalData.map((data, i) => <ShowMonthPlan key = {i} {...data} />)
+            ): <h1>no content</h1>}
+
+            </div>
+          
+        </div>
+
+        <div className = 'move-back-three-days' onClick = {this.backThreeDays.bind(this)}>왼쪽</div>
+
+        <div className = 'day-plans'>
+
+          <div className = 'yesterday' onClick = {this.changeToday.bind(this)}>
+
+            <Moment format = 'YYYY-MM-DD' >{moment(this.state.date).add(-1, 'day')}</Moment>
+
+            {scheduleData ? (
+              scheduleData.map((data, i) => <ShowDailyPlan key = {i} {...data} />)
+            ): <h1>no content</h1>}
+            
           </div>
-          <div
-            className="move-forword-three-days"
-            onClick={this.forwordThreeDays.bind(this)}
-          >
-            오른쪽
-          </div> */}
-          </div>
-          <div className="current-plans">
-            <div className="current-Year-and-plans" onClick={this.props.goYear}>
-              <p>
-                <Moment format="YYYY">{this.state.date}</Moment>
-              </p>
-              <ShowYearPlan />
-            </div>
 
-            <div
-              className="current-Month-and-plans"
-              onClick={this.props.goMonth}
-            >
-              <p>
-                <Moment format="MMM">{this.state.date}</Moment>
-              </p>
-              <ShowMonthPlan />
-            </div>
+          <div className = 'today' onClick = {(e) => { this.sendPropsToWeekly(e); this.props.goWeek();}} >
+
+            <Moment format = 'YYYY-MM-DD'>{this.state.date}</Moment>
+
+            {scheduleData ? (
+              scheduleData.map((data, i) => <ShowDailyPlan key = {i} {...data} />)
+            ): <h1>no content</h1>}
+
           </div>
 
-          <div className="day-plans">
-            <div className="yesterday" onClick={this.changeToday.bind(this)}>
-              <Moment format="YYYY-MM-DD">
-                {moment(this.state.date).add(-1, "day")}
-              </Moment>
-            </div>
+          <div className = 'tomorrow' onClick = {this.changeToday.bind(this)}>
 
-            <div
-              className="today"
-              onClick={(e) => {
-                this.sendPropsToWeekly(e);
-                this.props.goWeek();
-              }}
-            >
-              <Moment format="YYYY-MM-DD">{this.state.date}</Moment>
-            </div>
+            <Moment format = 'YYYY-MM-DD'>{moment(this.state.date).add(1, 'day')}</Moment>
+
+            {scheduleData ? (
+              scheduleData.map((data, i) => <ShowDailyPlan key = {i} {...data} />)
+            ): <h1>no content</h1>}
+
+          </div>
 
             <div className="tomorrow" onClick={this.changeToday.bind(this)}>
               <Moment format="YYYY-MM-DD">
@@ -148,11 +190,23 @@ class DailyPlan extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    date: state.setDateReducer.date,
-    year: state.setPlansReducer.year,
-  };
-};
 
-export default connect(mapStateToProps)(DailyPlan);
+
+const mapStateToProps = state => ({
+  date: state.setThisDate.date,
+  yearGoalData: state.getYearGoals.year,
+  monthGoalData: state.getMonthGoals.month,
+  scheduleData: state.getSchedules.data
+});
+
+const mapDispatchToProps = dispatch => ({
+  SetThisDateActions: bindActionCreators(setThisDateActions, dispatch),
+  GetYearGoalsActions: bindActionCreators(getYearGoalsActions, dispatch),
+  GetMonthGoalsActions: bindActionCreators(getMonthGoalsActions, dispatch),
+  GetDailySchedulesActions: bindActionCreators(getDailySchedulesActions, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DailyPlan);

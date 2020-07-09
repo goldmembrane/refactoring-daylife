@@ -1,21 +1,19 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+
+import React, { Component } from 'react';
+import Checkboxes from './Checkboxes';
 
 class ShowWeeklyPlan extends Component {
   render() {
-    return (
-      <div className="week-plan-box">
-        {/* <div className="week-plan">{this.props.week}</div> */}
-        <div className="week-plan"></div>
+
+    const { name } = this.props;
+    return(
+      <div className = 'week-plan-box'>
+        <div className = 'week-plan'>{name}</div>
+        <Checkboxes />
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    week: state.setPlansReducer.week,
-  };
-};
 
-export default connect(mapStateToProps)(ShowWeeklyPlan);
+export default ShowWeeklyPlan;

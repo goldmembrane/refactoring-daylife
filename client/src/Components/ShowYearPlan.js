@@ -1,21 +1,19 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+
+import React, { Component } from 'react';
+import Checkboxes from './Checkboxes';
 
 class ShowYearPlan extends Component {
   render() {
+    const { name } = this.props;
     return (
-      <div className="year-plan-box">
-        <div className="year-plan">{this.props.year}</div>
-        {/* <div className="year-plan">year plan 테스트1번</div> */}
+
+      <div className = 'year-plan-box'>
+        <span className = 'year-plan'>{name}</span>
+        <Checkboxes />
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    year: state.setPlansReducer.year,
-  };
-};
 
-export default connect(mapStateToProps)(ShowYearPlan);
+export default ShowYearPlan;

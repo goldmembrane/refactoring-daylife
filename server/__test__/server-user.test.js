@@ -7,6 +7,7 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
+
 const app = require('../app');
 
 const { users, goals, daily_schedules } = require('./database/models');

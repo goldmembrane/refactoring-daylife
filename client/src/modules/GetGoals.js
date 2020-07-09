@@ -7,7 +7,12 @@ const GET_GOAL_SUCCESS = "GET_GOAL_SUCCESS";
 const GET_GOAL_FAILURE = "GET_GOAL_FAILURE";
 
 function getGoalAPI() {
-  return axios.get("http://localhost:3001/goals/get");
+
+  return axios({
+    method: 'get',
+    url: 'http://15.164.232.40:3001/plans/goals/get',
+    responseType: 'json'
+  });
 }
 
 const initialState = {
@@ -16,7 +21,8 @@ const initialState = {
   data: [],
 };
 
-export const getGoal = () => (dispatch) => {
+
+export const getGoals = () => dispatch => {
   dispatch({ type: GET_GOAL_PENDING });
 
   return getGoalAPI()
