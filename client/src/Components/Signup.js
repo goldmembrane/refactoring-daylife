@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import Title from "./Title";
 import "./Signup.css";
 
 class Signup extends React.Component {
@@ -49,7 +48,6 @@ class Signup extends React.Component {
   render() {
     return (
       <div>
-        <Title />
         <form
           id="main-signup-form"
           onSubmit={(e) => {
@@ -81,7 +79,7 @@ class Signup extends React.Component {
               });
           }}
         >
-          <label id="main-label">Create Account</label>
+          <div id="main-label">Create Account</div>
           <div>
             <input
               className="signup-input-value"
@@ -116,6 +114,10 @@ class Signup extends React.Component {
             ></input>
           </div>
           <small id="feedback-message">{this.renderFeedbackMessage()}</small>
+          <div>
+            <input type="checkbox" />
+            약관에 동의합니다.
+          </div>
           <button id="click-signup-button" type="submit">
             Sign Up
           </button>

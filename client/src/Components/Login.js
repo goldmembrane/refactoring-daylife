@@ -1,10 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-// import axios from "axios";
-import Title from "./Title";
 import "./Login.css";
 
-class Login extends React.Component {
+class Login extends Component {
   state = {
     email: "",
     password: "",
@@ -18,7 +16,6 @@ class Login extends React.Component {
     const { history } = this.props;
     return (
       <div>
-        <Title />
         <form
           id="login-form"
           onSubmit={(e) => {
@@ -34,6 +31,7 @@ class Login extends React.Component {
               .then((res) => {
                 if (res.status === 200) {
                   console.log("200코드 받음 잘됨");
+                  localStorage.setItem("isLogin", 1);
                   return res.json();
                 }
               })
@@ -47,7 +45,7 @@ class Login extends React.Component {
               });
           }}
         >
-          <label id="main-label">Sign in</label>
+          <div id="main-label">Login</div>
           <div>
             <input
               className="login-input-value"
@@ -64,9 +62,14 @@ class Login extends React.Component {
               onChange={this.handleInputValue("password")}
             ></input>
           </div>
+          <div>
+            <input type="checkbox" />
+            로그인 정보를 기억합니다.
+          </div>
           <button id="click-login-button" type="submit">
-            SIGN IN
+            Sign In
           </button>
+          <div id="google-login-button" class="g-signin2" data-onsuccess="onSignIn"></div>
         </form>
       </div>
     );
