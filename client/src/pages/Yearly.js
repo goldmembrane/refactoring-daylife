@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { setDate } from '../actions';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Calendar from 'react-calendar';
@@ -9,6 +8,11 @@ import Moment from 'react-moment';
 import { withRouter } from "react-router-dom";
 import Popup from 'reactjs-popup';
 import CreatePlan from '../Components/CreatePlan';
+import * as getYearGoalsActions from '../modules/GetYearGoals';
+import * as setThisDateActions from '../modules/setThisDate';
+import { bindActionCreators } from 'redux';
+import ShowYearPlan from '../Components/ShowYearPlan';
+
 
 
 class Yearly extends Component {
@@ -18,6 +22,12 @@ class Yearly extends Component {
     this.state = {
       month: props.date
     }
+  }
+
+  componentDidMount() {
+    const { GetYearGoalsActions } = this.props;
+
+    GetYearGoalsActions.getYearGoals();
   }
   
   goDaily = () => {
@@ -40,21 +50,28 @@ class Yearly extends Component {
   handleChangeDate = event => {
 
     const select = event;
+    const { SetThisDateActions } = this.props;
+
     this.setState({ month: select});
 
-    this.props.dispatch(setDate(select));
+    SetThisDateActions.changeDate(select);
     this.props.history.push('/Monthly');
   }
 
   setToday = () => {
 
     const today = new Date();
-    this.setState({ date: today });
+    const { SetThisDateActions } = this.props;
 
-    this.props.dispatch(setDate(today));
+    this.setState({ month: today });
+
+    SetThisDateActions.changeDate(today);
+    this.props.history.push('/Yearly');
   }
 
   render() {
+
+    const { yearGoalData } = this.props;
 
     return (
       <div>
@@ -96,6 +113,9 @@ class Yearly extends Component {
 
             <Moment format = 'YYYY'>{this.state.month}</Moment>
 
+            {yearGoalData ? 
+              ( yearGoalData.map((data, i) => <ShowYearPlan key = {i} {...data}/> ) ) : <h1>no content</h1>}
+
           </div>
 
         </div>
@@ -106,6 +126,7 @@ class Yearly extends Component {
               view = 'year'
               onClickMonth = {this.handleChangeDate.bind(this)}
               onActiveStartDateChange = {this.handleChange}
+              defaultValue = {this.state.month}
             />
 
           </div>
@@ -114,10 +135,17 @@ class Yearly extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    date: state.setDateReducer.date
-  }
-};
+const mapStateToProps = state => ({
+  date: state.setThisDate.date,
+  yearGoalData: state.getYearGoals.year
+});
 
-export default connect(mapStateToProps)(withRouter(Yearly));
+const mapDispatchToProps = dispatch => ({
+  SetThisDateActions: bindActionCreators(setThisDateActions, dispatch),
+  GetYearGoalsActions: bindActionCreators(getYearGoalsActions, dispatch)
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Yearly));
