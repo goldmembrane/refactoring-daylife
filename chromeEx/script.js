@@ -256,9 +256,6 @@ const app = {
   <input type="checkbox" checked>
 </span>
 <span>
-  <img src="./edit.png" alt="edit" class="goal_delete" width="17" height="17">
-</span>
-<span>
   <img src="./trash.png" alt="Delete" class="goal_delete" width="17" height="17">
 </span>
 </li>
@@ -271,9 +268,6 @@ const app = {
 </span>
 <span>
   <input type="checkbox">
-</span>
-<span>
-  <img src="./edit.png" alt="edit" class="goal_delete" width="17" height="17">
 </span>
 <span>
   <img src="./trash.png" alt="Delete" class="goal_delete" width="17" height="17">
@@ -297,9 +291,6 @@ const app = {
   <input type="checkbox" checked>
 </span>
 <span>
-  <img src="./edit.png" alt="edit" class="goal_delete" width="17" height="17">
-</span>
-<span>
   <img src="./trash.png" alt="Delete" class="goal_delete" width="17" height="17">
 </span>
 <ul>
@@ -316,9 +307,6 @@ const app = {
 </span>
 <span>
   <input type="checkbox">
-</span>
-<span>
-  <img src="./edit.png" alt="edit" class="goal_delete" width="17" height="17">
 </span>
 <span>
   <img src="./trash.png" alt="Delete" class="goal_delete" width="17" height="17">
@@ -358,12 +346,13 @@ const app = {
           console.log(data[i].is_done)
           app.fetchGoalsCheck(data[i]);
         });
+        // tmpNode.childNodes[1].childNodes[5].addEventListener('click', e => {  //수정
+        //   e.preventDefault();
+        //   console.log("내용 수정" + gId);
+        //   window.open('./html/editPopup.html', 'signup', "width=500, height=400, left=200, top=50"); //수정창 팝업
+        //     //값 전달이 잘 되지 않음 
+        // });
         tmpNode.childNodes[1].childNodes[5].addEventListener('click', e => {  //수정
-          console.log("내용 수정" + gId);
-          window.open('./html/editPopup.html', 'signup', "width=500, height=400, left=200, top=50"); //수정창 팝업
-          //data[i]접근이 가능한지 확인 
-        });
-        tmpNode.childNodes[1].childNodes[7].addEventListener('click', e => {  //수정
           console.log("내용 삭제" + gId);
           app.fetchGoalsDel(gId);
         });
@@ -380,12 +369,12 @@ const app = {
           // app.fetchGoalsCheck(gId, data[i].is_done);
           app.fetchGoalsCheck(data[i]);
         });
-        tmpNode.childNodes[1].childNodes[5].addEventListener('click', e => {  //수정
-          console.log("내용 수정" + gId);
-          window.open('./html/editPopup.html', 'signup', "width=500, height=400, left=200, top=50"); //수정창 팝업
+        // tmpNode.childNodes[1].childNodes[5].addEventListener('click', e => {  //수정
+        //   console.log("내용 수정" + gId);
+        //   window.open('./html/editPopup.html', 'signup', "width=500, height=400, left=200, top=50"); //수정창 팝업
 
-        });
-        tmpNode.childNodes[1].childNodes[7].addEventListener('click', e => {  //수정
+        // });
+        tmpNode.childNodes[1].childNodes[5].addEventListener('click', e => {  //수정
           console.log("내용 삭제" + gId);
           app.fetchGoalsDel(gId);
         });
@@ -402,12 +391,12 @@ const app = {
           // app.fetchGoalsCheck(gId, data[i].is_done);
           app.fetchGoalsCheck(data[i]);
         });
-        tmpNode.childNodes[1].childNodes[5].addEventListener('click', e => {  //수정
-          console.log("내용 수정" + gId);
-          window.open('./html/editPopup.html', 'signup', "width=500, height=400, left=200, top=50"); //수정창 팝업
+        // tmpNode.childNodes[1].childNodes[5].addEventListener('click', e => {  //수정
+        //   console.log("내용 수정" + gId);
+        //   window.open('./html/editPopup.html', 'signup', "width=500, height=400, left=200, top=50"); //수정창 팝업
 
-        });
-        tmpNode.childNodes[1].childNodes[7].addEventListener('click', e => {  //수정
+        // });
+        tmpNode.childNodes[1].childNodes[5].addEventListener('click', e => {  //수정
           console.log("내용 삭제" + gId);
           app.fetchGoalsDel(gId);
         });
@@ -425,12 +414,12 @@ const app = {
           console.log("체크박스" + gId);
           app.fetchSchedulesCheck(gId, data[i].is_done);
         });
-        tmpNode.childNodes[1].childNodes[5].addEventListener('click', e => {  //수정
-          console.log("내용 수정" + gId);
-          window.open('./html/editPopup.html', 'signup', "width=500, height=400, left=200, top=50"); //수정창 팝업
+        // tmpNode.childNodes[1].childNodes[5].addEventListener('click', e => {  //수정
+        //   console.log("내용 수정" + gId);
+        //   window.open('./html/editPopup.html', 'signup', "width=500, height=400, left=200, top=50"); //수정창 팝업
 
-        });
-        tmpNode.childNodes[1].childNodes[7].addEventListener('click', e => {  //수정
+        // });
+        tmpNode.childNodes[1].childNodes[5].addEventListener('click', e => {  //수정
           console.log("내용 삭제" + gId);
           app.fetchSchedulesDel(gId);
         });
