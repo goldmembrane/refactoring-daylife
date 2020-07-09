@@ -1,37 +1,38 @@
-import { handleActions } from 'redux-actions';
+import { handleActions } from "redux-actions";
 
-import axios from 'axios';
+import axios from "axios";
 
-const GET_GOAL_PENDING = 'GET_GOAL_PENDING';
-const GET_GOAL_SUCCESS = 'GET_GOAL_SUCCESS';
-const GET_GOAL_FAILURE = 'GET_GOAL_FAILURE';
+const GET_GOAL_PENDING = "GET_GOAL_PENDING";
+const GET_GOAL_SUCCESS = "GET_GOAL_SUCCESS";
+const GET_GOAL_FAILURE = "GET_GOAL_FAILURE";
 
 function getGoalAPI() {
-  return axios.get('http://localhost:3001/goals/get');
+  return axios.get("http://localhost:3001/goals/get");
 }
 
 const initialState = {
   pending: false,
   error: false,
-  data: []
+  data: [],
 };
 
-export const getGoal = () => dispatch => {
+export const getGoal = () => (dispatch) => {
   dispatch({ type: GET_GOAL_PENDING });
 
   return getGoalAPI()
-    .then(result => {
+    .then((result) => {
       dispatch({
         type: GET_GOAL_SUCCESS,
-        payload: result.data
+        payload: result.data,
       });
-    }).catch(error => {
+    })
+    .catch((error) => {
       dispatch({
         type: GET_GOAL_FAILURE,
-        payload: error
+        payload: error,
       });
     });
-}
+};
 
 export default handleActions(
   {
@@ -39,23 +40,23 @@ export default handleActions(
       return {
         ...state,
         pending: true,
-        error: false
+        error: false,
       };
     },
     [GET_GOAL_SUCCESS]: (state, action) => {
       return {
         ...state,
         pending: false,
-        data: action.payload
+        data: action.payload,
       };
     },
     [GET_GOAL_FAILURE]: (state, action) => {
       return {
         ...state,
         pending: false,
-        error: true
+        error: true,
       };
-    }
+    },
   },
   initialState
-)
+);

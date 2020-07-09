@@ -1,7 +1,5 @@
-
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import Title from "./Title";
 import "./Login.css";
 
 class Login extends Component {
@@ -18,7 +16,6 @@ class Login extends Component {
     const { history } = this.props;
     return (
       <div>
-        <Title />
         <form
           id="login-form"
           onSubmit={(e) => {
@@ -34,6 +31,7 @@ class Login extends Component {
               .then((res) => {
                 if (res.status === 200) {
                   console.log("200코드 받음 잘됨");
+                  localStorage.setItem("isLogin", 1);
                   return res.json();
                 }
               })
@@ -47,7 +45,7 @@ class Login extends Component {
               });
           }}
         >
-          <label id="main-label">Sign in</label>
+          <div id="main-label">Login</div>
           <div>
             <input
               className="login-input-value"
@@ -64,8 +62,12 @@ class Login extends Component {
               onChange={this.handleInputValue("password")}
             ></input>
           </div>
+          <div>
+            <input type="checkbox" />
+            로그인 정보를 기억합니다.
+          </div>
           <button id="click-login-button" type="submit">
-            SIGN IN
+            Sign In
           </button>
         </form>
       </div>

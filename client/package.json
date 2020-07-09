@@ -24,7 +24,8 @@
     "reactjs-popup": "^1.5.0",
     "redux": "^4.0.5",
     "redux-actions": "^2.6.5",
-    "tui-calendar": "^1.12.13"  },
+    "tui-calendar": "^1.12.13"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

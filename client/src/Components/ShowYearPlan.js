@@ -1,23 +1,21 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
 class ShowYearPlan extends Component {
-  
   render() {
     return (
-      <div className = 'year-plan-box'>
-        <div className = 'year-plan'>{this.props.year}</div>
+      <div className="year-plan-box">
+        <div className="year-plan">{this.props.year}</div>
+        {/* <div className="year-plan">year plan 테스트1번</div> */}
       </div>
-    )
+    );
   }
-
-
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    year: state.setPlansReducer.year
-  }
-}
+    year: state.setPlansReducer.year,
+  };
+};
 
 export default connect(mapStateToProps)(ShowYearPlan);

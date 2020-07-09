@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
 class ShowWeeklyPlan extends Component {
-  
   render() {
-    return(
-      <div className = 'week-plan-box'>
-        <div className = 'week-plan'>{this.props.week}</div>
+    return (
+      <div className="week-plan-box">
+        {/* <div className="week-plan">{this.props.week}</div> */}
+        <div className="week-plan"></div>
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    week: state.setPlansReducer.week
-  }
-}
+    week: state.setPlansReducer.week,
+  };
+};
 
 export default connect(mapStateToProps)(ShowWeeklyPlan);
