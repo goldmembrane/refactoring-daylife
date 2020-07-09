@@ -1,15 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter, Route } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.css";
 
-ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-  document.getElementById("root")
+import React from 'react';
+import ReactDom from 'react-dom';
+import { Provider } from 'react-redux';
+
+import Root from './Root';
+import store from './store';
+
+
+ReactDom.render(
+  <Provider store = {store}>
+    <Root />
+  </Provider>,
+  document.getElementById('root')
 );
 
-serviceWorker.unregister();
