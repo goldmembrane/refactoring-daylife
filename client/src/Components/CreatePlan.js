@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import CreatePlanDetail from './CreatePlanDetail';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import CreatePlanDetail from "./CreatePlanDetail";
 
 class CreatePlan extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+
       value: 'goals',
       plan: ''
     }
@@ -53,11 +54,12 @@ render() {
               />
             </div>
           </div>
-      </div>
-    </React.Fragment>
-    )
+        </div>
+      </React.Fragment>
+    );
   }
 }
+
 
 const mapStateToProps = () => ({});
 

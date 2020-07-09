@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DropdownButton from 'react-bootstrap/DropdownButton';
@@ -21,10 +22,10 @@ class Weekly extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { 
+    this.state = {
       date: props.date,
-      isModalOpen: false
-    }
+      isModalOpen: false,
+    };
   }
 
   componentDidMount() {
@@ -37,26 +38,27 @@ class Weekly extends Component {
 
   openModal = () => {
     this.setState({ isModalOpen: true });
-  }
+  };
 
   closeModal = () => {
     this.setState({ isModalOpen: false });
-  }
+  };
 
   goDaily = () => {
-    this.props.history.push('/calendar');
-  }
+    this.props.history.push("/calendar");
+  };
 
   goMonthly = () => {
-    this.props.history.push('/Monthly');
-  }
+    this.props.history.push("/Monthly");
+  };
 
   goYearly = () => {
-    this.props.history.push('/Yearly');
-  }
+    this.props.history.push("/Yearly");
+  };
 
   backOneWeek = () => {
     const currentDate = this.props.date;
+
     const { SetThisDateActions } = this.props;
     const backOneWeek = moment(currentDate).add(-7, 'day');
 
@@ -73,9 +75,10 @@ class Weekly extends Component {
     SetThisDateActions.changeDate(forwordOneWeek);
   }
 
-  handleChangeDate = e => {
+  handleChangeDate = (e) => {
     const select = e.target.textContent;
     const selectDay = new Date(select);
+
     const { SetThisDateActions } = this.props;
 
     this.setState({ date: selectDay });
@@ -88,6 +91,7 @@ class Weekly extends Component {
 
     const { SetThisDateActions } = this.props;
     const today = new Date();
+
 
     const nowMonth = today.getMonth();
     const nowYear = today.getFullYear();
@@ -106,17 +110,26 @@ class Weekly extends Component {
     const { yearGoalData, monthGoalData, weeklyGoalData } = this.props;
     return (
       <div>
-        <DropdownButton id = 'select-button' title = '페이지 이동'>
-  
-          <Dropdown.Item className = 'option' as = 'button'
-          onClick = {this.goMonthly.bind(this)}>월</Dropdown.Item>
-  
-          <Dropdown.Item className = 'option' as = 'button'
-          onClick = {this.goYearly.bind(this)}>연도</Dropdown.Item>
-  
+        <DropdownButton id="select-button" title="페이지 이동▼">
+          <Dropdown.Item
+            className="option"
+            as="button"
+            onClick={this.goMonthly.bind(this)}
+          >
+            월
+          </Dropdown.Item>
+
+          <Dropdown.Item
+            className="option"
+            as="button"
+            onClick={this.goYearly.bind(this)}
+          >
+            연도
+          </Dropdown.Item>
         </DropdownButton>
 
-        <div className = 'user-name'>user</div>
+        {/* <span className="user-name">user</span> */}
+
 
         <div className = 'weekly-goals'>
 
@@ -165,41 +178,69 @@ class Weekly extends Component {
             ): <h1>no content</h1>}
 
           </div>
-
         </div>
 
-        <button className = 'move-back-week' onClick = {this.backOneWeek.bind(this)}>왼쪽</button>
-
-        <div className = 'weekly-plans'>
-          <div className = 'daily-plans' onClick = {this.handleChangeDate.bind(this)}>
-              <Moment format = 'YYYY-MM-DD'>{this.state.date}</Moment>
+        <div className="weekly-plans">
+          <div
+            className="daily-plans"
+            onClick={this.handleChangeDate.bind(this)}
+          >
+            <Moment format="YYYY-MM-DD">{this.state.date}</Moment>
           </div>
-          <div className = 'daily-plans' onClick = {this.handleChangeDate.bind(this)}>
-              <Moment format = 'YYYY-MM-DD'>{moment(this.state.date).add(1, 'day')}</Moment>
+          <div
+            className="daily-plans"
+            onClick={this.handleChangeDate.bind(this)}
+          >
+            <Moment format="YYYY-MM-DD">
+              {moment(this.state.date).add(1, "day")}
+            </Moment>
           </div>
-          <div className = 'daily-plans' onClick = {this.handleChangeDate.bind(this)}>
-              <Moment format = 'YYYY-MM-DD'>{moment(this.state.date).add(2, 'day')}</Moment>
+          <div
+            className="daily-plans"
+            onClick={this.handleChangeDate.bind(this)}
+          >
+            <Moment format="YYYY-MM-DD">
+              {moment(this.state.date).add(2, "day")}
+            </Moment>
           </div>
-          <div className = 'daily-plans' onClick = {this.handleChangeDate.bind(this)}>
-              <Moment format = 'YYYY-MM-DD'>{moment(this.state.date).add(3, 'day')}</Moment>
+          <div
+            className="daily-plans"
+            onClick={this.handleChangeDate.bind(this)}
+          >
+            <Moment format="YYYY-MM-DD">
+              {moment(this.state.date).add(3, "day")}
+            </Moment>
           </div>
-          <div className = 'daily-plans' onClick = {this.handleChangeDate.bind(this)}>
-              <Moment format = 'YYYY-MM-DD'>{moment(this.state.date).add(4, 'day')}</Moment>
+          <div
+            className="daily-plans"
+            onClick={this.handleChangeDate.bind(this)}
+          >
+            <Moment format="YYYY-MM-DD">
+              {moment(this.state.date).add(4, "day")}
+            </Moment>
           </div>
-          <div className = 'daily-plans' onClick = {this.handleChangeDate.bind(this)}>
-              <Moment format = 'YYYY-MM-DD'>{moment(this.state.date).add(5, 'day')}</Moment>
+          <div
+            className="daily-plans"
+            onClick={this.handleChangeDate.bind(this)}
+          >
+            <Moment format="YYYY-MM-DD">
+              {moment(this.state.date).add(5, "day")}
+            </Moment>
           </div>
-          <div className = 'daily-plans' onClick = {this.handleChangeDate.bind(this)}>
-              <Moment format = 'YYYY-MM-DD'>{moment(this.state.date).add(6, 'day')}</Moment>
+          <div
+            className="daily-plans"
+            onClick={this.handleChangeDate.bind(this)}
+          >
+            <Moment format="YYYY-MM-DD">
+              {moment(this.state.date).add(6, "day")}
+            </Moment>
           </div>
         </div>
-
-        <button className = 'move-next-week' onClick = {this.forwordOneWeek.bind(this)}>오른쪽</button>
-        
       </div>
-    )
+    );
   }
 }
+
 
 const mapStateToProps = state => ({
   date: state.setThisDate.date,

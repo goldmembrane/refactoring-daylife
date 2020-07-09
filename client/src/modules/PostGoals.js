@@ -1,14 +1,15 @@
-import { handleActions } from 'redux-actions';
+import { handleActions } from "redux-actions";
 
-import axios from 'axios';
+import axios from "axios";
 
-const POST_GOAL_PENDING = 'POST_GOAL_PENDING';
-const POST_GOAL_SUCCESS = 'POST_GOAL_SUCCESS';
-const POST_GOAL_FAILURE = 'POST_GOAL_FAILURE';
+const POST_GOAL_PENDING = "POST_GOAL_PENDING";
+const POST_GOAL_SUCCESS = "POST_GOAL_SUCCESS";
+const POST_GOAL_FAILURE = "POST_GOAL_FAILURE";
 
 axios.defaults.withCredentials = true;
 
 function postGoalAPI(data) {
+
   return axios({
     method: 'post',
     url: 'http://15.164.232.40:3001/plans/goals/post',
@@ -20,27 +21,26 @@ function postGoalAPI(data) {
 const initialState = {
   pending: false,
   error: false,
-  data: null
-}
+  data: null,
+};
 
-export const postGoals = data => dispatch => {
+export const postGoals = (data) => (dispatch) => {
   dispatch({ type: POST_GOAL_PENDING });
 
   return postGoalAPI(data)
-    .then(result => {
+    .then((result) => {
       dispatch({
         type: POST_GOAL_SUCCESS,
-        payload: result.data
+        payload: result.data,
       });
-    }).catch(error => {
+    })
+    .catch((error) => {
       dispatch({
         type: POST_GOAL_FAILURE,
-        payload: error
+        payload: error,
       });
     });
-}
-
-
+};
 
 export default handleActions(
   {
@@ -48,23 +48,23 @@ export default handleActions(
       return {
         ...state,
         pending: true,
-        error: false
+        error: false,
       };
     },
     [POST_GOAL_SUCCESS]: (state, action) => {
       return {
         ...state,
         pending: false,
-        data: action.payload
+        data: action.payload,
       };
     },
     [POST_GOAL_FAILURE]: (state, action) => {
       return {
         ...state,
         pending: false,
-        error: true
+        error: true,
       };
-    }
+    },
   },
   initialState
-)
+);

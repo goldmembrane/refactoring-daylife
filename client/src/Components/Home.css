@@ -1,9 +1,8 @@
 #main-home-page {
-  background-color: #f2f2f2;
 }
 
 #main-text {
-  margin-top: 100px;
+  margin-top: 150px;
   text-align: center;
 }
 
@@ -11,6 +10,7 @@
   margin-bottom: 13px;
   font-size: 18px;
   font-family: serif;
+  text-shadow: 3px 4px 10px black;
 }
 
 ol {

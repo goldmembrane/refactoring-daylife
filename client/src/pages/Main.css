@@ -3,19 +3,17 @@
   padding: 0;
 }
 .user-name {
-  margin: 20px 0 20px 20px;
-  width: 130px;
-  height: 30px;
+  margin: 0px 0 10px 600px;
   border: none;
-  background-color: #fc5036;
+  background-color: white;
   text-align: center;
-  line-height: 30px;
+  font-weight: 600;
 }
 
 .edit {
-  margin-left: 20px;
+  margin-left: 200px;
   width: 80px;
-  height: 400px;
+  height: 700px;
   float: left;
 }
 
@@ -28,103 +26,127 @@
   background-color: antiquewhite;
 }
 
+.show-popup {
+  border: none;
+  font-weight: bold;
+  background-color: white;
+  outline: none;
+  cursor: pointer;
+  margin: 0px 0px 15px 310px;
+  font-size: 20px;
+}
+
 .move-today {
-  margin-top: 50px;
-  width: 80px;
-  height: 175px;
+  margin: 0px 0px 0px 30px;
   border: none;
   text-align: center;
-  line-height: 150px;
-  background-color: antiquewhite;
+  border: none;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  font-size: 20px;
 }
 
 .current-plans {
-  width: 100px;
-  height: 400px;
-  margin-left: 20px;
+  width: 300px;
+  height: 600px;
+  margin-left: 0px;
   float: left;
 }
 
 .current-Year-and-plans {
-  width: 100px;
-  height: 175px;
+  width: 250px;
+  height: 255px;
   border: none;
   text-align: center;
-  background-color: aquamarine;
+  background-color: white;
+  box-shadow: 3px 3px 5px #414345;
+  border-radius: 10px;
 }
 
 .current-Month-and-plans {
-  margin-top: 50px;
-  width: 100px;
-  height: 175px;
+  margin-top: 30px;
+  width: 250px;
+  height: 255px;
   border: none;
   text-align: center;
-  background-color: aquamarine;
+  background-color: white;
+  box-shadow: 3px 3px 5px #414345;
+  border-radius: 10px;
 }
 
 .day-plans {
-  width: 500px;
+  width: 1000px;
   height: 400px;
   display: inline-block;
   margin-left: 30px;
 }
 
 .yesterday {
-  width: 150px;
-  height: 400px;
+  width: 300px;
+  height: 550px;
   border: none;
   text-align: center;
-  background-color: #84c9f1;
+  background-color: white;
   margin-right: 25px;
   display: inline-block;
+  box-shadow: 3px 3px 5px #414345;
+  border-radius: 10px;
 }
 
 .today {
-  width: 150px;
-  height: 400px;
+  width: 300px;
+  height: 550px;
   border: none;
   text-align: center;
-  background-color: #84c9f1;
+  background-color: white;
   margin-right: 25px;
   display: inline-block;
+  box-shadow: 3px 3px 5px #414345;
+  border-radius: 10px;
 }
 
 .tomorrow {
-  width: 150px;
-  height: 400px;
+  width: 300px;
+  height: 550px;
   border: none;
   text-align: center;
-  background-color: #84c9f1;
+  background-color: white;
   display: inline-block;
+  box-shadow: 3px 3px 5px #414345;
+  border-radius: 10px;
 }
 
 #select-button {
-  margin-left: 600px;
-  margin-top: 30px;
-  width: 150px;
-  height: 50px;
+  margin-left: 1600px;
   text-align: center;
-  line-height: 50px;
-  background-color: #5555ff;
-  color: #ffffff;
   border: none;
   cursor: pointer;
+  /* background-color: white; */
+  border: 3px solid black;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  outline: none;
+  font-size: 20px;
+  background-color: white;
 }
 
 .option {
   display: block;
   width: 100px;
-  height: 50px;
+  height: 100px;
   border: none;
-  background-color: #aaaaaa;
-  color: #222222;
+  background-color: #eaeaea;
+  color: black;
+  font-weight: 600;
   cursor: pointer;
 }
 .option:first-child {
   margin-top: 5px;
 }
 
-.move-yesterday {
+/* .move-yesterday {
   width: 40px;
   height: 20px;
   line-height: 20px;
@@ -139,6 +161,91 @@
   text-align: center;
   margin-left: 15px;
   display: inline-block;
+} */
+
+.weekly-plans {
+  /* background-color: blue; */
+  /* margin-left: 550px; */
+  column-span: all;
 }
 
+.daily-plans {
+  display: inline-flex;
+  width: 130px;
+  height: 500px;
+  margin-left: 20px;
+  background-color: white;
+  box-shadow: 3px 3px 5px #414345;
+  border-radius: 10px;
+}
 
+.current-Year-and-plans-on-Yearly {
+  width: 400px;
+  height: 500px;
+  border: none;
+  text-align: center;
+  background-color: white;
+  box-shadow: 3px 3px 5px #414345;
+  border-radius: 10px;
+}
+
+.close {
+  text-align: left;
+}
+
+.popup-content {
+  color: black;
+  font-weight: 600;
+  text-align: center;
+}
+
+.modal-title {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+.plan-name-box {
+  margin-bottom: 10px;
+}
+
+.plan-name {
+  margin-left: -60px;
+}
+
+.write-plan-name {
+}
+
+.plan-choose-box {
+  margin-bottom: 10px;
+}
+
+.plan-choose-title {
+  margin-left: -195px;
+}
+
+.plan-choose {
+}
+
+.goals-category-box {
+}
+
+.goals-category-title {
+  margin-left: -135px;
+}
+
+.goals-category {
+}
+
+.save {
+  width: 300px;
+  border: none;
+  border-radius: 7px;
+  color: white;
+  font-weight: bold;
+  background-color: #93291e;
+  cursor: pointer;
+  outline: none;
+  margin-top: 20px;
+}

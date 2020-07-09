@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import Checkboxes from './Checkboxes';
 
@@ -13,8 +14,9 @@ class ShowMonthPlan extends Component {
         {/* <Checkboxes onChange={handleChange}/> */}
         <Checkboxes />
       </div>
-    )
+    );
   }
 }
+
 
 export default ShowMonthPlan;

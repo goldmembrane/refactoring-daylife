@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import DropdownButton from 'react-bootstrap/DropdownButton';
@@ -17,10 +18,11 @@ import ShowYearPlan from '../Components/ShowYearPlan';
 
 
 class Monthly extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
+
       date: props.date
     }
     
@@ -34,28 +36,29 @@ class Monthly extends Component {
   }
   
   goDaily = () => {
-    this.props.history.push('/calendar');
+    this.props.history.push("/calendar");
   };
 
   goWeekly = () => {
-    this.props.history.push('/Weekly');
+    this.props.history.push("/Weekly");
   };
 
   goYearly = () => {
-    this.props.history.push('/Yearly');
+    this.props.history.push("/Yearly");
   };
-  
-  handleChange = event => {
-    const select = event.activeStartDate
-    this.setState({ date: select});
-  }
 
-  handleChangeDate = event => {
+  handleChange = (event) => {
+    const select = event.activeStartDate;
+    this.setState({ date: select });
+  };
+
+  handleChangeDate = (event) => {
     const select = event;
     const { SetThisDateActions } = this.props;
     this.setState({
-      date: select
+      date: select,
     });
+
     
     SetThisDateActions.changeDate(select);
     this.props.history.push('/calendar');
@@ -66,6 +69,7 @@ class Monthly extends Component {
     const { SetThisDateActions } = this.props;
     this.setState({ date: today });
 
+
     SetThisDateActions.changeDate(today);
     this.props.history.push('/Monthly');
   }
@@ -74,39 +78,56 @@ class Monthly extends Component {
     const { yearGoalData, monthGoalData } = this.props;
     return (
       <div>
+        <DropdownButton id="select-button" title="페이지 이동▼">
+          <Dropdown.Item
+            className="option"
+            as="button"
+            onClick={this.goDaily.bind(this)}
+          >
+            일
+          </Dropdown.Item>
 
-        <DropdownButton id = 'select-button' title = '페이지 이동'>
-  
-          <Dropdown.Item className = 'option' as = 'button'
-          onClick = {this.goDaily.bind(this)}>일</Dropdown.Item>
-  
-          <Dropdown.Item className = 'option' as = 'button'
-          onClick = {this.goWeekly.bind(this)}>주</Dropdown.Item>
-  
-          <Dropdown.Item className = 'option' as = 'button'
-          onClick = {this.goYearly.bind(this)}>연도</Dropdown.Item>
-  
+          <Dropdown.Item
+            className="option"
+            as="button"
+            onClick={this.goWeekly.bind(this)}
+          >
+            주
+          </Dropdown.Item>
+
+          <Dropdown.Item
+            className="option"
+            as="button"
+            onClick={this.goYearly.bind(this)}
+          >
+            연도
+          </Dropdown.Item>
         </DropdownButton>
 
-        <div className = 'user-name'>user</div>
+        {/* <span className="user-name">user</span> */}
 
-        <div className = 'edit'>
+        <Popup
+          trigger={<button className="show-popup">일정 생성</button>}
+          position="right center"
+          modal={true}
+          contentStyle={{ maxWidth: "600px", width: "90%", height: "30%" }}
+        >
+          {(close) => (
+            <div>
+              <div className="close" onClick={close}>
+                X
+              </div>
+              <CreatePlan close={close} />
+            </div>
+          )}
+        </Popup>
 
-         <Popup trigger = {<button className = 'show-popup'>일정 생성</button>} 
-                 position = 'right center'
-                 modal = {true}
-                 contentStyle = {{ maxWidth: '600px', width: '90%', height: '40%'}}>
-            {close => ( <div>
-                          <div className = 'close' onClick = {close}>X</div>
-                            <CreatePlan close = {close} />
-                        </div>) }
-          </Popup>
-
-          <div className = 'move-today' onClick = {this.setToday.bind(this)}>오늘로 이동</div>
-
+        <div className="move-today" onClick={this.setToday.bind(this)}>
+          오늘로 이동
         </div>
 
-        <div className = 'current-plans'>
+        <div className="edit"></div>
+
 
           <div className = 'current-Year-and-plans'
           onClick = {this.goYearly.bind(this)}>
@@ -129,21 +150,23 @@ class Monthly extends Component {
 
             </div>
 
+          <div className="current-Month-and-plans">
+            <Moment format="MMM">{this.state.date}</Moment>
+          </div>
         </div>
 
-        <div className = 'calendar-box-Monthly'>
-
-          <Calendar 
-            onClickDay = {this.handleChangeDate.bind(this)}
-            onActiveStartDateChange = {this.handleChange}
-            defaultValue = {this.state.date}
+        <div className="calendar-box-Monthly">
+          <Calendar
+            onClickDay={this.handleChangeDate.bind(this)}
+            onActiveStartDateChange={this.handleChange}
+            defaultValue={this.state.date}
           />
-
         </div>
       </div>
-    )
+    );
   }
 }
+
 
 const mapStateToProps = state => ({
   date: state.setThisDate.date,

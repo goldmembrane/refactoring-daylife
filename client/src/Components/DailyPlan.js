@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
@@ -16,12 +17,13 @@ import { bindActionCreators } from 'redux';
 class DailyPlan extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       date: props.date,
-      weekDay: new Date()
-    }
+      weekDay: new Date(),
+    };
   }
+
   
   
   componentDidMount() {
@@ -32,11 +34,12 @@ class DailyPlan extends Component {
     GetDailySchedulesActions.getSchedules();
   }
 
-  changeToday = e => {
+  changeToday = (e) => {
     const select = e.target.textContent;
     const { SetThisDateActions } = this.props;
     const selectDay = new Date(select);
-    this.setState({ date: selectDay});
+    this.setState({ date: selectDay });
+
 
     SetThisDateActions.changeDate(selectDay);
   }
@@ -44,8 +47,9 @@ class DailyPlan extends Component {
   backThreeDays = () => {
     const { SetThisDateActions } = this.props;
     const currentDate = this.props.date;
-    const backThreeDate = moment(currentDate).add(-3, 'day');
+    const backThreeDate = moment(currentDate).add(-3, "day");
     this.setState({ date: backThreeDate });
+
 
     SetThisDateActions.changeDate(backThreeDate);
   }
@@ -53,24 +57,27 @@ class DailyPlan extends Component {
   forwordThreeDays = () => {
     const { SetThisDateActions } = this.props;
     const currentDate = this.props.date;
-    const forwordThreeDate = moment(currentDate).add(3, 'day');
+    const forwordThreeDate = moment(currentDate).add(3, "day");
     this.setState({ date: forwordThreeDate });
+
 
     SetThisDateActions.changeDate(forwordThreeDate);
   }
 
   sendPropsToWeekly = e => {
 
+  sendPropsToWeekly = (e) => {
     const select = e.target.textContent;
     const { SetThisDateActions } = this.props;
     const selectToday = new Date(select);
-    
+
     const nowMonth = selectToday.getMonth();
     const nowYear = selectToday.getFullYear();
     const nowDay = selectToday.getDay();
     const nowDate = selectToday.getDate();
 
     const weekStartDay = new Date(nowYear, nowMonth, nowDate - nowDay);
+
 
     SetThisDateActions.changeDate(weekStartDay);
 
@@ -93,17 +100,23 @@ class DailyPlan extends Component {
     return(
 
       <div>
-        <div className = 'edit'>
-
-          <Popup trigger = {<button className = 'show-popup'>일정 생성</button>} 
-                 position = 'right center'
-                 modal = {true}
-                 contentStyle = {{ maxWidth: '600px', width: '90%', height: '40%'}}>
-            {close => ( <div>
-                          <div className = 'close' onClick = {close}>X</div>
-                            <CreatePlan close = {close} />
-                        </div>) }
+        <div>
+          <Popup
+            trigger={<button className="show-popup">일정 생성</button>}
+            position="right center"
+            modal={true}
+            contentStyle={{ maxWidth: "600px", width: "90%", height: "40%" }}
+          >
+            {(close) => (
+              <div>
+                <div className="close" onClick={close}>
+                  X
+                </div>
+                <CreatePlan close={close} />
+              </div>
+            )}
           </Popup>
+
 
           <div className = 'move-today' onClick = {this.setToday.bind(this)}>오늘로 이동</div>
 
@@ -166,14 +179,18 @@ class DailyPlan extends Component {
 
           </div>
 
+            <div className="tomorrow" onClick={this.changeToday.bind(this)}>
+              <Moment format="YYYY-MM-DD">
+                {moment(this.state.date).add(1, "day")}
+              </Moment>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div className = 'move-forword-three-days' onClick = {this.forwordThreeDays.bind(this)}>오른쪽</div>
-
-    </div>
-    )
+    );
   }
 }
+
 
 const mapStateToProps = state => ({
   date: state.setThisDate.date,

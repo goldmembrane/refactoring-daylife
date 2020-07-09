@@ -20,9 +20,10 @@ class Yearly extends Component {
     super(props);
 
     this.state = {
-      month: props.date
-    }
+      month: props.date,
+    };
   }
+
 
   componentDidMount() {
     const { GetYearGoalsActions } = this.props;
@@ -31,25 +32,25 @@ class Yearly extends Component {
   }
   
   goDaily = () => {
-    this.props.history.push('/calendar');
-  }
+    this.props.history.push("/calendar");
+  };
 
   goWeekly = () => {
-    this.props.history.push('/Weekly');
-  }
+    this.props.history.push("/Weekly");
+  };
 
   goMonthly = () => {
-    this.props.history.push('/Monthly');
-  }
+    this.props.history.push("/Monthly");
+  };
 
-  handleChange = event => {
+  handleChange = (event) => {
     const select = event.activeStartDate;
-    this.setState({ month: select});
-  }
+    this.setState({ month: select });
+  };
 
-  handleChangeDate = event => {
-
+  handleChangeDate = (event) => {
     const select = event;
+
     const { SetThisDateActions } = this.props;
 
     this.setState({ month: select});
@@ -59,9 +60,9 @@ class Yearly extends Component {
   }
 
   setToday = () => {
-
     const today = new Date();
     const { SetThisDateActions } = this.props;
+
 
     this.setState({ month: today });
 
@@ -117,8 +118,8 @@ class Yearly extends Component {
               ( yearGoalData.map((data, i) => <ShowYearPlan key = {i} {...data}/> ) ) : <h1>no content</h1>}
 
           </div>
-
         </div>
+
 
           <div className = 'calendar-box-Yearly'>
 
@@ -131,9 +132,10 @@ class Yearly extends Component {
 
           </div>
       </div>
-    )
+    );
   }
 }
+
 
 const mapStateToProps = state => ({
   date: state.setThisDate.date,

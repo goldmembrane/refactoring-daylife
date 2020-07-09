@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import Calendar from 'react-calendar';
 import { connect } from 'react-redux';
@@ -5,8 +6,8 @@ import * as setThisDateActions from '../modules/setThisDate';
 import { bindActionCreators } from 'redux';
 import './CreateYearPlan.css';
 
-
 class CreateYearPlan extends Component {
+
 
   handleSelectYear = event => {
     const select = event;

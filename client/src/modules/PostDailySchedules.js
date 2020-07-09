@@ -1,14 +1,15 @@
-import { handleActions } from 'redux-actions';
+import { handleActions } from "redux-actions";
 
-import axios from 'axios';
+import axios from "axios";
 
-const POST_SCHEDULES_PENDING = 'POST_SCHEDULES_PENDING';
-const POST_SCHEDULES_SUCCESS = 'POST_SCHEDULES_SUCCESS';
-const POST_SCHEDULES_FAILURE = 'POST_SCHEDULES_FAILURE';
+const POST_SCHEDULES_PENDING = "POST_SCHEDULES_PENDING";
+const POST_SCHEDULES_SUCCESS = "POST_SCHEDULES_SUCCESS";
+const POST_SCHEDULES_FAILURE = "POST_SCHEDULES_FAILURE";
 
 axios.defaults.withCredentials = true;
 
 function PostSchedulesAPI(data) {
+
   return axios({
     method: 'post',
     url: 'http://15.164.232.40:3001/plans/goals/post',
@@ -20,25 +21,27 @@ function PostSchedulesAPI(data) {
 const initialState = {
   pending: false,
   error: false,
-  data: null
-}
+  data: null,
+};
+
 
 export const postSchedules = data => dispatch => {
   dispatch({ type: POST_SCHEDULES_PENDING });
 
   return PostSchedulesAPI(data)
-    .then(result => {
+    .then((result) => {
       dispatch({
         type: POST_SCHEDULES_SUCCESS,
-        payload: result.data
+        payload: result.data,
       });
-    }).catch(error => {
+    })
+    .catch((error) => {
       dispatch({
         type: POST_SCHEDULES_FAILURE,
-        payload: error
+        payload: error,
       });
     });
-}
+};
 
 export default handleActions(
   {
@@ -46,23 +49,23 @@ export default handleActions(
       return {
         ...state,
         pending: true,
-        error: false
+        error: false,
       };
     },
     [POST_SCHEDULES_SUCCESS]: (state, action) => {
       return {
         ...state,
         pending: false,
-        data: action.payload
+        data: action.payload,
       };
     },
     [POST_SCHEDULES_FAILURE]: (state, action) => {
       return {
         ...state,
         pending: false,
-        error: true
+        error: true,
       };
-    }
+    },
   },
   initialState
-)
+);

@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TimePicker from 'react-time-picker';
@@ -15,6 +16,7 @@ class CreatePlanDetail extends Component {
     super(props);
 
     this.state = {
+
       startTime: '00:00',
       endTime: '23:00',
       value: 'annually'
@@ -26,22 +28,20 @@ class CreatePlanDetail extends Component {
 
   handleChangeFromSelect = event => {
     this.setState({ value: event.currentTarget.value });
-  }
+  };
 
-
-  handleChangeStartTime = event => {
 
     const selectTime = event.target;
     this.setState({ startTime: selectTime });
-
   };
+
 
   handleChangeEndTime = event => {
 
     const selectTime = event.target;
     this.setState({ endTime: selectTime });
-
   };
+
 
   handleYearGoalCreate = () => {
 
