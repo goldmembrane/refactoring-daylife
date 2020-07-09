@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Checkboxes from './Checkboxes';
 
 class ShowYearPlan extends Component {
   
@@ -6,7 +7,8 @@ class ShowYearPlan extends Component {
     const { name } = this.props;
     return (
       <div className = 'year-plan-box'>
-        <div className = 'year-plan'>{name}</div>
+        <span className = 'year-plan'>{name}</span>
+        <Checkboxes />
       </div>
     )
   }

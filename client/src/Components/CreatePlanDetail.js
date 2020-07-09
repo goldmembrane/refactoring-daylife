@@ -62,7 +62,7 @@ class CreatePlanDetail extends Component {
     const year = moment(date).format('YYYY');
     const day = moment(date).format('MM');
 
-    PostGoalsActions.postGoals({ name: plan, year: year, day: day,  category: value });
+    PostGoalsActions.postGoals({ is_done:false, name: plan, year: year, day: day,  category: value });
 
   }
 
