@@ -7,11 +7,10 @@ class ShowMonthPlan extends Component {
   
 
   render() {
-    const { name,is_done } = this.props
+    const { name} = this.props
     return(
       <div className = 'month-plan-box'>
         <span className = 'month-plan'>{name}</span>
-        {/* <Checkboxes onChange={handleChange}/> */}
         <Checkboxes />
       </div>
     );

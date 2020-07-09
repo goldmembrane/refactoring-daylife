@@ -126,7 +126,7 @@ class Monthly extends Component {
           오늘로 이동
         </div>
 
-        <div className="edit"></div>
+        <div className="edit">
 
 
           <div className = 'current-Year-and-plans'
@@ -148,11 +148,9 @@ class Monthly extends Component {
               monthGoalData.map((data, i) => <ShowMonthPlan key = {i} {...data} />)
             ): <h1>no content</h1>}
 
-            </div>
-
-          <div className="current-Month-and-plans">
-            <Moment format="MMM">{this.state.date}</Moment>
           </div>
+
+      
         </div>
 
         <div className="calendar-box-Monthly">
@@ -162,6 +160,7 @@ class Monthly extends Component {
             defaultValue={this.state.date}
           />
         </div>
+        
       </div>
     );
   }

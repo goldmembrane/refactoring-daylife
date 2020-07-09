@@ -69,6 +69,7 @@ class Login extends Component {
           <button id="click-login-button" type="submit">
             Sign In
           </button>
+          <div id="google-login-button" class="g-signin2" data-onsuccess="onSignIn"></div>
         </form>
       </div>
     );
