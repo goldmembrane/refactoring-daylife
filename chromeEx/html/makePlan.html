@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+  </head>
+  
+  <body>
+    <h2>daylife 일정/목표 추가</h2>
+    <select id="mode" name="select">
+      <option id="s">생성할 일정/목표 선택</option>
+      <option id="s" value="schedules">일정 생성</option>
+      <option id="a" value="annually_goals">년간 목표 생성</option>
+      <option id="m" value="month_goals">월간 목표 생성</option>
+      <option id="w" value="weekly_goals">주간 목표 생성</option>
+    </select>
+
+    <div id="schedules_area">
+      <h2>일정 생성</h2>
+      <form>
+        <p>
+          <strong>일정 이름</strong>
+          <input type="text" id="schedule_name">
+        </p>
+        <p>
+          <strong>날짜</strong>
+          <input type="date" id="schedule_date">  
+        </p>
+        <p>
+          <strong>시작시간</strong>
+          <input type="time" id="schedule_start"> 
+        </p>
+        <p>
+          <strong>끝 시간</strong>
+          <input type="time" id="schedule_end"> 
+        </p>
+        <button id="schedule_submit">생성</button>
+      </form>
+    </div>
+
+    <div id="annually_goals_area">
+      <h2>년간 목표 생성</h2>
+      <form>
+        <p>
+          <strong>목표 이름</strong>
+          <input type="text" id="annually_name">
+        </p>
+        <p>
+          <strong>년도</strong>
+          <input type="text" id="annually_year" style="width: 50px;">  
+        </p>
+        <button id="annually_submit">생성</button>
+      </form>
+    </div>
+
+    <div id="month_goals_area">
+      <h2>월간 목표 생성</h2>
+      <form>
+        <p>
+          <strong>목표 이름</strong>
+          <input type="text" id="monthly_name">
+        </p>
+        <p>
+          <strong>년 월</strong>
+          <input type="month" id="monthly_date">  
+        </p>
+        <button id="monthly_submit">생성</button>
+      </form>
+    </div>
+
+    <div id="weekly_goals_area">
+      <h2>주간 목표 생성</h2>
+      <form>
+        <p>
+          <strong>목표 이름</strong>
+          <input type="text" id="weekly_name">
+        </p>
+        <p>
+          <strong>해당 주에 포함된 아무 날짜</strong>
+          <input type="date" id="weekly_date">  
+        </p>
+        <button id="weekly_submit">생성</button>
+      </form>
+    </div>
+    
+  </body>
+  <script src="./makeup.js"></script>
+</html>
