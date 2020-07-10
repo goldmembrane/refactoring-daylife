@@ -94,7 +94,7 @@ class DailyPlan extends Component {
             trigger={<button className="show-popup">일정 생성</button>}
             position="right center"
             modal={true}
-            contentStyle={{ maxWidth: "600px", width: "90%", height: "40%" }}
+            contentStyle={{ maxWidth: "600px", width: "90%", height: "80%" }}
           >
             {(close) => (
               <div>
@@ -106,11 +106,11 @@ class DailyPlan extends Component {
             )}
           </Popup>
 
-          <div className="move-today" onClick={this.setToday.bind(this)}>
+          <span className="move-today" onClick={this.setToday.bind(this)}>
             오늘로 이동
-          </div>
+          </span>
         </div>
-        <div className="current-plans">
+        <div className="current-plans" id="current-plans-calendar">
           <div className="current-Year-and-plans" onClick={this.props.goYear}>
             <p>
               <Moment format="YYYY">{this.state.date}</Moment>
@@ -136,13 +136,6 @@ class DailyPlan extends Component {
               <h1>no content</h1>
             )}
           </div>
-        </div>
-
-        <div
-          className="move-back-three-days"
-          onClick={this.backThreeDays.bind(this)}
-        >
-          왼쪽
         </div>
 
         <div className="day-plans">
@@ -185,8 +178,6 @@ class DailyPlan extends Component {
               <h1>no content</h1>
             )}
           </div>
-
-
         </div>
       </div>
     );

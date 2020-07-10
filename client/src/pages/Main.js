@@ -48,7 +48,6 @@ class Main extends Component {
           </Dropdown.Item>
         </DropdownButton>
 
-        {/* <span className="user-name">user</span> */}
         <DailyPlan
           goYear={this.goYearly.bind(this)}
           goMonth={this.goMonthly.bind(this)}
@@ -61,9 +60,8 @@ class Main extends Component {
 
 const mapStateToProps = (state) => {
   return {
-
-    date: state.setThisDate.date
-  }
-}
+    date: state.setThisDate.date,
+  };
+};
 
 export default connect(mapStateToProps)(withRouter(Main));

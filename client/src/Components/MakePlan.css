@@ -1,5 +1,6 @@
 .close {
   text-align: left;
+  font-size: 30px;
 }
 
 .popup-content {
@@ -18,7 +19,7 @@
 }
 
 .plan-name-box {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .plan-name {
@@ -26,7 +27,7 @@
 }
 
 .plan-choose-box {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .plan-choose-title {
@@ -47,4 +48,13 @@
   cursor: pointer;
   outline: none;
   margin-top: 20px;
+  margin-left: 0px;
+  margin-bottom: -100px;
+}
+
+.modal-content-box {
+}
+
+.plan-content-detail {
+  height: 1000;
 }
