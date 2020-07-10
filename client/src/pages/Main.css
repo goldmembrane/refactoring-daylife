@@ -2,13 +2,6 @@
   margin: 0;
   padding: 0;
 }
-.user-name {
-  margin: 0px 0 10px 600px;
-  border: none;
-  background-color: white;
-  text-align: center;
-  font-weight: 600;
-}
 
 .edit {
   margin-left: 200px;
@@ -32,7 +25,17 @@
   background-color: white;
   outline: none;
   cursor: pointer;
-  margin: 0px 0px 15px 310px;
+  margin: 0px 0px 15px 300px;
+  font-size: 20px;
+}
+
+#show-popup-monthly {
+  border: none;
+  font-weight: bold;
+  background-color: white;
+  outline: none;
+  cursor: pointer;
+  margin: 0px 0px 15px 570px;
   font-size: 20px;
 }
 
@@ -52,6 +55,10 @@
   height: 600px;
   margin-left: 0px;
   float: left;
+}
+
+#current-plans-calendar {
+  margin-left: 300px;
 }
 
 .current-Year-and-plans {
@@ -187,65 +194,4 @@
   background-color: white;
   box-shadow: 3px 3px 5px #414345;
   border-radius: 10px;
-}
-
-.close {
-  text-align: left;
-}
-
-.popup-content {
-  color: black;
-  font-weight: 600;
-  text-align: center;
-}
-
-.modal-title {
-  font-size: 20px;
-  text-align: center;
-  margin-top: 30px;
-  margin-bottom: 40px;
-}
-
-.plan-name-box {
-  margin-bottom: 10px;
-}
-
-.plan-name {
-  margin-left: -60px;
-}
-
-.write-plan-name {
-}
-
-.plan-choose-box {
-  margin-bottom: 10px;
-}
-
-.plan-choose-title {
-  margin-left: -195px;
-}
-
-.plan-choose {
-}
-
-.goals-category-box {
-}
-
-.goals-category-title {
-  margin-left: -135px;
-}
-
-.goals-category {
-}
-
-.save {
-  width: 300px;
-  border: none;
-  border-radius: 7px;
-  color: white;
-  font-weight: bold;
-  background-color: #93291e;
-  cursor: pointer;
-  outline: none;
-  margin-top: 20px;
 }

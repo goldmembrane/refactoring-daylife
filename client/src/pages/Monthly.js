@@ -1,40 +1,36 @@
-
-import React, {Component} from 'react';
-import { connect } from 'react-redux';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-import Moment from 'react-moment';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Dropdown from "react-bootstrap/Dropdown";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import Moment from "react-moment";
 import { withRouter } from "react-router-dom";
-import Popup from 'reactjs-popup';
-import CreatePlan from '../Components/CreatePlan';
-import { bindActionCreators } from 'redux';
-import * as getYearGoalsActions from '../modules/GetYearGoals';
-import * as getMonthGoalsActions from '../modules/GetMonthGoals';
-import * as setThisDateActions from '../modules/setThisDate';
-import ShowMonthPlan from '../Components/ShowMonthPlan';
-import ShowYearPlan from '../Components/ShowYearPlan';
-
+import Popup from "reactjs-popup";
+import CreatePlan from "../Components/CreatePlan";
+import { bindActionCreators } from "redux";
+import * as getYearGoalsActions from "../modules/GetYearGoals";
+import * as getMonthGoalsActions from "../modules/GetMonthGoals";
+import * as setThisDateActions from "../modules/setThisDate";
+import ShowMonthPlan from "../Components/ShowMonthPlan";
+import ShowYearPlan from "../Components/ShowYearPlan";
 
 class Monthly extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-
-      date: props.date
-    }
-    
+      date: props.date,
+    };
   }
-  
+
   componentDidMount() {
     const { GetYearGoalsActions, GetMonthGoalsActions } = this.props;
 
     GetYearGoalsActions.getYearGoals();
     GetMonthGoalsActions.getMonthGoals();
   }
-  
+
   goDaily = () => {
     this.props.history.push("/calendar");
   };
@@ -59,9 +55,8 @@ class Monthly extends Component {
       date: select,
     });
 
-    
     SetThisDateActions.changeDate(select);
-    this.props.history.push('/calendar');
+    this.props.history.push("/calendar");
   };
 
   setToday = () => {
@@ -69,10 +64,9 @@ class Monthly extends Component {
     const { SetThisDateActions } = this.props;
     this.setState({ date: today });
 
-
     SetThisDateActions.changeDate(today);
-    this.props.history.push('/Monthly');
-  }
+    this.props.history.push("/Monthly");
+  };
 
   render() {
     const { yearGoalData, monthGoalData } = this.props;
@@ -104,13 +98,11 @@ class Monthly extends Component {
           </Dropdown.Item>
         </DropdownButton>
 
-        {/* <span className="user-name">user</span> */}
-
         <Popup
-          trigger={<button className="show-popup">일정 생성</button>}
+          trigger={<button id="show-popup-monthly">일정 생성</button>}
           position="right center"
           modal={true}
-          contentStyle={{ maxWidth: "600px", width: "90%", height: "30%" }}
+          contentStyle={{ maxWidth: "600px", width: "90%", height: "80%" }}
         >
           {(close) => (
             <div>
@@ -122,35 +114,34 @@ class Monthly extends Component {
           )}
         </Popup>
 
-        <div className="move-today" onClick={this.setToday.bind(this)}>
+        <span className="move-today" onClick={this.setToday.bind(this)}>
           오늘로 이동
-        </div>
-
+        </span>
         <div className="edit">
-
-
-          <div className = 'current-Year-and-plans'
-          onClick = {this.goYearly.bind(this)}>
-            
-            <Moment format = 'YYYY'>{this.state.date}</Moment>
+          <div
+            className="current-Year-and-plans"
+            onClick={this.goYearly.bind(this)}
+          >
+            <Moment format="YYYY">{this.state.date}</Moment>
 
             {yearGoalData ? (
-              yearGoalData.map((data, i) => <ShowYearPlan key = {i} {...data} />)
-            ): <h1>no content</h1>}
-            
-            </div>
-
-          <div className = 'current-Month-and-plans'>
-            
-            <Moment format = 'MMM'>{this.state.date}</Moment>
-            
-            {monthGoalData ? (
-              monthGoalData.map((data, i) => <ShowMonthPlan key = {i} {...data} />)
-            ): <h1>no content</h1>}
-
+              yearGoalData.map((data, i) => <ShowYearPlan key={i} {...data} />)
+            ) : (
+              <h1>no content</h1>
+            )}
           </div>
 
-      
+          <div className="current-Month-and-plans">
+            <Moment format="MMM">{this.state.date}</Moment>
+
+            {monthGoalData ? (
+              monthGoalData.map((data, i) => (
+                <ShowMonthPlan key={i} {...data} />
+              ))
+            ) : (
+              <h1>no content</h1>
+            )}
+          </div>
         </div>
 
         <div className="calendar-box-Monthly">
@@ -160,24 +151,22 @@ class Monthly extends Component {
             defaultValue={this.state.date}
           />
         </div>
-        
       </div>
     );
   }
 }
 
-
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   date: state.setThisDate.date,
   yearGoalData: state.getYearGoals.year,
-  monthGoalData: state.getMonthGoals.month
+  monthGoalData: state.getMonthGoals.month,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   SetThisDateActions: bindActionCreators(setThisDateActions, dispatch),
   GetYearGoalsActions: bindActionCreators(getYearGoalsActions, dispatch),
-  GetMonthGoalsActions: bindActionCreators(getMonthGoalsActions, dispatch)
-})
+  GetMonthGoalsActions: bindActionCreators(getMonthGoalsActions, dispatch),
+});
 
 export default connect(
   mapStateToProps,
