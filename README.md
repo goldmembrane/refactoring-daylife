@@ -6,8 +6,14 @@
   - **Calendar:** 달력 기능으로 편리하게 월간,연간 목표를 관리할 수 있습니다.
   
 ## Examples
-- 스크린샷 or 데모 : 여러분이 작성한 프로젝트의 시연 스크린샷 혹은 gif 파일을 첨부해서 어떤 결과물을 구현했는지 한 눈에 볼 수 있도록 해 주세요. 
- ---------추가 예정 --------------
+ - SignIn, SignUp, SignOut
+   ![user1](https://user-images.githubusercontent.com/60782131/87117011-5d175980-c2b2-11ea-89cd-7a0bd4de37db.gif)
+ 
+ - Flow
+   ![flow](https://user-images.githubusercontent.com/60782131/87117082-918b1580-c2b2-11ea-884a-22208548c28e.gif)
+ 
+ - Make a plan
+   ![makeplan](https://user-images.githubusercontent.com/60782131/87117087-9354d900-c2b2-11ea-886e-e8cc06bd6292.gif)
   
 ## Documentation
   - [API docs](https://github.com/codestates/dayLife/wiki/API-docs)
