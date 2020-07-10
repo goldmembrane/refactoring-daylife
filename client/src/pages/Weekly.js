@@ -128,20 +128,9 @@ class Weekly extends Component {
           </Dropdown.Item>
         </DropdownButton>
 
-        {/* <span className="user-name">user</span> */}
+        
 
-
-        <div className = 'weekly-goals'>
-
-          <p><Moment format = 'ww'>{this.state.date}</Moment></p>
-
-          {weeklyGoalData ? (
-            weeklyGoalData.map((data, i) => <ShowWeeklyPlan key = {i} {...data} />)
-          ): <h1>no content</h1>}
-
-        </div>
-
-        <div className = 'edit'>
+        
 
         <Popup trigger = {<button className = 'show-popup'>일정 생성</button>} 
                  position = 'right center'
@@ -152,7 +141,7 @@ class Weekly extends Component {
                             <CreatePlan close = {close} />
                         </div>) }
           </Popup>
-
+          <div className = 'edit'>
           <div className = 'move-today' onClick = {this.setToday.bind(this)}>오늘로 이동</div>
 
         </div>
