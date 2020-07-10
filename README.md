@@ -17,7 +17,7 @@
   - Chrome Extension : chrome://extensions/로 이동 -  '압축해제된 확장 프로그램을 로드합니다'를 클릭 - 'chromeEx' 디렉토리 로드
   
 ## Stacks
-  - Front-end : React,Redux,axios, material-ui, HTML, CSS
+  - Front-end : React, Redux, axios, material-ui, HTML, CSS
   - Back-end: Node.js, express, Sequelize, JWT, MySQL, Amazon EC2, Amazon RDS, mocha, chai
 
 
