@@ -13,7 +13,7 @@
   - [API docs](https://github.com/codestates/dayLife/wiki/API-docs)
   
 ## Installation
-  - application : 
+  - application : git clone https://github.com/codestates/dayLife - npm install
   - Chrome Extension : chrome://extensions/로 이동 -  '압축해제된 확장 프로그램을 로드합니다'를 클릭 - 'chromeEx' 디렉토리 로드
   
 ## Stacks
