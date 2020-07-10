@@ -1,0 +1,21 @@
+body{
+  width:300px;
+  padding:1rem;
+}
+span{
+  width:100%;
+  font-size:14pt;
+}
+#plans{
+  font-size:12pt;
+}
+#goals{
+  font-size:12pt;
+}
+#date{
+  font-size:12pt;
+}
+#plan{
+  width:200px;
+  height: 50px;
+}

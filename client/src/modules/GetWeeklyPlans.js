@@ -15,7 +15,7 @@ function getWeeklyGoalAPI() {
     method: 'get',
     url: 'http://15.164.232.40:3001/plans/goals/get',
     params: {
-      category: 'monthly',
+      category: 'weekly',
       year: '2020',
       day: '7'
     },

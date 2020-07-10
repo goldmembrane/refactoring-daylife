@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    
+  </head>
+  <body>
+    <h2>daylife</h2>
+    <div id="login_area">
+      <form>
+        <p>
+          <strong>이메일</strong>
+          <input type="text" id="name">
+        </p>
+        <p>
+          <strong>비밀번호</strong>
+          <input type="password" id="password">
+        </p>
+        <h2>유저정보가 필요합니다.</h2>
+        <button id="submit">로그인</button>
+        <button id="signup">회원가입</button>
+
+      </form>
+    </div>
+    
+    <div id="info_area">
+      <input type="button" id="makeup" value="일정추가">
+      <input type="button" id="logout" value="로그아웃">
+      <div class="annually">
+        <span id="date"> year: </span>
+        <span id="year">  </span>
+        <details id="annually_goals"> 
+          <summary> 올해 목표 </summary>
+        </details>
+      </div>
+  
+      <div class="monthly">
+        <span id="date"> month: </span>
+        <span id="month"></span>
+        <details id="month_goals">
+          <summary> 한달 목표 </summary> 
+        </details>
+      </div>
+  
+      <div class="weekly">
+        <span id="date"> week: </span>
+        <span id="week"></span>
+        <details id="weekly_goals"> 
+          <summary> 이번주 목표 </summary>
+        </details>
+      </div>
+  
+      <div class="today">
+        <span id="date"> today: </span>
+        <span id="today"></span>
+      </div>
+  
+      <details id="schedules" open>
+        <summary> 오늘 일정 </summary>
+      </details>
+    </div>
+    
+    
+  </body>
+  <script src="./script.js"></script>
+</html>
