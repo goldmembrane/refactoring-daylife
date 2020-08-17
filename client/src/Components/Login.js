@@ -20,7 +20,7 @@ class Login extends Component {
           id="login-form"
           onSubmit={(e) => {
             e.preventDefault();
-            fetch("http://15.164.232.40:3001/user/signin", {
+            fetch("http://localhost:3001/user/signin", {
               method: "POST",
               body: JSON.stringify(this.state),
               credentials: "include",
@@ -71,7 +71,7 @@ class Login extends Component {
           </button>
           <div
             id="google-login-button"
-            class="g-signin2"
+            className="g-signin2"
             data-onsuccess="onSignIn"
           ></div>
         </form>

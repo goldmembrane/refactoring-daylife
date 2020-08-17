@@ -60,7 +60,7 @@ class Signup extends React.Component {
 
             let config = {
               method: "post",
-              url: "http://15.164.232.40:3001/user/signup",
+              url: "http://localhost:3001/user/signup",
               headers: {
                 "Content-Type": "application/json",
               },
