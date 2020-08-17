@@ -1,51 +1,49 @@
-import { handleActions } from 'redux-actions';
+import { handleActions } from "redux-actions";
 
-import axios from 'axios';
+import axios from "axios";
 
-const GET_MONTH_GOAL_PENDING = 'GET_MONTH_GOAL_PENDING';
-const GET_MONTH_GOAL_SUCCESS = 'GET_MONTH_GOAL_SUCCESS';
-const GET_MONTH_GOAL_FAILURE = 'GET_MONTH_GOAL_FAILURE';
+const GET_MONTH_GOAL_PENDING = "GET_MONTH_GOAL_PENDING";
+const GET_MONTH_GOAL_SUCCESS = "GET_MONTH_GOAL_SUCCESS";
+const GET_MONTH_GOAL_FAILURE = "GET_MONTH_GOAL_FAILURE";
 
 axios.defaults.withCredentials = true;
 
-
-
 function getMonthGoalAPI() {
   return axios({
-    method: 'get',
-    url: 'http://15.164.232.40:3001/plans/goals/get',
+    method: "get",
+    url: "http://localhost:3001/plans/goals/get",
     params: {
-      category: 'monthly',
-      year: '2020',
-      day: '7'
+      category: "monthly",
+      year: "2020",
+      day: "7",
     },
-    responseType: 'json'
+    responseType: "json",
   });
 }
 
 const initialState = {
   pending: false,
   error: false,
-  data: []
+  data: [],
 };
 
-
-export const getMonthGoals = () => dispatch => {
+export const getMonthGoals = () => (dispatch) => {
   dispatch({ type: GET_MONTH_GOAL_PENDING });
 
   return getMonthGoalAPI()
-    .then(result => {
+    .then((result) => {
       dispatch({
         type: GET_MONTH_GOAL_SUCCESS,
-        payload: result.data
+        payload: result.data,
       });
-    }).catch(error => {
+    })
+    .catch((error) => {
       dispatch({
         type: GET_MONTH_GOAL_FAILURE,
-        payload: error
+        payload: error,
       });
     });
-}
+};
 
 export default handleActions(
   {
@@ -53,23 +51,23 @@ export default handleActions(
       return {
         ...state,
         pending: true,
-        error: false
+        error: false,
       };
     },
     [GET_MONTH_GOAL_SUCCESS]: (state, action) => {
       return {
         ...state,
         pending: false,
-        month: action.payload
+        month: action.payload,
       };
     },
     [GET_MONTH_GOAL_FAILURE]: (state, action) => {
       return {
         ...state,
         pending: false,
-        error: true
+        error: true,
       };
-    }
+    },
   },
   initialState
-)
+);

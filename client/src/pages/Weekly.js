@@ -6,7 +6,6 @@ import Moment from "react-moment";
 import moment from "moment";
 import ShowYearPlan from "../Components/ShowYearPlan";
 import ShowMonthPlan from "../Components/ShowMonthPlan";
-import ShowWeeklyPlan from "../Components/ShowWeeklyPlan";
 import CreatePlan from "../Components/CreatePlan";
 import { withRouter } from "react-router-dom";
 import Popup from "reactjs-popup";
@@ -106,7 +105,7 @@ class Weekly extends Component {
   };
 
   render() {
-    const { yearGoalData, monthGoalData, weeklyGoalData } = this.props;
+    const { yearGoalData, monthGoalData } = this.props;
     return (
       <div>
         <DropdownButton id="select-button" title="페이지 이동▼">

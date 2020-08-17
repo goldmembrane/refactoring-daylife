@@ -11,7 +11,7 @@ axios.defaults.withCredentials = true;
 function getWeeklyGoalAPI() {
   return axios({
     method: "get",
-    url: "http://15.164.232.40:3001/plans/goals/get",
+    url: "http://localhost:3001/plans/goals/get",
     params: {
       category: "weekly",
       year: "2020",
