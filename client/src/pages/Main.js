@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import DropdownButton from "react-bootstrap/DropdownButton";
 import { connect } from "react-redux";
-import Dropdown from "react-bootstrap/Dropdown";
 import "./Main.css";
 import { DailyPlan } from "../Components";
 import { withRouter } from "react-router-dom";
@@ -30,24 +28,6 @@ class Main extends Component {
   render() {
     return (
       <div>
-        <DropdownButton id="select-button" title="페이지 이동▼">
-          <Dropdown.Item
-            className="option"
-            as="button"
-            onClick={this.goMonthly.bind(this)}
-          >
-            월
-          </Dropdown.Item>
-
-          <Dropdown.Item
-            className="option"
-            as="button"
-            onClick={this.goYearly.bind(this)}
-          >
-            연도
-          </Dropdown.Item>
-        </DropdownButton>
-
         <DailyPlan
           goYear={this.goYearly.bind(this)}
           goMonth={this.goMonthly.bind(this)}

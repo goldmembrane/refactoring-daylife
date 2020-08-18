@@ -1,22 +1,27 @@
-#dropdown-basic-button {
-  margin-top: 100px;
-  margin-left: 400px;
-  width: 150px;
-  height: 50px;
-  text-align: center;
-  line-height: 50px;
-  background-color: #5555ff;
-  color: #ffffff;
-  border: none;
-  cursor: pointer;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.dropdown-item {
-  display: block;
-  width: 100px;
-  height: 50px;
+.current-Year-and-plans-on-Yearly {
+  width: 400px;
+  height: 500px;
   border: none;
-  background-color: #aaaaaa;
-  color: #222222;
-  cursor: pointer;
+  text-align: center;
+  background-color: white;
+  box-shadow: 3px 3px 5px #414345;
+  border-radius: 10px;
+  float: left;
+}
+
+.yearly-calendar {
+  display: inline-block;
+  box-shadow: 0 0 10px 0 black;
+  margin-left: 50px;
+  width: 850px;
+  height: 500px;
+}
+
+.react-calendar__year-view__months__month {
+  height: 110px;
 }

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import Dropdown from "react-bootstrap/Dropdown";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Moment from "react-moment";
@@ -14,6 +12,7 @@ import * as getMonthGoalsActions from "../modules/GetMonthGoals";
 import * as setThisDateActions from "../modules/setThisDate";
 import ShowMonthPlan from "../Components/ShowMonthPlan";
 import ShowYearPlan from "../Components/ShowYearPlan";
+import "./Monthly.css";
 
 class Monthly extends Component {
   constructor(props) {
@@ -72,52 +71,28 @@ class Monthly extends Component {
     const { yearGoalData, monthGoalData } = this.props;
     return (
       <div>
-        <DropdownButton id="select-button" title="페이지 이동▼">
-          <Dropdown.Item
-            className="option"
-            as="button"
-            onClick={this.goDaily.bind(this)}
+        <div>
+          <Popup
+            trigger={<button id="show-popup-monthly">일정 생성</button>}
+            position="right center"
+            modal={true}
+            contentStyle={{ maxWidth: "600px", width: "90%", height: "80%" }}
           >
-            일
-          </Dropdown.Item>
-
-          <Dropdown.Item
-            className="option"
-            as="button"
-            onClick={this.goWeekly.bind(this)}
-          >
-            주
-          </Dropdown.Item>
-
-          <Dropdown.Item
-            className="option"
-            as="button"
-            onClick={this.goYearly.bind(this)}
-          >
-            연도
-          </Dropdown.Item>
-        </DropdownButton>
-
-        <Popup
-          trigger={<button id="show-popup-monthly">일정 생성</button>}
-          position="right center"
-          modal={true}
-          contentStyle={{ maxWidth: "600px", width: "90%", height: "80%" }}
-        >
-          {(close) => (
-            <div>
-              <div className="close" onClick={close}>
-                X
+            {(close) => (
+              <div>
+                <div className="close" onClick={close}>
+                  X
+                </div>
+                <CreatePlan close={close} />
               </div>
-              <CreatePlan close={close} />
-            </div>
-          )}
-        </Popup>
+            )}
+          </Popup>
 
-        <span className="move-today" onClick={this.setToday.bind(this)}>
-          오늘로 이동
-        </span>
-        <div className="edit">
+          <span className="move-today" onClick={this.setToday.bind(this)}>
+            오늘로 이동
+          </span>
+        </div>
+        <div className="current-plans" id="current-plans-calendar">
           <div
             className="current-Year-and-plans"
             onClick={this.goYearly.bind(this)}
@@ -143,14 +118,12 @@ class Monthly extends Component {
             )}
           </div>
         </div>
-
-        <div className="calendar-box-Monthly">
-          <Calendar
-            onClickDay={this.handleChangeDate.bind(this)}
-            onActiveStartDateChange={this.handleChange}
-            defaultValue={this.state.date}
-          />
-        </div>
+        <Calendar
+          className="monthly-calendar"
+          onClickDay={this.handleChangeDate.bind(this)}
+          onActiveStartDateChange={this.handleChange}
+          defaultValue={this.state.date}
+        />
       </div>
     );
   }
