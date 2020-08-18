@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import Dropdown from "react-bootstrap/Dropdown";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Moment from "react-moment";
@@ -12,6 +10,7 @@ import * as getYearGoalsActions from "../modules/GetYearGoals";
 import * as setThisDateActions from "../modules/setThisDate";
 import { bindActionCreators } from "redux";
 import ShowYearPlan from "../Components/ShowYearPlan";
+import "./Yearly.css";
 
 class Yearly extends Component {
   constructor(props) {
@@ -71,32 +70,6 @@ class Yearly extends Component {
 
     return (
       <div>
-        <DropdownButton id="select-button" title="페이지 이동">
-          <Dropdown.Item
-            className="option"
-            as="button"
-            onClick={this.goDaily.bind(this)}
-          >
-            일
-          </Dropdown.Item>
-
-          <Dropdown.Item
-            className="option"
-            as="button"
-            onClick={this.goWeekly.bind(this)}
-          >
-            주
-          </Dropdown.Item>
-
-          <Dropdown.Item
-            className="option"
-            as="button"
-            onClick={this.goMonthly.bind(this)}
-          >
-            월
-          </Dropdown.Item>
-        </DropdownButton>
-
         <Popup
           trigger={<button className="show-popup">일정 생성</button>}
           position="right center"
@@ -118,26 +91,22 @@ class Yearly extends Component {
         </span>
         <div className="edit"></div>
 
-        <div className="current-plans">
-          <div className="current-Year-and-plans-on-Yearly">
-            <Moment format="YYYY">{this.state.month}</Moment>
+        <div className="current-Year-and-plans-on-Yearly">
+          <Moment format="YYYY">{this.state.month}</Moment>
 
-            {yearGoalData ? (
-              yearGoalData.map((data, i) => <ShowYearPlan key={i} {...data} />)
-            ) : (
-              <h1>no content</h1>
-            )}
-          </div>
+          {yearGoalData ? (
+            yearGoalData.map((data, i) => <ShowYearPlan key={i} {...data} />)
+          ) : (
+            <h1>no content</h1>
+          )}
         </div>
-
-        <div className="calendar-box-Yearly">
-          <Calendar
-            view="year"
-            onClickMonth={this.handleChangeDate.bind(this)}
-            onActiveStartDateChange={this.handleChange}
-            defaultValue={this.state.month}
-          />
-        </div>
+        <Calendar
+          view="year"
+          className="yearly-calendar"
+          onClickMonth={this.handleChangeDate.bind(this)}
+          onActiveStartDateChange={this.handleChange}
+          defaultValue={this.state.month}
+        />
       </div>
     );
   }

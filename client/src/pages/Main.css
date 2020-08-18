@@ -3,13 +3,6 @@
   padding: 0;
 }
 
-.edit {
-  margin-left: 200px;
-  width: 80px;
-  height: 700px;
-  float: left;
-}
-
 .edit-schedules {
   width: 80px;
   height: 175px;
@@ -25,22 +18,12 @@
   background-color: white;
   outline: none;
   cursor: pointer;
-  margin: 0px 0px 15px 300px;
-  font-size: 20px;
-}
-
-#show-popup-monthly {
-  border: none;
-  font-weight: bold;
-  background-color: white;
-  outline: none;
-  cursor: pointer;
-  margin: 0px 0px 15px 570px;
+  margin: 0px 0px 15px 75px;
   font-size: 20px;
 }
 
 .move-today {
-  margin: 0px 0px 0px 30px;
+  margin: 0px 0px 0px 10px;
   border: none;
   text-align: center;
   border: none;
@@ -50,20 +33,16 @@
   font-size: 20px;
 }
 
-.current-plans {
-  width: 300px;
-  height: 600px;
-  margin-left: 0px;
-  float: left;
-}
-
 #current-plans-calendar {
-  margin-left: 300px;
+  margin-left: 50px;
+  width: 250px;
+  float: left;
 }
 
 .current-Year-and-plans {
   width: 250px;
   height: 255px;
+  display: inline-block;
   border: none;
   text-align: center;
   background-color: white;
@@ -129,7 +108,6 @@
   text-align: center;
   border: none;
   cursor: pointer;
-  /* background-color: white; */
   border: 3px solid black;
   border-radius: 8px;
   border: none;
@@ -153,45 +131,6 @@
   margin-top: 5px;
 }
 
-/* .move-yesterday {
-  width: 40px;
-  height: 20px;
-  line-height: 20px;
-  text-align: center;
-  margin-left: 15px;
-  display: inline-block;
-}
-.move-tomorrow {
-  width: 50px;
-  height: 20px;
-  line-height: 20px;
-  text-align: center;
-  margin-left: 15px;
-  display: inline-block;
-} */
-
 .weekly-plans {
-  /* background-color: blue; */
-  /* margin-left: 550px; */
   column-span: all;
-}
-
-.daily-plans {
-  display: inline-flex;
-  width: 130px;
-  height: 500px;
-  margin-left: 20px;
-  background-color: white;
-  box-shadow: 3px 3px 5px #414345;
-  border-radius: 10px;
-}
-
-.current-Year-and-plans-on-Yearly {
-  width: 400px;
-  height: 500px;
-  border: none;
-  text-align: center;
-  background-color: white;
-  box-shadow: 3px 3px 5px #414345;
-  border-radius: 10px;
 }

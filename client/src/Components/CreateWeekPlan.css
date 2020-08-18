@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.week-calendar {
+  box-shadow: 0 0 10px 0 black;
+  height: 280px;
+  margin-left: 125px;
+  margin-top: 20px;
+}
+
+.week-calendar .react-calendar__month-view__days__day {
+  height: 30px;
+}

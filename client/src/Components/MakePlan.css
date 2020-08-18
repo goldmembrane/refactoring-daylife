@@ -1,6 +1,8 @@
 .close {
   text-align: left;
   font-size: 30px;
+  cursor: pointer;
+  width: 21px;
 }
 
 .popup-content {
@@ -23,7 +25,11 @@
 }
 
 .plan-name {
-  margin-left: -60px;
+  margin-left: -65px;
+}
+
+.write-plan-name {
+  margin-left: 20px;
 }
 
 .plan-choose-box {
@@ -31,15 +37,23 @@
 }
 
 .plan-choose-title {
-  margin-left: -195px;
+  margin-left: -175px;
+}
+
+.plan-choose {
+  margin-left: 20px;
 }
 
 .goals-category-title {
-  margin-left: -135px;
+  margin-left: -115px;
+}
+
+.goals-category {
+  margin-left: 20px;
 }
 
 .save {
-  width: 300px;
+  width: 200px;
   border: none;
   border-radius: 7px;
   color: white;
@@ -49,12 +63,4 @@
   outline: none;
   margin-top: 20px;
   margin-left: 0px;
-  margin-bottom: -100px;
-}
-
-.modal-content-box {
-}
-
-.plan-content-detail {
-  height: 1000;
 }

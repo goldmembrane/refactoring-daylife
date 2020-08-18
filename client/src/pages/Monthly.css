@@ -1,32 +1,26 @@
-/* #dropdown-basic-button {
-  margin-top: 100px;
-  margin-left: 400px;
-  width: 150px;
-  height: 50px;
-  text-align: center;
-  line-height: 50px;
-  background-color: #5555ff;
-  color: #ffffff;
-  border: none;
-  cursor: pointer;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.dropdown-item {
-  display: block;
-  width: 100px;
-  height: 50px;
+#show-popup-monthly {
   border: none;
-  background-color: #aaaaaa;
-  color: #222222;
+  font-weight: bold;
+  background-color: white;
+  outline: none;
   cursor: pointer;
+  margin: 0px 0px 15px 75px;
+  font-size: 20px;
 }
 
-.current-month {
-  margin: 20px 0 0 10px;
-  width: 100px;
-  height: 200px;
-  border: none;
-  background-color: #b8eb75;
-  line-height: 200px;
-  text-align: center;
-} */
+.monthly-calendar {
+  display: inline-block;
+  box-shadow: 0 0 10px 0 black;
+  margin-left: 50px;
+  width: 850px;
+  height: 500px;
+}
+
+.react-calendar__month-view__days__day {
+  height: 68px;
+}

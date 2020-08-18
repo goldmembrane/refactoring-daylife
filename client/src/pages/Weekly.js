@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import Dropdown from "react-bootstrap/Dropdown";
 import Moment from "react-moment";
 import moment from "moment";
 import ShowYearPlan from "../Components/ShowYearPlan";
@@ -14,6 +12,7 @@ import * as getYearGoalsActions from "../modules/GetYearGoals";
 import * as getMonthGoalsActions from "../modules/GetMonthGoals";
 import * as getWeeklyGoalsActions from "../modules/GetWeeklyPlans";
 import { bindActionCreators } from "redux";
+import "./Weekly.css";
 
 class Weekly extends Component {
   constructor(props) {
@@ -108,24 +107,6 @@ class Weekly extends Component {
     const { yearGoalData, monthGoalData } = this.props;
     return (
       <div>
-        <DropdownButton id="select-button" title="페이지 이동▼">
-          <Dropdown.Item
-            className="option"
-            as="button"
-            onClick={this.goMonthly.bind(this)}
-          >
-            월
-          </Dropdown.Item>
-
-          <Dropdown.Item
-            className="option"
-            as="button"
-            onClick={this.goYearly.bind(this)}
-          >
-            연도
-          </Dropdown.Item>
-        </DropdownButton>
-
         <Popup
           trigger={<button className="show-popup">일정 생성</button>}
           position="right center"
@@ -145,8 +126,7 @@ class Weekly extends Component {
           오늘로 이동
         </span>
         <div className="edit"></div>
-
-        <div className="current-plans">
+        <div className="current-plans" id="current-plans-calendar">
           <div
             className="current-Year-and-plans"
             onClick={this.goYearly.bind(this)}
