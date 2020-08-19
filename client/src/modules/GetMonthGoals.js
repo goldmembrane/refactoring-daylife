@@ -15,7 +15,7 @@ function getMonthGoalAPI() {
     params: {
       category: "monthly",
       year: "2020",
-      day: "7",
+      day: "08",
     },
     responseType: "json",
   });

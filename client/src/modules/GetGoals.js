@@ -11,6 +11,9 @@ function getGoalAPI() {
     method: "get",
     url: "http://localhost:3001/plans/goals/get",
     responseType: "json",
+    params: {
+      year: "2020",
+    },
   });
 }
 
