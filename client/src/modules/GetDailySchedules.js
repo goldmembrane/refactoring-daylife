@@ -11,6 +11,9 @@ function getScheduleAPI() {
   return axios({
     method: "get",
     url: "http://localhost:3001/plans/schedules/get",
+    params: {
+      date: "2020-08-19",
+    },
     responseType: "json",
   });
 }

@@ -11,7 +11,7 @@ axios.defaults.withCredentials = true;
 function PostSchedulesAPI(data) {
   return axios({
     method: "post",
-    url: "http://localhost:3001/plans/goals/post",
+    url: "http://localhost:3001/plans/schedules/post",
     headers: { "content-type": "application/json" },
     data: JSON.stringify(data),
   });
