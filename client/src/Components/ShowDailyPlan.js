@@ -1,25 +1,17 @@
-import React, { Component } from 'react';
-
+import React, { Component } from "react";
 
 class ShowDailyPlan extends Component {
-  
-
   render() {
-    const { name, start, end } = this.props
-    return(
-      <div className = 'daily-shedule-box'>
-        <div className = 'daily-shedule'>
-            {name}
-          <div className = 'daily-shedule-start'>
-            {start}
-          </div>
-          <div className = 'daily-shedule-end'>
-            {end}
-          </div>    
+    const { name, start, end } = this.props;
+    return (
+      <div className="daily-schedule-box">
+        <div className="daily-schedule">
+          {name}
+          <div className="daily-schedule-start">{start}</div>
+          <div className="daily-schedule-end">{end}</div>
         </div>
-        
       </div>
-    )
+    );
   }
 }
 
