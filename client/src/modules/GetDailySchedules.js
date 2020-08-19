@@ -10,7 +10,7 @@ axios.defaults.withCredentials = true;
 function getScheduleAPI() {
   return axios({
     method: "get",
-    url: "http://localhost:3001/plans/schedules/get",
+    url: "http://54.180.87.72:3001/plans/schedules/get",
     params: {
       date: "2020-08-19",
     },
