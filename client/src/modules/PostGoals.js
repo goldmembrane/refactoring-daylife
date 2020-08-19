@@ -11,7 +11,7 @@ axios.defaults.withCredentials = true;
 function postGoalAPI(data) {
   return axios({
     method: "post",
-    url: "http://localhost:3001/plans/goals/post",
+    url: "http://54.180.87.72:3001/plans/goals/post",
     headers: { "content-type": "application/json" },
     data: JSON.stringify(data),
   });

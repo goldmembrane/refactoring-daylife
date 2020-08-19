@@ -11,7 +11,7 @@ axios.defaults.withCredentials = true;
 function getYearGoalAPI() {
   return axios({
     method: "get",
-    url: "http://localhost:3001/plans/goals/get",
+    url: "http://54.180.87.72:3001/plans/goals/get",
     params: {
       category: "annually",
       year: "2020",
