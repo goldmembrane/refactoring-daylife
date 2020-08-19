@@ -5,14 +5,14 @@ import "react-calendar/dist/Calendar.css";
 import Moment from "react-moment";
 import { withRouter } from "react-router-dom";
 import Popup from "reactjs-popup";
-import CreatePlan from "../Components/CreatePlan";
+import CreatePlan from "../Components/create/CreatePlan";
 import { bindActionCreators } from "redux";
 import * as getYearGoalsActions from "../modules/GetYearGoals";
 import * as getMonthGoalsActions from "../modules/GetMonthGoals";
 import * as setThisDateActions from "../modules/setThisDate";
-import ShowMonthPlan from "../Components/ShowMonthPlan";
-import ShowYearPlan from "../Components/ShowYearPlan";
-import "./Monthly.css";
+import ShowMonthPlan from "../Components/show/ShowMonthPlan";
+import ShowYearPlan from "../Components/show/ShowYearPlan";
+import "./css/Monthly.css";
 
 class Monthly extends Component {
   constructor(props) {

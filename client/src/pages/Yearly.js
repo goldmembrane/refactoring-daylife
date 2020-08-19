@@ -5,12 +5,12 @@ import "react-calendar/dist/Calendar.css";
 import Moment from "react-moment";
 import { withRouter } from "react-router-dom";
 import Popup from "reactjs-popup";
-import CreatePlan from "../Components/CreatePlan";
+import CreatePlan from "../Components/create/CreatePlan";
 import * as getYearGoalsActions from "../modules/GetYearGoals";
 import * as setThisDateActions from "../modules/setThisDate";
 import { bindActionCreators } from "redux";
-import ShowYearPlan from "../Components/ShowYearPlan";
-import "./Yearly.css";
+import ShowYearPlan from "../Components/show/ShowYearPlan";
+import "./css/Yearly.css";
 
 class Yearly extends Component {
   constructor(props) {

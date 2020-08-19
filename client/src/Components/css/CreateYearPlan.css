@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.year-calendar {
+  box-shadow: 0 0 10px 0 black;
+  height: 280px;
+  margin-left: 125px;
+  margin-top: 20px;
+}
+
+.react-calendar__decade-view__years__year {
+  height: 23px;
+}
+
+.save {
+  margin-left: 550px;
+  margin-top: 100px;
+}

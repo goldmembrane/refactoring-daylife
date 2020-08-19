@@ -1,0 +1,136 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.edit-schedules {
+  width: 80px;
+  height: 175px;
+  border: none;
+  text-align: center;
+  line-height: 150px;
+  background-color: antiquewhite;
+}
+
+.show-popup {
+  border: none;
+  font-weight: bold;
+  background-color: white;
+  outline: none;
+  cursor: pointer;
+  margin: 0px 0px 15px 75px;
+  font-size: 20px;
+}
+
+.move-today {
+  margin: 0px 0px 0px 10px;
+  border: none;
+  text-align: center;
+  border: none;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+#current-plans-calendar {
+  margin-left: 50px;
+  width: 250px;
+  float: left;
+}
+
+.current-Year-and-plans {
+  width: 250px;
+  height: 255px;
+  display: inline-block;
+  border: none;
+  text-align: center;
+  background-color: white;
+  box-shadow: 3px 3px 5px #414345;
+  border-radius: 10px;
+}
+
+.current-Month-and-plans {
+  margin-top: 30px;
+  width: 250px;
+  height: 255px;
+  border: none;
+  text-align: center;
+  background-color: white;
+  box-shadow: 3px 3px 5px #414345;
+  border-radius: 10px;
+}
+
+.day-plans {
+  width: 1000px;
+  height: 400px;
+  display: inline-block;
+  margin-left: 30px;
+}
+
+.yesterday {
+  width: 300px;
+  height: 550px;
+  border: none;
+  text-align: center;
+  background-color: white;
+  margin-right: 25px;
+  display: inline-block;
+  box-shadow: 3px 3px 5px #414345;
+  border-radius: 10px;
+}
+
+.today {
+  width: 300px;
+  height: 550px;
+  border: none;
+  text-align: center;
+  background-color: white;
+  margin-right: 25px;
+  display: inline-block;
+  box-shadow: 3px 3px 5px #414345;
+  border-radius: 10px;
+}
+
+.tomorrow {
+  width: 300px;
+  height: 550px;
+  border: none;
+  text-align: center;
+  background-color: white;
+  display: inline-block;
+  box-shadow: 3px 3px 5px #414345;
+  border-radius: 10px;
+}
+
+#select-button {
+  margin-left: 1600px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  border: 3px solid black;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  outline: none;
+  font-size: 20px;
+  background-color: white;
+}
+
+.option {
+  display: block;
+  width: 100px;
+  height: 100px;
+  border: none;
+  background-color: #eaeaea;
+  color: black;
+  font-weight: 600;
+  cursor: pointer;
+}
+.option:first-child {
+  margin-top: 5px;
+}
+
+.weekly-plans {
+  column-span: all;
+}

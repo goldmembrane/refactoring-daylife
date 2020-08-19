@@ -13,8 +13,8 @@ import "./App.css";
 import Monthly from "./pages/Monthly";
 import { Yearly } from "./pages";
 import Title from "./Components/Title";
-import "./Components/Calendar.css";
-import "./Components/MakePlan.css";
+import "./Components/css/Calendar.css";
+import "./Components/css/MakePlan.css";
 
 class App extends React.Component {
   constructor(props) {

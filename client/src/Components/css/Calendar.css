@@ -1,0 +1,12 @@
+.react-calendar__navigation {
+  background-color: black;
+}
+
+.react-calendar__navigation__arrow {
+  color: white;
+}
+
+.react-calendar__navigation__label {
+  font-weight: 900;
+  color: white;
+}
