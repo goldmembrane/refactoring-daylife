@@ -1,0 +1,25 @@
+#main {
+  padding-bottom: 50px;
+  color: #414345;
+  text-shadow: 5px 5px 8px #414345;
+  text-align: center;
+  color: black;
+  background-color: white;
+}
+
+#main-title {
+  font-size: 100px;
+  margin-bottom: 18px;
+  font-family: serif;
+  font-weight: 700;
+  text-shadow: 5px 5px 5px gray;
+}
+
+#sub-title {
+  font-style: oblique;
+  font-size: 20px;
+  font-family: serif;
+  text-align: center;
+  padding-bottom: 50px;
+  border-bottom: 1px solid #3a3a3a;
+}

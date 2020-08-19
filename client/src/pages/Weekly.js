@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Moment from "react-moment";
 import moment from "moment";
-import ShowYearPlan from "../Components/ShowYearPlan";
-import ShowMonthPlan from "../Components/ShowMonthPlan";
-import CreatePlan from "../Components/CreatePlan";
+import ShowYearPlan from "../Components/show/ShowYearPlan";
+import ShowMonthPlan from "../Components/show/ShowMonthPlan";
+import CreatePlan from "../Components/create/CreatePlan";
 import { withRouter } from "react-router-dom";
 import Popup from "reactjs-popup";
 import * as setThisDateActions from "../modules/setThisDate";
@@ -12,7 +12,7 @@ import * as getYearGoalsActions from "../modules/GetYearGoals";
 import * as getMonthGoalsActions from "../modules/GetMonthGoals";
 import * as getWeeklyGoalsActions from "../modules/GetWeeklyPlans";
 import { bindActionCreators } from "redux";
-import "./Weekly.css";
+import "./css/Weekly.css";
 
 class Weekly extends Component {
   constructor(props) {

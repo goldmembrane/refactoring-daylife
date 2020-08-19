@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "./Main.css";
+import "./css/Main.css";
 import { DailyPlan } from "../Components";
 import { withRouter } from "react-router-dom";
 

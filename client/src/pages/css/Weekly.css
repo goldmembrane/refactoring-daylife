@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.daily-plans {
+  display: inline-flex;
+  width: 130px;
+  height: 550px;
+  margin-left: 20px;
+  background-color: white;
+  box-shadow: 3px 3px 5px #414345;
+  border-radius: 10px;
+}
