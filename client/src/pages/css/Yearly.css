@@ -3,6 +3,16 @@
   padding: 0;
 }
 
+@media (max-width: 1024px) {
+  .current-Year-and-plans-on-Yearly {
+    width: auto;
+  }
+
+  .yearly-calendar {
+    width: auto;
+  }
+}
+
 .current-Year-and-plans-on-Yearly {
   width: 400px;
   height: 500px;

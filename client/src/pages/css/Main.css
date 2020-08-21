@@ -2,6 +2,19 @@
   margin: 0;
   padding: 0;
 }
+@media (max-width: 1024px) {
+  .current-Year-and-plans {
+    width: auto;
+  }
+
+  .current-Month-and-plans {
+    width: auto;
+  }
+
+  .day-plans {
+    width: auto;
+  }
+}
 
 .edit-schedules {
   width: 80px;
@@ -101,6 +114,12 @@
   display: inline-block;
   box-shadow: 3px 3px 5px #414345;
   border-radius: 10px;
+}
+
+.move-right-box {
+  width: 30px;
+  height: 400px;
+  display: inline-block;
 }
 
 #select-button {
