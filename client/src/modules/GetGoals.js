@@ -9,7 +9,7 @@ const GET_GOAL_FAILURE = "GET_GOAL_FAILURE";
 function getGoalAPI() {
   return axios({
     method: "get",
-    url: "http://54.180.87.72:3001/plans/goals/get",
+    url: "http://localhost:3001/plans/goals/get",
     responseType: "json",
     params: {
       year: "2020",

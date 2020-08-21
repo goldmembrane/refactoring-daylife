@@ -3,6 +3,12 @@
   padding: 0;
 }
 
+@media (max-width: 1024px) {
+  .daily-plans {
+    width: auto;
+  }
+}
+
 .daily-plans {
   display: inline-flex;
   width: 130px;
